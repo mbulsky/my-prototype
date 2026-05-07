@@ -1,0 +1,1674 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privy Enterprise — Registrasi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['DM Sans', 'sans-serif'] },
+          colors: {
+            'brand-action': '#E42E2C',
+            'brand-accent': '#008AFF',
+            'gray-0':  '#FBFCFD',
+            'gray-5':  '#F4F5F7',
+            'gray-10': '#E6E7EB',
+            'gray-15': '#D9DDE3',
+            'gray-20': '#CBD1D8',
+            'gray-35': '#A0ABB9',
+            'gray-50': '#728196',
+            'gray-60': '#5B6778',
+            'gray-70': '#495260',
+            'gray-95': '#1F2329',
+            'success':        '#34C759',
+            'success-subtle': '#EAF9EE',
+            'success-border': '#BEEDCA',
+            'warning':        '#FF9E00',
+            'warning-subtle': '#FFF5E5',
+            'warning-border': '#FFE0AD',
+            'warning-fg':     '#663F00',
+            'info':        '#008AFF',
+            'info-subtle': '#E5F3FF',
+            'info-border': '#ADD9FF',
+            'info-fg':     '#004C8C',
+            'danger':        '#E42E2C',
+            'danger-subtle': '#FCEAE9',
+            'danger-border': '#F6BCBB',
+          },
+          borderRadius: {
+            'DEFAULT': '6px', 'md': '8px', 'lg': '12px', 'xl': '16px',
+          },
+          fontSize: {
+            'tn':   ['11px', { lineHeight: '1.45', letterSpacing: '0.4px' }],
+            'xs':   ['12px', { lineHeight: '1.33', letterSpacing: '0.2px' }],
+            'sm':   ['14px', { lineHeight: '1.42', letterSpacing: '0.2px' }],
+            'base': ['16px', { lineHeight: '1.5',  letterSpacing: '0.2px' }],
+            'xl':   ['20px', { lineHeight: 'auto', letterSpacing: '0px'   }],
+            '2xl':  ['24px', { lineHeight: 'auto', letterSpacing: '0px'   }],
+          },
+        },
+      },
+    }
+  </script>
+  <style>
+    body { font-family: 'DM Sans', sans-serif; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .spinner { animation: spin 0.8s linear infinite; display: inline-block; }
+    .doc-scroll::-webkit-scrollbar { width: 4px; }
+    .doc-scroll::-webkit-scrollbar-track { background: #F4F5F7; }
+    .doc-scroll::-webkit-scrollbar-thumb { background: #CBD1D8; border-radius: 9999px; }
+    .tnc-scroll::-webkit-scrollbar { width: 5px; }
+    .tnc-scroll::-webkit-scrollbar-track { background: #F4F5F7; }
+    .tnc-scroll::-webkit-scrollbar-thumb { background: #CBD1D8; border-radius: 9999px; }
+    input:focus, select:focus, textarea:focus { outline: none; }
+    .step-circle {
+      width: 28px; height: 28px; border-radius: 9999px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 600; flex-shrink: 0;
+    }
+    .step-circle.active   { background: #E42E2C; color: #fff; }
+    .step-circle.done     { background: #34C759; color: #fff; }
+    .step-circle.inactive { background: #E6E7EB; color: #A0ABB9; }
+    /* field states */
+    .field-filled  { border-color: #BEEDCA !important; }
+    .field-focused { border-color: #008AFF !important; }
+    /* doc autofill span */
+    .af { background: #E5F3FF; color: #1d4ed8; padding: 0 3px; border-radius: 3px; }
+    /* modal backdrop */
+    #tnc-modal { backdrop-filter: blur(2px); }
+  </style>
+</head>
+<body class="bg-gray-5 min-h-screen font-sans text-gray-95">
+
+<!-- ============================================================
+     TNC MODAL
+     ============================================================ -->
+<div id="tnc-modal" class="hidden fixed inset-0 z-50 bg-black/40 flex items-center justify-center p-4">
+  <div class="bg-white rounded-lg w-full max-w-2xl flex flex-col shadow-xl" style="max-height:88vh;">
+    <!-- Modal header -->
+    <div class="px-6 pt-5 pb-3 text-center flex-shrink-0 border-b border-gray-10">
+      <h2 class="text-base font-bold text-gray-95">Ketentuan Penggunaan Layanan Enterprise Suite</h2>
+      <p class="text-xs text-gray-50 mt-0.5">Tanggal efektif: 20 Agustus 2024</p>
+    </div>
+    <!-- Scrollable body -->
+    <div id="tnc-body" onscroll="checkTncScroll()" class="tnc-scroll overflow-y-auto flex-1 px-6 py-4 text-sm text-gray-70 leading-relaxed space-y-3">
+      <p>Selamat datang di Layanan Enterprise Suite!</p>
+      <p>Terima kasih atas ketertarikan Anda menggunakan Enterprise Suite. Dengan mendaftarkan Enterprise Suite atau menggunakan Layanan Enterprise Suite, Anda menyatakan telah membaca, memahami, dan menyetujui Ketentuan Penggunaan Layanan Enterprise Suite ini (<strong>"Ketentuan Penggunaan"</strong>). Privy menyediakan berbagai jenis layanan, oleh karenanya beberapa syarat dan ketentuan tambahan dapat berlaku pada saat Anda menggunakan Layanan Enterprise Suite tersebut.</p>
+      <p>Ketentuan Penggunaan ini merupakan bagian yang tidak terpisahkan dari ketentuan dan syarat umum penggunaan layanan Privy termasuk namun tidak terbatas pada Ketentuan Penggunaan Privy Personal, Tata Cara Pengelolaan Sertifikat (CPS), Kebijakan Jaminan dan/atau Kebijakan Garansi, Pemberitahuan Privasi, Perjanjian Pemegang Sertifikat dan Perjanjian Pihak Pengandal sebagaimana tertera dalam <a href="https://repository.privyca.id" class="text-brand-accent">https://repository.privyca.id</a> dan Ketentuan Meterai Elektronik serta ketentuan lainnya sebagaimana tersedia pada Aplikasi Privy dari waktu ke waktu.</p>
+      <p>Ketentuan Penggunaan ini mungkin diubah atau diperbaharui baik sebagian maupun seluruhnya dari waktu ke waktu tanpa atau dengan pemberitahuan sebelumnya kepada Pelanggan, dan akan berlaku sejak diunggah pada Aplikasi Privy. Privy menyarankan agar Pelanggan memeriksa Aplikasi Privy untuk mengetahui perubahan atas Ketentuan Penggunaan ini dari waktu ke waktu. Dengan tetap mengakses Enterprise Suite atau menggunakan Layanan Enterprise Suite, maka Pelanggan dianggap menyetujui perubahan atas Ketentuan Penggunaan ini. Apabila Pelanggan tidak menyetujui perubahan Ketentuan Penggunaan, Pelanggan dapat menghubungi Privy untuk melakukan pengakhiran Enterprise Suite.</p>
+      <p>Ketentuan Penggunaan ini mengandung kesepakatan antara Privy dan Pelanggan. Silakan membaca Ketentuan Penggunaan ini dengan seksama!</p>
+      <p class="font-bold text-gray-95">Definisi</p>
+      <p>Kecuali didefinisikan secara khusus di bawah ini, istilah-istilah dalam huruf kapital yang digunakan dalam Ketentuan Penggunaan ini mengandung arti yang sama dengan definisi yang ada di dalam Ketentuan Penggunaan Privy Personal. Setiap kata yang diawali huruf kapital mengandung arti berikut ini:</p>
+      <ol class="list-[lower-alpha] pl-5 space-y-2">
+        <li><strong>"Admin"</strong> berarti Akun Privy yang didaftarkan oleh Pelanggan atau Admin yang sudah terdaftar pada Enterprise Account Pelanggan yang dapat mengelola Enterprise Account sebagaimana diatur dalam Ketentuan Penggunaan ini.</li>
+        <li><strong>"Action"</strong> berarti setiap instruksi yang diterima oleh Sistem Elektronik Privy dari Employee Account Pelanggan melalui Aplikasi Privy untuk: (i) memberikan akses ke suatu Dokumen Elektronik yang diunggah pada Aplikasi Privy kepada setiap alamat surel atau setiap Akun Privy yang tidak terdaftar sebagai Employee Account Pelanggan; atau (ii) mengirimkan setiap permintaan tanda tangan elektronik kepada setiap alamat surel atau setiap Akun Privy yang tidak terdaftar sebagai Employee Account Pelanggan.</li>
+        <li><strong>"Admin Account"</strong> berarti akun Admin pada Enterprise Account Pelanggan.</li>
+        <li><strong>"Employee Account"</strong> berarti Akun Privy yang telah disetujui oleh Admin untuk tergabung dalam Enterprise Account Pelanggan.</li>
+        <li><strong>"Enterprise Account"</strong> berarti akun yang digunakan untuk mengoperasikan fitur-fitur Enterprise, termasuk namun tidak terbatas pada fitur Manajemen Dokumen, fitur e-Seal, dan fitur Stempel.</li>
+        <li><strong>"Enterprise Suite"</strong> berarti produk Privy yang ditawarkan kepada Pelanggan untuk menggunakan Layanan Enterprise.</li>
+        <li><strong>"Layanan Enterprise"</strong> berarti layanan Privy untuk Enterprise yang mencakup antara lain fitur Employee Account, fitur Action, fitur e-Seal, dan fitur Stempel yang tersedia pada Enterprise Account.</li>
+      </ol>
+      <p class="font-bold text-gray-95">Pendaftaran Enterprise Suite</p>
+      <p>Pelanggan dapat mendaftarkan Enterprise Suite melalui antarmuka yang disediakan oleh Privy dari waktu ke waktu. Untuk keperluan verifikasi identitas, Pelanggan wajib memberikan informasi yang diminta oleh Privy antara lain berupa nama perusahaan, alamat perusahaan, NPWP perusahaan, akta pendirian perusahaan beserta SK pengesahan dari Kemenkumham. Privy berhak untuk menolak pendaftaran Enterprise Suite apabila Pelanggan tidak memberikan informasi yang diperlukan atau informasi yang diberikan tidak valid.</p>
+      <p class="font-bold text-gray-95">Penggunaan Layanan Enterprise</p>
+      <p>Pelanggan bertanggung jawab penuh atas segala penggunaan Enterprise Account, termasuk namun tidak terbatas pada: (i) menjaga kerahasiaan informasi akses Enterprise Account; (ii) memastikan bahwa setiap Admin yang didaftarkan pada Enterprise Account Pelanggan memiliki kewenangan yang sah untuk bertindak atas nama Pelanggan; dan (iii) memastikan bahwa penggunaan Layanan Enterprise sesuai dengan ketentuan hukum yang berlaku.</p>
+      <p class="font-bold text-gray-95">Pembatasan Penggunaan</p>
+      <p>Pelanggan dilarang menggunakan Layanan Enterprise untuk: (i) tujuan yang melanggar hukum atau peraturan yang berlaku; (ii) menyebarkan konten yang bersifat ilegal, merendahkan, mengancam, atau melanggar hak pihak ketiga; (iii) melakukan tindakan yang dapat merusak, menonaktifkan, atau mengganggu sistem Privy.</p>
+      <p class="font-bold text-gray-95">Kerahasiaan Data</p>
+      <p>Privy berkomitmen untuk menjaga kerahasiaan data Pelanggan sesuai dengan Kebijakan Privasi Privy. Privy tidak akan mengungkapkan data Pelanggan kepada pihak ketiga tanpa persetujuan Pelanggan, kecuali diwajibkan oleh hukum atau perintah pengadilan yang berlaku.</p>
+      <p class="font-bold text-gray-95">Penghentian Layanan</p>
+      <p>Privy berhak untuk menghentikan akses Pelanggan terhadap Layanan Enterprise apabila Pelanggan melanggar Ketentuan Penggunaan ini. Penghentian layanan dapat dilakukan tanpa pemberitahuan terlebih dahulu apabila pelanggaran yang dilakukan bersifat material atau membahayakan keamanan sistem Privy.</p>
+      <p class="font-bold text-gray-95">Hukum yang Berlaku</p>
+      <p>Ketentuan Penggunaan ini tunduk pada dan ditafsirkan berdasarkan hukum yang berlaku di Republik Indonesia. Segala sengketa yang timbul dari atau sehubungan dengan Ketentuan Penggunaan ini akan diselesaikan melalui Badan Arbitrase Nasional Indonesia (BANI).</p>
+    </div>
+    <!-- Scroll hint -->
+    <div id="tnc-scroll-hint" class="px-6 py-1 text-right transition-opacity duration-300">
+      <span class="text-tn text-gray-35 flex items-center justify-end gap-1">
+        <i class="ti ti-chevrons-down text-xs"></i> Gulir ke bawah untuk melanjutkan
+      </span>
+    </div>
+    <!-- Footer -->
+    <div class="px-5 py-3 border-t border-gray-10 flex items-center justify-between flex-shrink-0">
+      <div class="flex gap-1">
+        <button id="tnc-lang-id" onclick="setTncLang('id')" class="text-xs px-3 py-1.5 rounded border border-gray-20 font-medium text-gray-95 bg-white">Indonesia</button>
+        <button id="tnc-lang-en" onclick="setTncLang('en')" class="text-xs px-3 py-1.5 rounded border border-transparent font-medium text-gray-35">English</button>
+      </div>
+      <div class="flex items-center gap-2">
+        <button onclick="closeTncModal(false)" class="h-9 px-4 border border-gray-20 text-gray-60 rounded text-sm font-medium hover:bg-gray-5 transition-colors">Batal</button>
+        <button id="tnc-accept-btn" disabled onclick="closeTncModal(true)" class="h-9 px-4 bg-brand-action/40 text-white rounded text-sm font-medium cursor-not-allowed transition-all">Lanjutkan</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ============================================================
+     PAGE 0 — CHECKLIST
+     ============================================================ -->
+<section id="page-checklist">
+  <div class="max-w-xl mx-auto px-4 py-8">
+    <div class="flex justify-center mb-6">
+      <img src="logo-privy.png" alt="Privy" class="h-8 w-auto" />
+    </div>
+    <!-- Step bar -->
+    <div class="flex items-center mb-8">
+      <div class="flex flex-col items-center flex-1">
+        <div class="step-circle active">1</div>
+        <span class="text-tn mt-1 text-brand-action font-medium">Isi data pendaftaran</span>
+      </div>
+      <div class="flex-1 h-px bg-gray-15 mb-4"></div>
+      <div class="flex flex-col items-center flex-1">
+        <div class="step-circle inactive">2</div>
+        <span class="text-tn mt-1 text-gray-35">Review & tanda tangan</span>
+      </div>
+    </div>
+
+    <div class="bg-white border border-gray-10 rounded-md overflow-hidden shadow-sm">
+      <div class="px-5 pt-5 pb-4 border-b border-gray-10">
+        <h1 class="text-xl font-bold text-gray-95">Daftar Privy Enterprise</h1>
+        <p class="text-sm text-gray-50 mt-1">Lengkapi dokumen berikut sebelum memulai pendaftaran</p>
+      </div>
+      <div class="px-5 py-4 space-y-4">
+        <div class="flex items-center gap-2">
+          <i class="ti ti-clock text-gray-50 text-base"></i>
+          <span class="text-sm text-gray-60">Estimasi waktu pengisian</span>
+          <span class="border border-gray-15 rounded-full text-tn px-2.5 py-0.5 text-gray-60 font-medium">~10–15 menit</span>
+        </div>
+        <div class="space-y-2">
+          <div class="flex items-start gap-3 rounded-md p-3 bg-success-subtle">
+            <div class="mt-0.5 flex-shrink-0 w-6 h-6 rounded-full bg-success flex items-center justify-center">
+              <i class="ti ti-check text-white text-xs"></i>
+            </div>
+            <div>
+              <p class="text-sm font-medium text-gray-95">Akun Privy (PrivyID)</p>
+              <p class="text-xs text-gray-50 mt-0.5">Diperlukan untuk menandatangani perjanjian layanan dan menjadi pemilik enterprise.</p>
+              <a href="#" onclick="return false;" class="text-xs text-brand-accent font-medium mt-1 inline-block">Belum punya? Daftar di sini →</a>
+            </div>
+          </div>
+          <div class="flex items-start gap-3 rounded-md p-3 bg-success-subtle">
+            <div class="mt-0.5 flex-shrink-0 w-6 h-6 rounded-full bg-success flex items-center justify-center">
+              <i class="ti ti-check text-white text-xs"></i>
+            </div>
+            <div>
+              <p class="text-sm font-medium text-gray-95">NPWP perusahaan</p>
+              <p class="text-xs text-gray-50 mt-0.5">File asli NPWP.</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-3 rounded-md p-3 bg-success-subtle">
+            <div class="mt-0.5 flex-shrink-0 w-6 h-6 rounded-full bg-success flex items-center justify-center">
+              <i class="ti ti-check text-white text-xs"></i>
+            </div>
+            <div>
+              <p class="text-sm font-medium text-gray-95">Akta pendirian perusahaan</p>
+              <p class="text-xs text-gray-50 mt-0.5">File akta asli atau salinan yang dilegalisir.</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-3 rounded-md p-3 bg-success-subtle">
+            <div class="mt-0.5 flex-shrink-0 w-6 h-6 rounded-full bg-success flex items-center justify-center">
+              <i class="ti ti-check text-white text-xs"></i>
+            </div>
+            <div>
+              <p class="text-sm font-medium text-gray-95">SK pengesahan badan usaha</p>
+              <p class="text-xs text-gray-50 mt-0.5">Surat keputusan pengesahan dari Kemenkumham.</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-3 rounded-md p-3 bg-warning-subtle border border-warning-border">
+            <div class="mt-0.5 flex-shrink-0 w-6 h-6 rounded-full bg-warning flex items-center justify-center">
+              <i class="ti ti-alert-triangle text-white text-xs"></i>
+            </div>
+            <div>
+              <p class="text-sm font-medium text-warning-fg">Surat kuasa <span class="font-normal">(jika diperlukan)</span></p>
+              <p class="text-xs text-warning-fg/75 mt-0.5">Diperlukan jika nama pemilik Enterprise tidak tercantum sebagai pejabat berwenang dalam akta pendirian perusahaan.</p>
+            </div>
+          </div>
+        </div>
+        <div class="bg-gray-5 border border-gray-10 rounded-md p-3 flex items-start gap-2">
+          <i class="ti ti-device-floppy text-gray-35 text-base mt-0.5 flex-shrink-0"></i>
+          <p class="text-xs text-gray-50">Form ini menyimpan progress kamu secara otomatis. Kamu bisa melanjutkan kapan saja tanpa kehilangan data.</p>
+        </div>
+      </div>
+      <div class="px-5 pb-5">
+        <button onclick="showPage('page-form')" class="w-full h-10 bg-brand-action text-white rounded font-medium text-sm hover:bg-red-600 transition-colors flex items-center justify-center gap-2">
+          Mulai pendaftaran <i class="ti ti-arrow-right text-base"></i>
+        </button>
+      </div>
+    </div>
+    <div class="text-center mt-6 space-y-1">
+      <div class="flex items-center justify-center gap-2 text-xs text-gray-35">
+        <span class="font-medium text-gray-50">Indonesia</span><span>·</span><span>English</span>
+      </div>
+      <p class="text-tn text-gray-35">© 2025 Privy</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     PAGE 1 — FORM
+     ============================================================ -->
+<section id="page-form" class="hidden">
+  <div class="max-w-xl mx-auto px-4 py-8">
+    <div class="flex justify-center mb-6">
+      <img src="logo-privy.png" alt="Privy" class="h-8 w-auto" />
+    </div>
+    <div class="flex items-center mb-6">
+      <div class="flex flex-col items-center flex-1">
+        <div class="step-circle active">1</div>
+        <span class="text-tn mt-1 text-brand-action font-medium">Isi data pendaftaran</span>
+      </div>
+      <div class="flex-1 h-px bg-gray-15 mb-4"></div>
+      <div class="flex flex-col items-center flex-1">
+        <div class="step-circle inactive">2</div>
+        <span class="text-tn mt-1 text-gray-35">Review & tanda tangan</span>
+      </div>
+    </div>
+    <div class="bg-white border border-gray-10 rounded-md p-3 mb-4 flex items-center gap-3">
+      <div class="flex-1 h-1.5 bg-gray-10 rounded-full overflow-hidden">
+        <div id="progress-bar" class="h-full bg-brand-action rounded-full transition-all duration-300" style="width:0%"></div>
+      </div>
+      <span class="text-tn text-gray-50 whitespace-nowrap"><span id="progress-text" class="text-gray-35 font-medium">0 dari 3</span> section selesai</span>
+    </div>
+
+    <!-- CARD 1 -->
+    <div class="bg-white border border-gray-10 rounded-md overflow-hidden shadow-sm mb-4">
+      <div class="px-5 py-4 border-b border-gray-10 flex items-center justify-between">
+        <div>
+          <h2 class="text-sm font-semibold text-gray-95 flex items-center gap-2">
+            Siapa yang mendaftar?
+            <span id="card1-badge" class="hidden rounded-full text-tn px-2 py-0.5 bg-success-subtle border border-success-border text-success font-medium">✓ Lengkap</span>
+          </h2>
+          <p class="text-xs text-gray-50 mt-0.5">Data pribadi PIC Enterprise kamu</p>
+        </div>
+        <span class="rounded-full text-tn px-2.5 py-1 font-medium bg-warning-subtle text-warning-fg border border-warning-border flex items-center gap-1">
+          <i class="ti ti-device-floppy text-xs"></i> Tersimpan otomatis
+        </span>
+      </div>
+      <div class="px-5 py-4 space-y-3">
+        <div>
+          <label class="block text-xs font-medium text-gray-70 mb-1">Nama lengkap <span class="text-danger">*</span></label>
+          <input id="f-nama" type="text" placeholder="Masukkan nama lengkap..." oninput="onFormInput()" class="w-full h-9 px-3 border border-gray-20 bg-white rounded text-sm text-gray-95 focus:border-brand-accent transition-colors" />
+        </div>
+        <div>
+          <label class="block text-xs font-medium text-gray-70 mb-1">Alamat email <span class="text-danger">*</span></label>
+          <input id="f-email" type="email" placeholder="nama@email.com" oninput="onFormInput()" class="w-full h-9 px-3 border border-gray-20 bg-white rounded text-sm text-gray-95 focus:border-brand-accent transition-colors" />
+        </div>
+        <div>
+          <label class="block text-xs font-medium text-gray-70 mb-1">Nomor telepon <span class="text-danger">*</span></label>
+          <input id="f-telepon" type="tel" placeholder="+62..." oninput="onFormInput()" class="w-full h-9 px-3 border border-gray-20 bg-white rounded text-sm text-gray-95 focus:border-brand-accent transition-colors" />
+        </div>
+        <div>
+          <label class="block text-xs font-medium text-gray-70 mb-1">Nama perusahaan <span class="text-danger">*</span></label>
+          <input id="f-perusahaan" type="text" placeholder="PT / CV / ..." oninput="onFormInput()" class="w-full h-9 px-3 border border-gray-20 bg-white rounded text-sm text-gray-95 focus:border-brand-accent transition-colors" />
+        </div>
+        <div>
+          <label class="block text-xs font-medium text-gray-70 mb-1">Sektor bisnis <span class="text-danger">*</span></label>
+          <div class="relative">
+            <select id="f-sektor" onchange="onFormInput()" class="w-full h-9 px-3 pr-9 border border-gray-20 bg-white rounded text-sm text-gray-95 focus:border-brand-accent appearance-none transition-colors">
+              <option value="">Pilih sektor bisnis...</option>
+              <option value="Teknologi informasi">Teknologi informasi</option>
+              <option value="Keuangan & perbankan">Keuangan &amp; perbankan</option>
+              <option value="Kesehatan">Kesehatan</option>
+              <option value="Pendidikan">Pendidikan</option>
+              <option value="Manufaktur">Manufaktur</option>
+              <option value="Ritel & e-commerce">Ritel &amp; e-commerce</option>
+              <option value="Properti">Properti</option>
+              <option value="Logistik & transportasi">Logistik &amp; transportasi</option>
+              <option value="Hukum & konsultansi">Hukum &amp; konsultansi</option>
+              <option value="Lainnya">Lainnya</option>
+            </select>
+            <i class="ti ti-chevron-down text-gray-35 absolute right-3 top-1/2 -translate-y-1/2 text-sm pointer-events-none"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD 2 -->
+    <div class="bg-white border border-gray-10 rounded-md overflow-hidden shadow-sm mb-4">
+      <div class="px-5 py-4 border-b border-gray-10">
+        <h2 class="text-sm font-semibold text-gray-95 flex items-center gap-2">
+          Data perusahaan
+          <span id="card2-badge" class="hidden rounded-full text-tn px-2 py-0.5 bg-success-subtle border border-success-border text-success font-medium">✓ Lengkap</span>
+        </h2>
+        <p class="text-xs text-gray-50 mt-0.5">Informasi legal perusahaan kamu</p>
+      </div>
+      <div class="px-5 py-4 space-y-4">
+        <!-- PrivyID -->
+        <div>
+          <label class="block text-xs font-medium text-gray-70 mb-1 flex items-center gap-1">
+            PrivyID pemilik enterprise <span class="text-danger">*</span>
+            <span class="w-4 h-4 rounded-full bg-gray-10 flex items-center justify-center ml-1 cursor-help" title="PrivyID adalah akun Privy personal kamu">
+              <i class="ti ti-question-mark text-gray-35" style="font-size:9px;"></i>
+            </span>
+          </label>
+          <!-- STATE A -->
+          <div id="privyid-empty">
+            <input id="f-privy-input" type="text" placeholder="Masukkan PrivyID..." class="w-full h-9 px-3 border border-gray-20 bg-white rounded text-sm text-gray-95 focus:border-brand-accent transition-colors" />
+            <p class="text-xs text-gray-50 mt-1.5">PrivyID adalah akun Privy personal kamu. <a href="#" onclick="return false;" class="text-brand-accent font-medium">Belum punya PrivyID? Daftar dulu →</a></p>
+            <button onclick="fetchPrivyId()" class="mt-2 text-xs text-brand-accent border border-info-border bg-info-subtle rounded px-3 py-1.5 font-medium hover:bg-blue-50 transition-colors flex items-center gap-1">
+              <i class="ti ti-player-play text-xs"></i> Simulasi: input PrivyID →
+            </button>
+          </div>
+          <!-- STATE B -->
+          <div id="privyid-loading" class="hidden">
+            <div class="relative">
+              <input type="text" id="privy-loading-input" readonly class="w-full h-9 px-3 pr-9 border border-brand-accent bg-white rounded text-sm text-gray-95" />
+              <span class="spinner absolute right-3 top-1/2 -translate-y-1/2 text-brand-accent"><i class="ti ti-loader-2 text-base"></i></span>
+            </div>
+            <p class="text-xs text-gray-50 mt-1.5 flex items-center gap-1"><i class="ti ti-loader-2 spinner text-brand-accent text-xs"></i> Memverifikasi PrivyID...</p>
+          </div>
+          <!-- STATE C -->
+          <div id="privyid-success" class="hidden">
+            <div class="relative">
+              <input id="privy-success-input" type="text" readonly class="w-full h-9 px-3 pr-9 border border-success-border bg-white rounded text-sm text-gray-95" />
+              <i class="ti ti-circle-check-filled text-success absolute right-3 top-1/2 -translate-y-1/2 text-base"></i>
+            </div>
+            <div class="mt-2 border border-success-border bg-success-subtle rounded-md p-3 flex items-center gap-3">
+              <div id="privy-avatar" class="privy-avatar w-9 h-9 rounded-full bg-brand-action text-white flex items-center justify-center font-semibold text-sm flex-shrink-0">?</div>
+              <div class="flex-1 min-w-0">
+                <p id="privy-nama-display" class="text-sm font-semibold text-gray-95">—</p>
+                <p class="text-xs text-gray-50">Akun Privy terverifikasi · <span id="privy-id-display">—</span></p>
+              </div>
+              <span class="rounded-full text-tn px-2 py-0.5 bg-success-subtle border border-success-border text-success font-medium flex items-center gap-1 flex-shrink-0">
+                <i class="ti ti-check text-xs"></i> Terverifikasi
+              </span>
+            </div>
+            <p class="text-xs text-gray-50 mt-1.5">Nama di atas otomatis digunakan sebagai penandatangan perjanjian layanan Enterprise.</p>
+            <button onclick="resetPrivyId()" class="mt-1.5 text-xs text-gray-50 hover:text-gray-70 underline">Ganti PrivyID</button>
+          </div>
+        </div>
+
+        <!-- Kuasa Section -->
+        <div id="kuasa-section" class="hidden">
+          <div class="bg-gray-5 border border-gray-15 rounded-md p-3">
+            <p class="text-xs font-semibold text-gray-95 mb-0.5">Apakah kamu direktur utama perusahaan?</p>
+            <p class="text-xs text-gray-50 mb-2">Jika tidak, kamu perlu melampirkan surat kuasa dari direktur utama.</p>
+            <label class="flex items-start gap-2 cursor-pointer">
+              <input type="checkbox" id="kuasa-cb" onchange="toggleKuasa(this)" class="mt-0.5 accent-brand-action flex-shrink-0" />
+              <span class="text-xs text-gray-70">Nama pemilik PrivyID tidak tercantum dalam akta pendirian — saya perlu melampirkan surat kuasa</span>
+            </label>
+          </div>
+          <div id="kuasa-upload" class="hidden mt-2 border border-warning-border rounded-md overflow-hidden">
+            <div class="bg-warning-subtle px-3 py-2 flex items-center gap-2">
+              <i class="ti ti-file-upload text-warning-fg text-sm"></i>
+              <span class="text-xs font-semibold text-warning-fg">Unggah surat kuasa</span>
+            </div>
+            <div class="p-3 bg-white">
+              <p class="text-xs text-gray-50 mb-2">Surat kuasa bermaterai dari direktur utama yang memberikan wewenang kepada kamu.</p>
+              <label class="flex items-center gap-2 cursor-pointer border-2 border-dashed border-warning-border rounded-md p-3 hover:bg-warning-subtle transition-colors">
+                <i class="ti ti-upload text-warning text-base"></i>
+                <span class="text-xs text-gray-50">Pilih file atau seret ke sini... <span class="text-tn">(PDF/PNG/JPG, maks. 2 MB)</span></span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Jabatan Section -->
+        <div id="jabatan-section" class="hidden">
+          <div class="bg-info-subtle border border-info-border rounded-md p-3 flex items-start gap-2 mb-3">
+            <i class="ti ti-wand text-info text-base flex-shrink-0 mt-0.5"></i>
+            <p class="text-xs text-info-fg">Nama penandatangan terisi otomatis dari PrivyID kamu dan tidak dapat diubah.</p>
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-medium text-gray-70 mb-1">Nama penandatangan</label>
+              <div class="relative">
+                <input id="f-nama-penanda" type="text" disabled class="w-full h-9 px-3 pr-9 border border-gray-10 bg-gray-5 rounded text-sm text-gray-35 cursor-not-allowed" />
+                <i class="ti ti-lock text-gray-35 absolute right-3 top-1/2 -translate-y-1/2 text-sm"></i>
+              </div>
+            </div>
+            <div>
+              <label class="block text-xs font-medium text-gray-70 mb-1">Jabatan <span class="text-danger">*</span></label>
+              <input id="f-jabatan" type="text" placeholder="Direktur / Head of ..." oninput="onFormInput()" class="w-full h-9 px-3 border border-gray-20 bg-white rounded text-sm text-gray-95 focus:border-brand-accent transition-colors" />
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-medium text-gray-70 mb-1">Email perusahaan <span class="text-danger">*</span></label>
+          <input id="f-email-kantor" type="email" placeholder="info@perusahaan.com" oninput="onFormInput()" class="w-full h-9 px-3 border border-gray-20 bg-white rounded text-sm text-gray-95 focus:border-brand-accent transition-colors" />
+          <p class="text-xs text-gray-50 mt-1">Digunakan untuk korespondensi resmi Enterprise.</p>
+        </div>
+        <div>
+          <label class="block text-xs font-medium text-gray-70 mb-1">Nomor telepon perusahaan <span class="text-danger">*</span></label>
+          <input id="f-hp-kantor" type="tel" placeholder="+62..." oninput="onFormInput()" class="w-full h-9 px-3 border border-gray-20 bg-white rounded text-sm text-gray-95 focus:border-brand-accent transition-colors" />
+        </div>
+        <div>
+          <label class="block text-xs font-medium text-gray-70 mb-1">Alamat perusahaan <span class="text-danger">*</span></label>
+          <input id="f-alamat" type="text" placeholder="Jl. ..." oninput="onFormInput()" class="w-full h-9 px-3 border border-gray-20 bg-white rounded text-sm text-gray-95 focus:border-brand-accent transition-colors" />
+          <p class="text-xs text-gray-50 mt-1">Digunakan pada dokumen perjanjian layanan.</p>
+        </div>
+        <div>
+          <label class="block text-xs font-medium text-gray-70 mb-1">Nomor NPWP perusahaan <span class="text-danger">*</span></label>
+          <input id="f-npwp" type="text" placeholder="00.000.000.0-000.000" oninput="onFormInput()" class="w-full h-9 px-3 border border-gray-20 bg-white rounded text-sm text-gray-95 focus:border-brand-accent transition-colors" />
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD 3 -->
+    <div class="bg-white border border-gray-10 rounded-md overflow-hidden shadow-sm mb-4">
+      <div class="px-5 py-4 border-b border-gray-10">
+        <h2 class="text-sm font-semibold text-gray-95 flex items-center gap-2">
+          Unggah dokumen
+          <span id="card3-badge" class="hidden rounded-full text-tn px-2 py-0.5 bg-success-subtle border border-success-border text-success font-medium">✓ Lengkap</span>
+        </h2>
+        <p class="text-xs text-gray-50 mt-0.5">Dokumen legal perusahaan untuk verifikasi</p>
+      </div>
+      <div class="px-5 py-3 space-y-0 divide-y divide-gray-10">
+        <!-- NPWP doc -->
+        <div class="flex items-center gap-3 py-3">
+          <div id="doc1-icon" class="w-8 h-8 rounded bg-gray-5 border border-gray-10 flex items-center justify-center flex-shrink-0">
+            <i class="ti ti-file text-gray-35 text-sm"></i>
+          </div>
+          <div class="flex-1 min-w-0">
+            <p class="text-sm font-medium text-gray-95">Dokumen NPWP</p>
+            <p class="text-xs text-gray-50">PDF/PNG/JPG · maks. 2 MB</p>
+          </div>
+          <label id="doc1-label" class="cursor-pointer">
+            <input type="file" accept=".pdf,.png,.jpg,.jpeg" class="hidden" onchange="handleDocUpload(this, 'doc1')" />
+            <span class="rounded-full text-tn px-2.5 py-1 bg-gray-5 border border-gray-15 text-gray-50 font-medium flex items-center gap-1 hover:bg-gray-10 transition-colors">
+              <i class="ti ti-upload text-xs"></i> Pilih file
+            </span>
+          </label>
+        </div>
+        <!-- Akta -->
+        <div class="flex items-center gap-3 py-3">
+          <div id="doc2-icon" class="w-8 h-8 rounded bg-gray-5 border border-gray-10 flex items-center justify-center flex-shrink-0">
+            <i class="ti ti-file text-gray-35 text-sm"></i>
+          </div>
+          <div class="flex-1 min-w-0">
+            <p class="text-sm font-medium text-gray-95">Akta pendirian perusahaan</p>
+            <p class="text-xs text-gray-50">PDF/PNG/JPG · maks. 2 MB</p>
+          </div>
+          <label id="doc2-label" class="cursor-pointer">
+            <input type="file" accept=".pdf,.png,.jpg,.jpeg" class="hidden" onchange="handleDocUpload(this, 'doc2')" />
+            <span class="rounded-full text-tn px-2.5 py-1 bg-gray-5 border border-gray-15 text-gray-50 font-medium flex items-center gap-1 hover:bg-gray-10 transition-colors">
+              <i class="ti ti-upload text-xs"></i> Pilih file
+            </span>
+          </label>
+        </div>
+        <!-- SK -->
+        <div class="flex items-center gap-3 py-3">
+          <div id="doc3-icon" class="w-8 h-8 rounded bg-gray-5 border border-gray-10 flex items-center justify-center flex-shrink-0">
+            <i class="ti ti-file text-gray-35 text-sm"></i>
+          </div>
+          <div class="flex-1 min-w-0">
+            <p class="text-sm font-medium text-gray-95">SK pengesahan badan usaha</p>
+            <p class="text-xs text-gray-50">PDF/PNG/JPG · maks. 2 MB</p>
+          </div>
+          <label id="doc3-label" class="cursor-pointer">
+            <input type="file" accept=".pdf,.png,.jpg,.jpeg" class="hidden" onchange="handleDocUpload(this, 'doc3')" />
+            <span class="rounded-full text-tn px-2.5 py-1 bg-gray-5 border border-gray-15 text-gray-50 font-medium flex items-center gap-1 hover:bg-gray-10 transition-colors">
+              <i class="ti ti-upload text-xs"></i> Pilih file
+            </span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- TNC -->
+    <div class="bg-gray-5 border border-gray-10 rounded-md p-4 mb-4">
+      <label class="flex items-start gap-2 cursor-pointer" onclick="handleTncClick(event)">
+        <input type="checkbox" id="tnc-cb" class="mt-0.5 accent-brand-action flex-shrink-0 pointer-events-none" readonly />
+        <span class="text-xs text-gray-70 select-none">Saya telah membaca dan menyetujui <span class="text-brand-accent font-medium">Syarat &amp; Ketentuan</span> serta <span class="text-brand-accent font-medium">Kebijakan Privasi</span> Privy Enterprise.</span>
+      </label>
+      <p class="text-tn text-gray-50 mt-2 ml-5">Dengan mendaftar, kamu menyetujui penggunaan tanda tangan elektronik sesuai UU ITE dan regulasi PSrE yang berlaku.</p>
+    </div>
+
+    <button id="form-cta" onclick="goToReview()" disabled class="w-full h-10 bg-brand-action/40 text-white rounded font-medium text-sm cursor-not-allowed flex items-center justify-center gap-2 transition-all">
+      Lanjut ke review &amp; tanda tangan <i class="ti ti-arrow-right text-base"></i>
+    </button>
+
+    <div class="text-center mt-6 space-y-1">
+      <div class="flex items-center justify-center gap-2 text-xs text-gray-35">
+        <span class="font-medium text-gray-50">Indonesia</span><span>·</span><span>English</span>
+      </div>
+      <p class="text-tn text-gray-35">© 2025 Privy</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     PAGE 2 — REVIEW & TTD
+     ============================================================ -->
+<section id="page-review" class="hidden">
+  <div class="max-w-xl mx-auto px-4 py-8">
+    <div class="flex justify-center mb-6">
+      <img src="logo-privy.png" alt="Privy" class="h-8 w-auto" />
+    </div>
+    <div class="flex items-center mb-6">
+      <div class="flex flex-col items-center flex-1">
+        <div class="step-circle done"><i class="ti ti-check" style="font-size:13px;"></i></div>
+        <span class="text-tn mt-1 text-success font-medium">Isi data pendaftaran</span>
+      </div>
+      <div class="flex-1 h-px bg-success mb-4"></div>
+      <div class="flex flex-col items-center flex-1">
+        <div class="step-circle active">2</div>
+        <span class="text-tn mt-1 text-brand-action font-medium">Review &amp; tanda tangan</span>
+      </div>
+    </div>
+
+    <!-- CARD 1 — Ringkasan -->
+    <div class="bg-white border border-gray-10 rounded-md overflow-hidden shadow-sm mb-4">
+      <div class="px-5 py-4 border-b border-gray-10 flex items-center justify-between">
+        <div>
+          <h2 class="text-sm font-semibold text-gray-95">Ringkasan pendaftaran</h2>
+          <p class="text-xs text-gray-50 mt-0.5">Periksa kembali data yang akan dikirimkan</p>
+        </div>
+        <button onclick="showPage('page-form')" class="h-8 px-3 border border-gray-15 text-gray-60 rounded text-xs font-medium hover:bg-gray-5 transition-colors flex items-center gap-1">
+          <i class="ti ti-pencil text-xs"></i> Ubah
+        </button>
+      </div>
+      <div class="px-5 py-4 space-y-1 text-sm">
+        <!-- INFORMASI KONTAK -->
+        <div class="flex items-center gap-2 my-2">
+          <div class="flex-1 h-px bg-gray-10"></div>
+          <span class="text-tn text-gray-35 uppercase tracking-widest font-medium">INFORMASI KONTAK</span>
+          <div class="flex-1 h-px bg-gray-10"></div>
+        </div>
+        <div class="flex justify-between border-b border-gray-10 py-1.5"><span class="text-gray-60">Nama lengkap</span><span id="rv-nama" class="text-gray-95 font-medium text-right ml-4">—</span></div>
+        <div class="flex justify-between border-b border-gray-10 py-1.5"><span class="text-gray-60">Email</span><span id="rv-email" class="text-gray-95 font-medium text-right ml-4 break-all">—</span></div>
+        <div class="flex justify-between border-b border-gray-10 py-1.5"><span class="text-gray-60">Telepon</span><span id="rv-telepon" class="text-gray-95 font-medium text-right ml-4">—</span></div>
+        <div class="flex justify-between border-b border-gray-10 py-1.5"><span class="text-gray-60">Perusahaan</span><span id="rv-perusahaan" class="text-gray-95 font-medium text-right ml-4">—</span></div>
+        <div class="flex justify-between border-b border-gray-10 py-1.5"><span class="text-gray-60">Sektor bisnis</span><span id="rv-sektor" class="text-gray-95 font-medium text-right ml-4">—</span></div>
+        <!-- DATA PERUSAHAAN -->
+        <div class="flex items-center gap-2 my-2">
+          <div class="flex-1 h-px bg-gray-10"></div>
+          <span class="text-tn text-gray-35 uppercase tracking-widest font-medium">DATA PERUSAHAAN</span>
+          <div class="flex-1 h-px bg-gray-10"></div>
+        </div>
+        <div class="flex justify-between border-b border-gray-10 py-1.5">
+          <span class="text-gray-60">PrivyID</span>
+          <div class="flex items-center gap-1.5 ml-4">
+            <div id="rv-privy-avatar" class="privy-avatar w-5 h-5 rounded-full bg-brand-action text-white flex items-center justify-center text-tn font-bold flex-shrink-0">?</div>
+            <span id="rv-privyid" class="text-gray-95 font-medium">—</span>
+          </div>
+        </div>
+        <div class="flex justify-between border-b border-gray-10 py-1.5"><span class="text-gray-60">Jabatan</span><span id="rv-jabatan" class="text-gray-95 font-medium text-right ml-4">—</span></div>
+        <div class="flex justify-between border-b border-gray-10 py-1.5"><span class="text-gray-60">Email kantor</span><span id="rv-email-kantor" class="text-gray-95 font-medium text-right ml-4 break-all">—</span></div>
+        <div class="flex justify-between border-b border-gray-10 py-1.5"><span class="text-gray-60">Telepon kantor</span><span id="rv-hp" class="text-gray-95 font-medium text-right ml-4">—</span></div>
+        <div class="flex justify-between border-b border-gray-10 py-1.5"><span class="text-gray-60">Alamat</span><span id="rv-alamat" class="text-gray-95 font-medium text-right ml-4">—</span></div>
+        <div class="flex justify-between border-b border-gray-10 py-1.5"><span class="text-gray-60">NPWP</span><span id="rv-npwp" class="text-gray-95 font-medium text-right ml-4">—</span></div>
+        <!-- DOKUMEN -->
+        <div class="flex items-center gap-2 my-2">
+          <div class="flex-1 h-px bg-gray-10"></div>
+          <span class="text-tn text-gray-35 uppercase tracking-widest font-medium">DOKUMEN DIUNGGAH</span>
+          <div class="flex-1 h-px bg-gray-10"></div>
+        </div>
+        <div class="flex justify-between border-b border-gray-10 py-1.5"><span class="text-gray-60">Dokumen NPWP</span><span id="rv-doc1" class="text-success font-medium flex items-center gap-1"><i class="ti ti-file-check text-sm"></i> —</span></div>
+        <div class="flex justify-between border-b border-gray-10 py-1.5"><span class="text-gray-60">Akta pendirian</span><span id="rv-doc2" class="text-success font-medium flex items-center gap-1"><i class="ti ti-file-check text-sm"></i> —</span></div>
+        <div class="flex justify-between py-1.5"><span class="text-gray-60">SK badan usaha</span><span id="rv-doc3" class="text-success font-medium flex items-center gap-1"><i class="ti ti-file-check text-sm"></i> —</span></div>
+      </div>
+    </div>
+
+    <!-- DOCUMENT VIEWER — Privy signing UI -->
+    <div class="rounded-md overflow-hidden border border-gray-15 shadow-sm mb-4">
+      <!-- ── Toolbar ── -->
+      <div class="bg-white border-b border-gray-10 flex items-center justify-between gap-2 px-4" style="height:52px;">
+        <span id="viewer-title" class="text-sm font-medium text-gray-95 truncate">Formulir Pendaftaran Layanan Enterprise Account Privy</span>
+        <!-- State A: place stamp -->
+        <div id="toolbar-place" style="display:flex; align-items:center;">
+          <button onclick="placeSigStamp()" class="h-9 px-4 bg-brand-action text-white rounded text-sm font-medium hover:bg-red-600 transition-colors flex items-center gap-2">
+            <i class="ti ti-writing text-sm"></i>
+            <span>Taruh tanda tangan (1)</span>
+          </button>
+        </div>
+        <!-- State B: confirm / reject -->
+        <div id="toolbar-confirm" style="display:none; align-items:center; gap:8px;">
+          <button onclick="rejectStamp()" class="h-9 px-4 border border-gray-20 text-gray-60 rounded text-sm font-medium hover:bg-gray-5 transition-colors flex items-center gap-1.5">
+            <i class="ti ti-x text-sm"></i> Tolak
+          </button>
+          <button onclick="openAuthModal()" class="h-9 px-4 bg-brand-accent text-white rounded text-sm font-medium hover:bg-blue-600 transition-colors flex items-center gap-1.5">
+            <i class="ti ti-check text-sm"></i> Konfirmasi
+          </button>
+        </div>
+        <!-- State C: signed -->
+        <div id="toolbar-signed" style="display:none; align-items:center;">
+          <span class="h-9 px-3 bg-success text-white rounded text-sm font-medium flex items-center gap-1.5">
+            <i class="ti ti-rosette-discount-check text-sm"></i> Ditandatangani
+          </span>
+        </div>
+      </div>
+
+      <!-- ── PDF area (gray bg + white paper) ── -->
+      <div class="doc-scroll overflow-y-auto" style="background:#E8EAED; height:580px;">
+        <div style="padding:32px 16px;">
+          <!-- White paper page -->
+          <div id="pdf-page" class="bg-white mx-auto" style="max-width:660px; min-height:900px; padding:56px 64px; box-shadow:0 2px 8px rgba(0,0,0,0.18);">
+
+            <!-- Confidential header -->
+            <p style="text-align:right; font-size:11px; font-style:italic; color:#728196; margin-bottom:20px;">Sangat Rahasia / <em>Strictly Confidential</em></p>
+
+            <!-- Doc title -->
+            <p style="font-weight:700; text-align:center; font-size:13px; color:#1F2329; margin-bottom:2px;">Formulir Pendaftaran Layanan Enterprise Account Privy</p>
+            <p style="text-align:center; font-size:11px; font-style:italic; color:#728196; margin-bottom:24px;">Privy Enterprise Account Service Registration Form</p>
+
+            <!-- No. Privy -->
+            <table style="width:100%; border-collapse:collapse; font-size:11px; margin-bottom:20px;">
+              <tr><td style="width:140px; color:#728196; padding:2px 0;">No. Privy</td><td style="width:12px; color:#728196; padding:2px 4px;">:</td><td><span class="af" id="doc-no-privy">—</span></td></tr>
+            </table>
+
+            <!-- Section A -->
+            <p style="font-weight:700; font-size:12px; color:#1F2329; margin-bottom:6px;">A. Identitas Para Pihak / <em style="font-weight:400; color:#728196;">Identity of the Parties</em></p>
+            <p style="font-size:11px; color:#5B6778; line-height:1.65; margin-bottom:10px;">Formulir Pendaftaran Layanan Enterprise Account Privy ini adalah perjanjian yang sah dan mengikat antara PT Privy Identitas Digital ("Privy") dan Pelanggan dengan rincian sebagai berikut: / <em>This Registration Form is a valid and binding agreement between PT Privy Identitas Digital ("Privy") and the Customer with the following details:</em></p>
+            <table style="width:100%; border-collapse:collapse; font-size:11px; margin-bottom:8px;">
+              <tr><td style="width:160px; color:#728196; padding:3px 0;">Nama / <em>Name</em></td><td style="width:12px; color:#728196; padding:3px 4px;">:</td><td><span class="af" id="doc-perusahaan">—</span></td></tr>
+              <tr><td style="color:#728196; padding:3px 0;">Alamat / <em>Address</em></td><td style="color:#728196; padding:3px 4px;">:</td><td><span class="af" id="doc-alamat">—</span></td></tr>
+              <tr><td style="color:#728196; padding:3px 0;">Bidang usaha / <em>Line of business</em></td><td style="color:#728196; padding:3px 4px;">:</td><td><span class="af" id="doc-sektor">—</span></td></tr>
+              <tr><td style="color:#728196; padding:3px 0;">NPWP / <em>Tax ID</em></td><td style="color:#728196; padding:3px 4px;">:</td><td><span class="af" id="doc-npwp">—</span></td></tr>
+            </table>
+            <p style="font-size:11px; color:#5B6778; font-style:italic; margin-bottom:4px;">("Pelanggan" / "Customer")</p>
+            <p style="font-size:11px; color:#5B6778; margin-bottom:6px;">Dalam hal ini diwakili secara sah oleh: / <em>In this case legally represented by:</em></p>
+            <table style="width:100%; border-collapse:collapse; font-size:11px; margin-bottom:12px;">
+              <tr><td style="width:160px; color:#728196; padding:3px 0;">Nama / <em>Name</em></td><td style="width:12px; color:#728196; padding:3px 4px;">:</td><td><span class="af" id="doc-nama-wakil">—</span></td></tr>
+              <tr><td style="color:#728196; padding:3px 0;">Jabatan / <em>Title</em></td><td style="color:#728196; padding:3px 4px;">:</td><td><span class="af" id="doc-jabatan">—</span></td></tr>
+            </table>
+            <p style="font-size:11px; color:#5B6778; line-height:1.65; margin-bottom:20px;">Para Pihak sepakat bahwa Formulir Pendaftaran ini tunduk pada Ketentuan Umum yang tersedia di <span style="color:#008AFF;">https://privy.id/general-terms</span>. / <em>The Parties agree that this Registration Form is subject to the General Terms available at https://privy.id/general-terms.</em></p>
+
+            <!-- Section B -->
+            <p style="font-weight:700; font-size:12px; color:#1F2329; margin-bottom:6px;">B. Korespondensi / <em style="font-weight:400; color:#728196;">Correspondence</em></p>
+            <p style="font-size:11px; color:#5B6778; margin-bottom:6px; font-weight:500;">Privy:</p>
+            <table style="width:100%; border-collapse:collapse; font-size:11px; margin-bottom:10px; padding-left:16px;">
+              <tr><td style="width:160px; color:#728196; padding:3px 0;">Alamat / <em>Address</em></td><td style="width:12px; color:#728196; padding:3px 4px;">:</td><td style="color:#495260;">CIBIS Tower 9 (PT Privy Identitas Digital, Lantai 8), Jl. Raya Cilandak KKO No. 129, Jakarta Selatan 12560</td></tr>
+              <tr><td style="color:#728196; padding:3px 0;">Surel / <em>E-mail</em></td><td style="color:#728196; padding:3px 4px;">:</td><td style="color:#495260;">bd@privy.id</td></tr>
+            </table>
+            <p style="font-size:11px; color:#5B6778; margin-bottom:6px; font-weight:500;">Pelanggan / <em style="font-weight:400;">Customer:</em></p>
+            <table style="width:100%; border-collapse:collapse; font-size:11px; margin-bottom:20px;">
+              <tr><td style="width:160px; color:#728196; padding:3px 0;">Alamat / <em>Address</em></td><td style="width:12px; color:#728196; padding:3px 4px;">:</td><td><span class="af" id="doc-alamat-b">—</span></td></tr>
+              <tr><td style="color:#728196; padding:3px 0;">Surel / <em>E-mail</em></td><td style="color:#728196; padding:3px 4px;">:</td><td><span class="af" id="doc-email-b">—</span></td></tr>
+            </table>
+
+            <!-- Section C -->
+            <p style="font-weight:700; font-size:12px; color:#1F2329; margin-bottom:6px;">C. Jenis dan Biaya Layanan / <em style="font-weight:400; color:#728196;">Types and Costs of Services</em></p>
+            <p style="font-size:11px; color:#5B6778; line-height:1.65; margin-bottom:20px;">Pelanggan setuju untuk mendaftar dan membeli layanan Enterprise Account Privy sesuai pilihan paket yang dikonfirmasi saat pendaftaran. Biaya Layanan belum termasuk PPN dan seluruh pembelian bersifat pra-bayar (pre-paid) dan non-refundable. / <em>The Customer agrees to purchase the Privy Enterprise Account service per the package confirmed at registration. Service Fees exclude VAT and all purchases are pre-paid and non-refundable.</em></p>
+
+            <!-- Section D -->
+            <p style="font-weight:700; font-size:12px; color:#1F2329; margin-bottom:6px;">D. Jangka Waktu Perjanjian / <em style="font-weight:400; color:#728196;">Term of the Agreement</em></p>
+            <p style="font-size:11px; color:#5B6778; line-height:1.65; margin-bottom:20px;">Perjanjian ini berlaku efektif selama 1 (satu) tahun sejak tanggal aktivasi Enterprise Account dan diperpanjang otomatis untuk setiap periode 1 (satu) tahun berikutnya kecuali diakhiri. / <em>This Agreement is effective for 1 (one) year from Enterprise Account activation and is automatically renewed for successive 1-year periods unless terminated.</em></p>
+
+            <!-- Section E -->
+            <p style="font-weight:700; font-size:12px; color:#1F2329; margin-bottom:6px;">E. Pembaruan Periode Layanan / <em style="font-weight:400; color:#728196;">Service Period Renewal</em></p>
+            <p style="font-size:11px; color:#5B6778; line-height:1.65; margin-bottom:20px;">Pelanggan wajib melunasi Biaya Layanan sebelum berakhirnya Periode Layanan. Keterlambatan pembayaran mengakibatkan Periode Layanan tidak diperbarui dan Perjanjian berakhir otomatis. / <em>Customers must settle Service Fees before the Service Period ends. Late payment results in non-renewal and automatic termination of this Agreement.</em></p>
+
+            <!-- Section F -->
+            <p style="font-weight:700; font-size:12px; color:#1F2329; margin-bottom:6px;">F. Pernyataan dan Jaminan Pelanggan / <em style="font-weight:400; color:#728196;">Customer Representations and Warranties</em></p>
+            <p style="font-size:11px; color:#5B6778; margin-bottom:6px;">Dengan menandatangani Formulir Pendaftaran ini, Pelanggan menyatakan dan menjamin bahwa: / <em>By signing this Registration Form, the Customer represents and warrants that:</em></p>
+            <ol style="font-size:11px; color:#5B6778; padding-left:20px; line-height:1.8; margin-bottom:20px;">
+              <li>Penandatangan adalah perwakilan yang sah dan berwenang mengikatkan Perusahaan dalam perjanjian ini; / <em>The signatory is a lawful representative authorized to bind the Company;</em></li>
+              <li>Pelanggan telah membaca, memahami, dan menyetujui seluruh Ketentuan Umum (tersedia di https://privy.id/general-terms); / <em>The Customer has read, understood, and agreed to all General Terms;</em></li>
+              <li>Formulir Pendaftaran ini beserta Ketentuan Umum merupakan perjanjian yang sah dan mengikat. / <em>This Registration Form together with the General Terms constitutes a valid and binding agreement.</em></li>
+            </ol>
+
+            <!-- Signature page -->
+            <div style="border-top:1px solid #E6E7EB; margin-top:32px; padding-top:28px;">
+              <p style="font-weight:700; text-align:center; font-size:12px; color:#1F2329; margin-bottom:20px;">HALAMAN TANDA TANGAN / <em style="font-weight:400;">SIGNATURE PAGE</em></p>
+              <table style="width:100%; border-collapse:collapse; font-size:11px; margin-bottom:16px;">
+                <tr><td style="width:140px; color:#728196; padding:3px 0;">Tanggal / <em>Date</em></td><td style="width:12px; color:#728196; padding:3px 4px;">:</td><td><span class="af" id="doc-tanggal">—</span></td></tr>
+                <tr><td style="color:#728196; padding:3px 0;">Pelanggan / <em>Customer</em></td><td style="color:#728196; padding:3px 4px;">:</td><td><span class="af" id="doc-perusahaan-sign">—</span></td></tr>
+              </table>
+              <p style="font-size:11px; color:#5B6778; margin-bottom:20px;">Untuk dan atas nama Pelanggan / <em>For and on behalf of the Customer:</em></p>
+              <!-- Signature area: 3 states -->
+              <!-- State idle: placeholder -->
+              <div id="sign-placeholder" style="border:2px dashed #D9DDE3; border-radius:6px; height:72px; display:flex; align-items:center; justify-content:center; margin-bottom:14px;">
+                <span style="font-size:11px; color:#A0ABB9;">[ Area tanda tangan / Signature area ]</span>
+              </div>
+              <!-- State stamped: pending confirm (blue) -->
+              <div id="sign-stamp" style="display:none; margin-bottom:14px; position:relative;">
+                <div style="border:2px solid #ADD9FF; border-radius:6px; background:#E5F3FF; padding:10px 14px; display:flex; align-items:center; gap:12px; position:relative;">
+                  <div id="stamp-barcode-preview" style="width:56px; height:38px; flex-shrink:0;"></div>
+                  <div>
+                    <div id="stamp-preview-name" style="font-size:10px; font-weight:600; color:#004C8C; margin-bottom:2px;">—</div>
+                    <div id="stamp-preview-id" style="font-size:9px; color:#008AFF;">Privy ID: —</div>
+                  </div>
+                  <button onclick="rejectStamp()" title="Hapus tanda tangan" style="position:absolute; top:-8px; right:-8px; width:20px; height:20px; background:#E42E2C; border:none; border-radius:9999px; color:white; font-size:13px; line-height:1; cursor:pointer; display:flex; align-items:center; justify-content:center; flex-shrink:0;">×</button>
+                </div>
+              </div>
+              <!-- State signed: finalized -->
+              <div id="sign-done" style="display:none; margin-bottom:14px;">
+                <div style="border:1.5px solid #D9DDE3; border-radius:6px; background:#fff; padding:10px 14px; display:flex; align-items:center; gap:12px;">
+                  <div id="done-barcode" style="width:56px; height:38px; flex-shrink:0;"></div>
+                  <div>
+                    <div id="done-name" style="font-size:10px; font-weight:600; color:#1F2329; margin-bottom:1px;">Signed by —</div>
+                    <div id="done-id" style="font-size:9px; color:#728196; margin-bottom:1px;">Privy ID: —</div>
+                    <div id="done-time" style="font-size:9px; color:#A0ABB9;"></div>
+                  </div>
+                </div>
+              </div>
+              <table style="width:100%; border-collapse:collapse; font-size:11px;">
+                <tr><td style="width:140px; color:#728196; padding:3px 0;">Nama / <em>Name</em></td><td style="width:12px; color:#728196; padding:3px 4px;">:</td><td><span class="af" id="doc-nama-sign">—</span></td></tr>
+                <tr><td style="color:#728196; padding:3px 0;">Jabatan / <em>Title</em></td><td style="color:#728196; padding:3px 4px;">:</td><td><span class="af" id="doc-jabatan-sign">—</span></td></tr>
+              </table>
+            </div>
+
+          </div><!-- /pdf-page -->
+        </div>
+      </div><!-- /pdf area -->
+    </div><!-- /document viewer -->
+
+    <!-- Status bar -->
+    <div class="flex items-center gap-2 mb-3">
+      <span id="sign-dot" class="w-2 h-2 rounded-full bg-danger inline-block flex-shrink-0"></span>
+      <span id="sign-status-text" class="text-sm text-gray-50">Belum ditandatangani — klik tombol "Taruh tanda tangan" di atas</span>
+    </div>
+    <button id="submit-btn" disabled onclick="showPage('page-pending')" class="w-full h-10 bg-brand-action/40 text-white rounded font-medium text-sm cursor-not-allowed flex items-center justify-center gap-2 transition-all mb-2">
+      <i class="ti ti-send text-base"></i> Submit untuk verifikasi
+    </button>
+    <button onclick="showPage('page-form')" class="w-full h-10 bg-transparent border border-gray-20 text-gray-60 rounded font-medium text-sm hover:bg-gray-5 transition-colors flex items-center justify-center gap-2">
+      <i class="ti ti-arrow-left text-base"></i> Kembali ke form
+    </button>
+
+    <div class="text-center mt-6 space-y-1">
+      <div class="flex items-center justify-center gap-2 text-xs text-gray-35">
+        <span class="font-medium text-gray-50">Indonesia</span><span>·</span><span>English</span>
+      </div>
+      <p class="text-tn text-gray-35">© 2025 Privy</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     STATE — PENDING
+     ============================================================ -->
+<section id="page-pending" class="hidden">
+  <div class="max-w-xl mx-auto px-4 py-8">
+    <div class="flex justify-center mb-8">
+      <img src="logo-privy.png" alt="Privy" class="h-8 w-auto" />
+    </div>
+    <div class="flex flex-col items-center text-center space-y-4">
+      <div class="w-24 h-24 rounded-full bg-blue-50 flex items-center justify-center text-4xl">⏳</div>
+      <div>
+        <h1 class="text-xl font-bold text-gray-95">Pendaftaran berhasil dikirim!</h1>
+        <p class="text-sm text-gray-50 mt-2 max-w-xs mx-auto">Data dan dokumen kamu sudah kami terima. Tim Privy akan memverifikasi dalam waktu 10–30 menit.</p>
+      </div>
+      <div class="bg-gray-5 border border-gray-10 rounded-md px-4 py-3 flex items-center gap-2 w-full max-w-sm">
+        <i class="ti ti-hash text-gray-35 text-base flex-shrink-0"></i>
+        <span class="text-xs text-gray-50 flex-shrink-0">ID Registrasi:</span>
+        <strong class="text-xs text-gray-95 font-mono flex-1 truncate" id="reg-id">23942937428937428348237</strong>
+        <button onclick="copyRegId()" id="copy-btn" class="flex-shrink-0 text-brand-accent hover:text-blue-600 transition-colors">
+          <i class="ti ti-copy text-base"></i>
+        </button>
+      </div>
+      <div class="bg-gray-5 rounded-md p-4 text-left w-full max-w-sm">
+        <p class="text-xs font-semibold text-gray-95 mb-3">Apa yang terjadi selanjutnya?</p>
+        <div class="space-y-3">
+          <div class="flex items-start gap-3">
+            <div class="w-6 h-6 rounded-full bg-success flex items-center justify-center flex-shrink-0 mt-0.5"><i class="ti ti-check text-white" style="font-size:10px;"></i></div>
+            <div><p class="text-xs font-medium text-gray-95">Dokumen diterima</p><p class="text-tn text-gray-50">Semua dokumen berhasil diunggah</p></div>
+          </div>
+          <div class="flex items-start gap-3">
+            <div class="w-6 h-6 rounded-full bg-brand-action flex items-center justify-center flex-shrink-0 mt-0.5"><span class="spinner"><i class="ti ti-loader-2 text-white" style="font-size:10px;"></i></span></div>
+            <div><p class="text-xs font-medium text-gray-95">Verifikasi oleh tim Privy</p><p class="text-tn text-gray-50">SLA: 10–30 menit kerja</p></div>
+          </div>
+          <div class="flex items-start gap-3">
+            <div class="w-6 h-6 rounded-full bg-gray-10 flex items-center justify-center flex-shrink-0 mt-0.5"><span class="text-gray-35" style="font-size:10px;font-weight:600;">3</span></div>
+            <div><p class="text-xs font-medium text-gray-35">Notifikasi via email</p><p class="text-tn text-gray-35">ke <span id="pending-email">—</span></p></div>
+          </div>
+          <div class="flex items-start gap-3">
+            <div class="w-6 h-6 rounded-full bg-gray-10 flex items-center justify-center flex-shrink-0 mt-0.5"><span class="text-gray-35" style="font-size:10px;font-weight:600;">4</span></div>
+            <div><p class="text-xs font-medium text-gray-35">Enterprise aktif</p><p class="text-tn text-gray-35">Mulai gunakan semua fitur Enterprise</p></div>
+          </div>
+        </div>
+      </div>
+      <button onclick="showPage('page-verified')" class="text-xs text-gray-35 border border-dashed border-gray-15 rounded px-3 py-1.5 hover:text-gray-50 transition-colors">
+        Simulasi: enterprise terverifikasi →
+      </button>
+      <p class="text-xs text-gray-50">Mengalami kendala? <a href="#" onclick="return false;" class="text-brand-accent font-medium">Hubungi tim Privy</a> atau pelajari <a href="#" onclick="return false;" class="text-brand-accent font-medium">cara menggunakan Privy Enterprise</a></p>
+    </div>
+    <div class="text-center mt-8 space-y-1">
+      <div class="flex items-center justify-center gap-2 text-xs text-gray-35"><span class="font-medium text-gray-50">Indonesia</span><span>·</span><span>English</span></div>
+      <p class="text-tn text-gray-35">© 2025 Privy</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     STATE — VERIFIED
+     ============================================================ -->
+<section id="page-verified" class="hidden">
+  <div class="max-w-xl mx-auto px-4 py-8">
+    <div class="flex justify-center mb-8">
+      <img src="logo-privy.png" alt="Privy" class="h-8 w-auto" />
+    </div>
+    <div class="flex flex-col items-center text-center space-y-4">
+      <div class="w-24 h-24 rounded-full bg-success-subtle flex items-center justify-center text-4xl">🎉</div>
+      <div>
+        <h1 class="text-xl font-bold text-gray-95">Selamat! Enterprise kamu terverifikasi</h1>
+        <p class="text-sm text-gray-50 mt-2 max-w-xs mx-auto">Akun enterprise <strong id="verified-perusahaan" class="text-gray-95">—</strong> sudah aktif dan siap digunakan.</p>
+      </div>
+      <div class="bg-gray-5 border border-gray-10 rounded-md overflow-hidden w-full max-w-sm divide-y divide-gray-10">
+        <div class="flex items-center gap-3 px-4 py-3 hover:bg-gray-10 cursor-pointer transition-colors">
+          <div class="w-7 h-7 rounded bg-success-subtle flex items-center justify-center flex-shrink-0"><i class="ti ti-users text-success text-sm"></i></div>
+          <div class="text-left flex-1"><p class="text-xs font-semibold text-gray-95">Undang karyawan</p><p class="text-tn text-gray-50">Tambahkan anggota tim ke akun enterprise kamu</p></div>
+          <i class="ti ti-chevron-right text-gray-35 text-sm flex-shrink-0"></i>
+        </div>
+        <div class="flex items-center gap-3 px-4 py-3 hover:bg-gray-10 cursor-pointer transition-colors">
+          <div class="w-7 h-7 rounded bg-success-subtle flex items-center justify-center flex-shrink-0"><i class="ti ti-file-plus text-success text-sm"></i></div>
+          <div class="text-left flex-1"><p class="text-xs font-semibold text-gray-95">Buat dokumen pertama</p><p class="text-tn text-gray-50">Mulai tanda tangani dokumen secara digital</p></div>
+          <i class="ti ti-chevron-right text-gray-35 text-sm flex-shrink-0"></i>
+        </div>
+        <div class="flex items-center gap-3 px-4 py-3 hover:bg-gray-10 cursor-pointer transition-colors">
+          <div class="w-7 h-7 rounded bg-success-subtle flex items-center justify-center flex-shrink-0"><i class="ti ti-stamp text-success text-sm"></i></div>
+          <div class="text-left flex-1"><p class="text-xs font-semibold text-gray-95">Atur enterprise seal</p><p class="text-tn text-gray-50">Aktifkan stempel dan cap digital perusahaan kamu</p></div>
+          <i class="ti ti-chevron-right text-gray-35 text-sm flex-shrink-0"></i>
+        </div>
+      </div>
+      <button class="w-full max-w-sm h-10 bg-brand-action text-white rounded font-medium text-sm hover:bg-red-600 transition-colors flex items-center justify-center gap-2">
+        <i class="ti ti-rocket text-base"></i> Mulai gunakan Privy Enterprise
+      </button>
+      <p class="text-xs text-gray-50">Butuh bantuan? <a href="#" onclick="return false;" class="text-brand-accent font-medium">Pelajari cara menggunakan Privy Enterprise</a></p>
+    </div>
+    <div class="text-center mt-8 space-y-1">
+      <div class="flex items-center justify-center gap-2 text-xs text-gray-35"><span class="font-medium text-gray-50">Indonesia</span><span>·</span><span>English</span></div>
+      <p class="text-tn text-gray-35">© 2025 Privy</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     JAVASCRIPT
+     ============================================================ -->
+<script>
+  // ── State ──────────────────────────────────────────────────
+  let currentPrivyId   = '';
+  let privyDisplayName = '';
+  let tncAccepted      = false;
+  let docExpanded      = false;
+  const docs = { doc1: null, doc2: null, doc3: null };
+
+  // ── Navigation ─────────────────────────────────────────────
+  function showPage(id) {
+    document.querySelectorAll('section[id^="page-"]')
+      .forEach(s => s.classList.add('hidden'));
+    document.getElementById(id).classList.remove('hidden');
+    window.scrollTo(0, 0);
+    if (id === 'page-review') refreshReviewPage();
+    if (id === 'page-pending') {
+      const el = document.getElementById('pending-email');
+      if (el) el.textContent = g('f-email-kantor') || g('f-email') || '—';
+    }
+    if (id === 'page-verified') {
+      const el = document.getElementById('verified-perusahaan');
+      if (el) el.textContent = g('f-perusahaan') || '—';
+    }
+  }
+
+  // ── Field helpers ──────────────────────────────────────────
+  function g(id)    { const e = document.getElementById(id); return e ? e.value.trim() : ''; }
+  function st(id, v){ const e = document.getElementById(id); if (e) e.textContent = v || '—'; }
+  function sh(id, h){ const e = document.getElementById(id); if (e) e.innerHTML  = h; }
+  function af(v)    { return `<span class="af">${v || '—'}</span>`; }
+
+  // ── Avatar initials ─────────────────────────────────────────
+  function getInitials(name) {
+    if (!name) return '?';
+    return name.trim().split(/\s+/).map(w => w[0]).join('').toUpperCase().slice(0, 2);
+  }
+  function updateAvatars() {
+    const initials = getInitials(privyDisplayName || g('f-nama'));
+    document.querySelectorAll('.privy-avatar').forEach(el => el.textContent = initials);
+  }
+
+  // ── PrivyID fetch simulation ────────────────────────────────
+  function fetchPrivyId() {
+    const input = document.getElementById('f-privy-input');
+    const rawId = input.value.trim() || 'JJ9999';
+    const name  = g('f-nama') || 'Pengguna Privy';
+
+    document.getElementById('privyid-empty').classList.add('hidden');
+    document.getElementById('privyid-loading').classList.remove('hidden');
+    document.getElementById('privy-loading-input').value = rawId;
+
+    setTimeout(() => {
+      currentPrivyId   = rawId;
+      privyDisplayName = name;
+
+      document.getElementById('privyid-loading').classList.add('hidden');
+      document.getElementById('privyid-success').classList.remove('hidden');
+      document.getElementById('privy-success-input').value = rawId;
+      document.getElementById('privy-id-display').textContent = rawId;
+      document.getElementById('privy-nama-display').textContent = name;
+      document.getElementById('f-nama-penanda').value = name;
+      document.getElementById('doc-no-privy').textContent = rawId;
+
+      updateAvatars();
+      document.getElementById('kuasa-section').classList.remove('hidden');
+      document.getElementById('jabatan-section').classList.remove('hidden');
+      onFormInput();
+    }, 1200);
+  }
+
+  function resetPrivyId() {
+    currentPrivyId   = '';
+    privyDisplayName = '';
+    document.getElementById('privyid-success').classList.add('hidden');
+    document.getElementById('privyid-empty').classList.remove('hidden');
+    document.getElementById('kuasa-section').classList.add('hidden');
+    document.getElementById('jabatan-section').classList.add('hidden');
+    document.getElementById('f-privy-input').value = '';
+    document.getElementById('f-nama-penanda').value = '';
+    onFormInput();
+  }
+
+  // ── Kuasa toggle ────────────────────────────────────────────
+  function toggleKuasa(cb) {
+    document.getElementById('kuasa-upload').classList.toggle('hidden', !cb.checked);
+  }
+
+  // ── Document upload ─────────────────────────────────────────
+  function handleDocUpload(input, key) {
+    if (!input.files || !input.files[0]) return;
+    const file = input.files[0];
+    docs[key] = file.name;
+    const icon  = document.getElementById(key + '-icon');
+    const label = document.getElementById(key + '-label');
+    if (icon) {
+      icon.className = 'w-8 h-8 rounded bg-success-subtle border border-success-border flex items-center justify-center flex-shrink-0';
+      icon.innerHTML = '<i class="ti ti-file-check text-success text-sm"></i>';
+    }
+    if (label) {
+      label.innerHTML = `<span class="rounded-full text-tn px-2.5 py-1 bg-success-subtle border border-success-border text-success font-medium flex items-center gap-1">
+        <i class="ti ti-check text-xs"></i> ${file.name.length > 16 ? file.name.slice(0,14)+'…' : file.name}
+      </span>`;
+    }
+    onFormInput();
+  }
+
+  // ── Progress tracking ───────────────────────────────────────
+  function onFormInput() {
+    const c1 = g('f-nama') && g('f-email') && g('f-telepon') && g('f-perusahaan') && g('f-sektor');
+    const c2 = currentPrivyId && g('f-jabatan') && g('f-email-kantor') && g('f-hp-kantor') && g('f-alamat') && g('f-npwp');
+    const c3 = docs.doc1 && docs.doc2 && docs.doc3;
+
+    const badge1 = document.getElementById('card1-badge');
+    const badge2 = document.getElementById('card2-badge');
+    const badge3 = document.getElementById('card3-badge');
+    if (badge1) badge1.classList.toggle('hidden', !c1);
+    if (badge2) badge2.classList.toggle('hidden', !c2);
+    if (badge3) badge3.classList.toggle('hidden', !c3);
+
+    const done  = [c1, c2, c3].filter(Boolean).length;
+    const pct   = Math.round(done / 3 * 100);
+    const bar   = document.getElementById('progress-bar');
+    const txt   = document.getElementById('progress-text');
+    if (bar) bar.style.width = pct + '%';
+    if (txt) {
+      txt.textContent = done + ' dari 3';
+      txt.className   = done === 3 ? 'text-brand-action font-medium' : 'text-gray-35 font-medium';
+    }
+
+    const allDone = c1 && c2 && c3 && tncAccepted;
+    const cta = document.getElementById('form-cta');
+    if (cta) {
+      if (allDone) {
+        cta.removeAttribute('disabled');
+        cta.className = 'w-full h-10 bg-brand-action text-white rounded font-medium text-sm cursor-pointer hover:bg-red-600 flex items-center justify-center gap-2 transition-all';
+      } else {
+        cta.setAttribute('disabled', '');
+        cta.className = 'w-full h-10 bg-brand-action/40 text-white rounded font-medium text-sm cursor-not-allowed flex items-center justify-center gap-2 transition-all';
+      }
+    }
+    updateAvatars();
+  }
+
+  // ── TNC Modal ───────────────────────────────────────────────
+  function handleTncClick(e) {
+    e.preventDefault();
+    const cb = document.getElementById('tnc-cb');
+    if (tncAccepted) {
+      // allow uncheck
+      tncAccepted = false;
+      cb.checked  = false;
+      onFormInput();
+      return;
+    }
+    openTncModal();
+  }
+
+  function openTncModal() {
+    const modal = document.getElementById('tnc-modal');
+    const body  = document.getElementById('tnc-body');
+    const hint  = document.getElementById('tnc-scroll-hint');
+    const btn   = document.getElementById('tnc-accept-btn');
+    modal.classList.remove('hidden');
+    body.scrollTop = 0;
+    hint.style.opacity = '1';
+    btn.disabled  = true;
+    btn.className = 'h-9 px-4 bg-brand-action/40 text-white rounded text-sm font-medium cursor-not-allowed transition-all';
+    document.body.style.overflow = 'hidden';
+  }
+
+  function checkTncScroll() {
+    const body = document.getElementById('tnc-body');
+    const hint = document.getElementById('tnc-scroll-hint');
+    const btn  = document.getElementById('tnc-accept-btn');
+    const near = body.scrollTop + body.clientHeight >= body.scrollHeight - 40;
+    if (near) {
+      hint.style.opacity = '0';
+      btn.disabled  = false;
+      btn.className = 'h-9 px-4 bg-brand-action text-white rounded text-sm font-medium cursor-pointer hover:bg-red-600 transition-all';
+    }
+  }
+
+  function closeTncModal(accepted) {
+    document.getElementById('tnc-modal').classList.add('hidden');
+    document.body.style.overflow = '';
+    if (accepted) {
+      tncAccepted = true;
+      document.getElementById('tnc-cb').checked = true;
+    } else {
+      document.getElementById('tnc-cb').checked = false;
+    }
+    onFormInput();
+  }
+
+  function setTncLang(lang) {
+    const id = document.getElementById('tnc-lang-id');
+    const en = document.getElementById('tnc-lang-en');
+    if (lang === 'id') {
+      id.className = 'text-xs px-3 py-1.5 rounded border border-gray-20 font-medium text-gray-95 bg-white';
+      en.className = 'text-xs px-3 py-1.5 rounded border border-transparent font-medium text-gray-35';
+    } else {
+      en.className = 'text-xs px-3 py-1.5 rounded border border-gray-20 font-medium text-gray-95 bg-white';
+      id.className = 'text-xs px-3 py-1.5 rounded border border-transparent font-medium text-gray-35';
+    }
+  }
+
+  // ── Review page refresh ─────────────────────────────────────
+  function refreshReviewPage() {
+    st('rv-nama',         g('f-nama'));
+    st('rv-email',        g('f-email'));
+    st('rv-telepon',      g('f-telepon'));
+    st('rv-perusahaan',   g('f-perusahaan'));
+    st('rv-sektor',       g('f-sektor'));
+    st('rv-privyid',      currentPrivyId || '—');
+    st('rv-jabatan',      g('f-jabatan'));
+    st('rv-email-kantor', g('f-email-kantor'));
+    st('rv-hp',           g('f-hp-kantor'));
+    st('rv-alamat',       g('f-alamat'));
+    st('rv-npwp',         g('f-npwp'));
+
+    const doc1 = document.getElementById('rv-doc1');
+    const doc2 = document.getElementById('rv-doc2');
+    const doc3 = document.getElementById('rv-doc3');
+    if (doc1) doc1.innerHTML = `<i class="ti ti-file-check text-sm"></i> ${docs.doc1 || '—'}`;
+    if (doc2) doc2.innerHTML = `<i class="ti ti-file-check text-sm"></i> ${docs.doc2 || '—'}`;
+    if (doc3) doc3.innerHTML = `<i class="ti ti-file-check text-sm"></i> ${docs.doc3 || '—'}`;
+
+    // Update avatars
+    const initials = getInitials(privyDisplayName || g('f-nama'));
+    document.querySelectorAll('.privy-avatar').forEach(el => el.textContent = initials);
+
+    // Update document viewer toolbar
+    const perus = g('f-perusahaan') || 'Formulir Pendaftaran Enterprise';
+    const nama  = privyDisplayName || g('f-nama') || '—';
+    st('viewer-title',     perus);
+    st('viewer-user-name', nama);
+    st('viewer-user-id',   currentPrivyId || '—');
+
+    // Update doc preview autofill spans
+    const jabatan = g('f-jabatan')      || '—';
+    const alamat  = g('f-alamat')       || '—';
+    const sektor  = g('f-sektor')       || '—';
+    const npwp    = g('f-npwp')         || '—';
+    const emailK  = g('f-email-kantor') || '—';
+    const privId  = currentPrivyId      || '—';
+    const today   = new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
+
+    sh('doc-no-privy',        privId);
+    sh('doc-perusahaan',      perus);
+    sh('doc-alamat',          alamat);
+    sh('doc-sektor',          sektor);
+    sh('doc-npwp',            npwp);
+    sh('doc-nama-wakil',      nama);
+    sh('doc-jabatan',         jabatan);
+    sh('doc-alamat-b',        alamat);
+    sh('doc-email-b',         emailK);
+    sh('doc-tanggal',         today);
+    sh('doc-perusahaan-sign', perus);
+    sh('doc-nama-sign',       nama);
+    sh('doc-jabatan-sign',    jabatan);
+  }
+
+  // ── Go to review ────────────────────────────────────────────
+  function goToReview() {
+    resetSignFlow();
+    showPage('page-review');
+  }
+
+  // ── Reset sign UI to idle state ──────────────────────────────
+  function resetSignFlow() {
+    signState = 'idle';
+
+    // Toolbar
+    document.getElementById('toolbar-place').style.display  = 'flex';
+    document.getElementById('toolbar-confirm').style.display = 'none';
+    document.getElementById('toolbar-signed').style.display  = 'none';
+
+    // Signature area
+    document.getElementById('sign-placeholder').style.display = 'flex';
+    document.getElementById('sign-stamp').style.display        = 'none';
+    document.getElementById('sign-done').style.display         = 'none';
+
+    // Status bar
+    const dot  = document.getElementById('sign-dot');
+    const stxt = document.getElementById('sign-status-text');
+    if (dot)  dot.className = 'w-2 h-2 rounded-full bg-danger inline-block flex-shrink-0';
+    if (stxt) { stxt.textContent = 'Belum ditandatangani — klik tombol "Taruh tanda tangan" di atas'; stxt.className = 'text-sm text-gray-50'; }
+
+    // Submit button
+    const sbtn = document.getElementById('submit-btn');
+    if (sbtn) {
+      sbtn.setAttribute('disabled', '');
+      sbtn.className = 'w-full h-10 bg-brand-action/40 text-white rounded font-medium text-sm cursor-not-allowed flex items-center justify-center gap-2 transition-all mb-2';
+    }
+  }
+
+  // ── Multi-step signing flow ──────────────────────────────────
+  let signState = 'idle'; // idle | stamped | signed
+
+  function generateBarcodeSVG() {
+    const pattern = [2,1,3,1,2,2,1,3,1,2,1,1,3,2,1,2,3,1,1,2,1,2,2,1];
+    const totalW = 56, h = 38;
+    const scale  = totalW / pattern.reduce((a,b)=>a+b,0);
+    let x = 0, rects = '';
+    pattern.forEach((w, i) => {
+      const bw = Math.max(1, Math.round(w * scale));
+      if (i % 2 === 0) rects += `<rect x="${x}" y="0" width="${bw}" height="${h}" fill="#1F2329"/>`;
+      x += bw;
+    });
+    return `<svg width="${totalW}" height="${h}" viewBox="0 0 ${totalW} ${h}" xmlns="http://www.w3.org/2000/svg">${rects}</svg>`;
+  }
+
+  function placeSigStamp() {
+    if (signState !== 'idle') return;
+    signState = 'stamped';
+
+    const nama    = privyDisplayName || g('f-nama') || '—';
+    const privyId = currentPrivyId   || '—';
+
+    document.getElementById('stamp-preview-name').textContent = nama;
+    document.getElementById('stamp-preview-id').textContent   = 'Privy ID: ' + privyId;
+    document.getElementById('stamp-barcode-preview').innerHTML = generateBarcodeSVG();
+
+    document.getElementById('sign-placeholder').style.display = 'none';
+    document.getElementById('sign-stamp').style.display        = 'block';
+
+    document.getElementById('toolbar-place').style.display   = 'none';
+    document.getElementById('toolbar-confirm').style.display  = 'flex';
+
+    const pdfArea = document.querySelector('.doc-scroll');
+    if (pdfArea) setTimeout(() => pdfArea.scrollTo({ top: pdfArea.scrollHeight, behavior: 'smooth' }), 200);
+  }
+
+  function rejectStamp() {
+    signState = 'idle';
+    document.getElementById('sign-placeholder').style.display = 'flex';
+    document.getElementById('sign-stamp').style.display        = 'none';
+    document.getElementById('toolbar-place').style.display    = 'flex';
+    document.getElementById('toolbar-confirm').style.display   = 'none';
+    closeAuthModal();
+    closePinModal();
+  }
+
+  function openAuthModal() {
+    document.getElementById('modal-auth').classList.remove('hidden');
+  }
+
+  function closeAuthModal() {
+    document.getElementById('modal-auth').classList.add('hidden');
+  }
+
+  function openPinModal() {
+    closeAuthModal();
+    const perus = g('f-perusahaan') || 'perusahaan Anda';
+    document.getElementById('pin-reason').textContent = 'Saya menyetujui dokumen ini atas nama ' + perus;
+    // Reset PIN dots + inputs
+    for (let i = 1; i <= 6; i++) {
+      const inp = document.getElementById('pin-' + i);
+      const dot = document.getElementById('pin-dot-' + i);
+      if (inp) inp.value = '';
+      if (dot) {
+        dot.classList.remove('bg-brand-accent','border-brand-accent');
+        dot.classList.add('bg-gray-5','border-gray-15');
+        dot.innerHTML = '';
+      }
+    }
+    document.getElementById('pin-notes').value = '';
+    document.getElementById('pin-notes-count').textContent = '0';
+    const btn = document.getElementById('btn-tanda-tangan');
+    btn.disabled   = true;
+    btn.className  = 'w-full h-11 bg-brand-action/40 text-white rounded-lg font-semibold text-sm cursor-not-allowed transition-all flex items-center justify-center gap-2';
+    document.getElementById('modal-pin').classList.remove('hidden');
+    setTimeout(() => document.getElementById('pin-1')?.focus(), 150);
+  }
+
+  function closePinModal() {
+    document.getElementById('modal-pin').classList.add('hidden');
+  }
+
+  function backToAuthModal() {
+    closePinModal();
+    openAuthModal();
+  }
+
+  function handlePinInput(input, index) {
+    const val = input.value.replace(/\D/g,'');
+    input.value = val ? val[0] : '';
+    const dot = document.getElementById('pin-dot-' + index);
+    if (val) {
+      dot.classList.remove('bg-gray-5','border-gray-15');
+      dot.classList.add('bg-brand-accent','border-brand-accent');
+      dot.innerHTML = '<div style="width:8px;height:8px;border-radius:9999px;background:white;"></div>';
+      if (index < 6) document.getElementById('pin-' + (index+1))?.focus();
+    } else {
+      dot.classList.remove('bg-brand-accent','border-brand-accent');
+      dot.classList.add('bg-gray-5','border-gray-15');
+      dot.innerHTML = '';
+    }
+    // Check all filled
+    const filled = [1,2,3,4,5,6].filter(i => document.getElementById('pin-'+i)?.value).length;
+    const btn    = document.getElementById('btn-tanda-tangan');
+    if (filled === 6) {
+      btn.disabled  = false;
+      btn.className = 'w-full h-11 bg-brand-action text-white rounded-lg font-semibold text-sm cursor-pointer hover:bg-red-600 transition-all flex items-center justify-center gap-2';
+    } else {
+      btn.disabled  = true;
+      btn.className = 'w-full h-11 bg-brand-action/40 text-white rounded-lg font-semibold text-sm cursor-not-allowed transition-all flex items-center justify-center gap-2';
+    }
+  }
+
+  function handlePinKeydown(e, index) {
+    if (e.key === 'Backspace' && !e.target.value && index > 1) {
+      document.getElementById('pin-' + (index-1))?.focus();
+    }
+  }
+
+  function completeSigning() {
+    signState = 'signed';
+    closePinModal();
+
+    const now  = new Date();
+    const ts   = now.toLocaleDateString('id-ID', { day:'numeric', month:'long', year:'numeric' })
+               + ' · ' + now.toLocaleTimeString('id-ID', { hour:'2-digit', minute:'2-digit' }) + ' WIB';
+    const nama    = privyDisplayName || g('f-nama') || '—';
+    const privyId = currentPrivyId   || '—';
+
+    // Update done stamp
+    document.getElementById('done-name').textContent  = 'Signed by ' + nama;
+    document.getElementById('done-id').textContent    = 'Privy ID: ' + privyId;
+    document.getElementById('done-time').textContent  = ts;
+    document.getElementById('done-barcode').innerHTML = generateBarcodeSVG();
+
+    // Show done stamp
+    document.getElementById('sign-placeholder').style.display = 'none';
+    document.getElementById('sign-stamp').style.display        = 'none';
+    document.getElementById('sign-done').style.display         = 'flex';
+
+    // Toolbar → signed
+    document.getElementById('toolbar-place').style.display   = 'none';
+    document.getElementById('toolbar-confirm').style.display  = 'none';
+    document.getElementById('toolbar-signed').style.display   = 'flex';
+
+    // Status bar
+    const dot  = document.getElementById('sign-dot');
+    const stxt = document.getElementById('sign-status-text');
+    if (dot)  dot.className = 'w-2 h-2 rounded-full bg-success inline-block flex-shrink-0';
+    if (stxt) { stxt.textContent = 'Dokumen telah ditandatangani secara digital · ' + ts; stxt.className = 'text-sm text-success'; }
+
+    // Enable submit
+    const sbtn = document.getElementById('submit-btn');
+    if (sbtn) {
+      sbtn.removeAttribute('disabled');
+      sbtn.className = 'w-full h-10 bg-brand-action text-white rounded font-medium text-sm cursor-pointer hover:bg-red-600 flex items-center justify-center gap-2 transition-all mb-2';
+    }
+
+    // Scroll to signature
+    const pdfArea = document.querySelector('.doc-scroll');
+    if (pdfArea) setTimeout(() => pdfArea.scrollTo({ top: pdfArea.scrollHeight, behavior: 'smooth' }), 200);
+  }
+
+  // ── Copy reg ID ─────────────────────────────────────────────
+  function copyRegId() {
+    const id  = document.getElementById('reg-id').textContent;
+    const btn = document.getElementById('copy-btn');
+    navigator.clipboard.writeText(id).catch(() => {});
+    btn.innerHTML = '<i class="ti ti-check text-success text-base"></i>';
+    setTimeout(() => { btn.innerHTML = '<i class="ti ti-copy text-base"></i>'; }, 2000);
+  }
+
+  // ── Close modal on backdrop click ───────────────────────────
+  document.getElementById('tnc-modal').addEventListener('click', function(e) {
+    if (e.target === this) closeTncModal(false);
+  });
+
+  // ── Demo: Autofill ──────────────────────────────────────────
+  const DEMO_DATA = {
+    'f-nama':        'Dimas Aprilian Sulaiman Putra',
+    'f-email':       'dimas.aprilian@techcorp.id',
+    'f-telepon':     '+6281234567890',
+    'f-perusahaan':  'PT Teknologi Maju Indonesia',
+    'f-sektor':      'Teknologi informasi',
+    'f-jabatan':     'Chief Technology Officer',
+    'f-email-kantor':'info@techcorp.id',
+    'f-hp-kantor':   '+62215551234',
+    'f-alamat':      'Jl. Jend. Sudirman Kav. 55, Jakarta Selatan 12190',
+    'f-npwp':        '01.234.567.8-901.000',
+  };
+  const DEMO_PRIVY_ID   = 'WM0905';
+  const DEMO_PRIVY_NAME = 'Dimas Aprilian Sulaiman Putra';
+
+  function autofillDemo() {
+    // Navigate to form page first
+    showPage('page-form');
+
+    // Fill all text inputs & select
+    Object.entries(DEMO_DATA).forEach(([id, val]) => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.value = val;
+    });
+
+    // Set PrivyID success state instantly (skip loading)
+    currentPrivyId   = DEMO_PRIVY_ID;
+    privyDisplayName = DEMO_PRIVY_NAME;
+
+    document.getElementById('privyid-empty').classList.add('hidden');
+    document.getElementById('privyid-loading').classList.add('hidden');
+    document.getElementById('privyid-success').classList.remove('hidden');
+    document.getElementById('privy-success-input').value       = DEMO_PRIVY_ID;
+    document.getElementById('privy-id-display').textContent    = DEMO_PRIVY_ID;
+    document.getElementById('privy-nama-display').textContent  = DEMO_PRIVY_NAME;
+    document.getElementById('f-nama-penanda').value            = DEMO_PRIVY_NAME;
+    document.getElementById('doc-no-privy').textContent        = DEMO_PRIVY_ID;
+    document.getElementById('kuasa-section').classList.remove('hidden');
+    document.getElementById('jabatan-section').classList.remove('hidden');
+    updateAvatars();
+
+    // Simulate document uploads
+    ['doc1','doc2','doc3'].forEach((key, i) => {
+      const names = ['NPWP-Perusahaan.pdf', 'Akta-Pendirian.pdf', 'SK-Badan-Usaha.pdf'];
+      docs[key] = names[i];
+      const icon  = document.getElementById(key + '-icon');
+      const label = document.getElementById(key + '-label');
+      if (icon) {
+        icon.className = 'w-8 h-8 rounded bg-success-subtle border border-success-border flex items-center justify-center flex-shrink-0';
+        icon.innerHTML = '<i class="ti ti-file-check text-success text-sm"></i>';
+      }
+      if (label) {
+        label.innerHTML = `<span class="rounded-full text-tn px-2.5 py-1 bg-success-subtle border border-success-border text-success font-medium flex items-center gap-1">
+          <i class="ti ti-check text-xs"></i> ${names[i]}
+        </span>`;
+      }
+    });
+
+    // Accept TNC
+    tncAccepted = true;
+    document.getElementById('tnc-cb').checked = true;
+
+    // Trigger progress update
+    onFormInput();
+
+    // Visual feedback on button
+    const btn = document.getElementById('demo-autofill-btn');
+    btn.innerHTML = '<i class="ti ti-check text-xs"></i> Terisi!';
+    btn.classList.remove('bg-brand-action', 'hover:bg-red-600');
+    btn.classList.add('bg-success');
+    setTimeout(() => {
+      btn.innerHTML = '<i class="ti ti-wand text-xs"></i> Autofill';
+      btn.classList.remove('bg-success');
+      btn.classList.add('bg-brand-action', 'hover:bg-red-600');
+    }, 1800);
+  }
+
+  function resetDemo() {
+    // Clear all inputs
+    Object.keys(DEMO_DATA).forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.value = '';
+    });
+
+    // Reset PrivyID
+    currentPrivyId   = '';
+    privyDisplayName = '';
+    document.getElementById('privyid-empty').classList.remove('hidden');
+    document.getElementById('privyid-loading').classList.add('hidden');
+    document.getElementById('privyid-success').classList.add('hidden');
+    document.getElementById('f-privy-input').value  = '';
+    document.getElementById('f-nama-penanda').value = '';
+    document.getElementById('kuasa-section').classList.add('hidden');
+    document.getElementById('jabatan-section').classList.add('hidden');
+    document.getElementById('kuasa-upload').classList.add('hidden');
+    const kuasaCb = document.getElementById('kuasa-cb');
+    if (kuasaCb) kuasaCb.checked = false;
+    updateAvatars();
+
+    // Reset doc uploads
+    ['doc1','doc2','doc3'].forEach(key => {
+      docs[key] = null;
+      const icon  = document.getElementById(key + '-icon');
+      const label = document.getElementById(key + '-label');
+      if (icon) {
+        icon.className = 'w-8 h-8 rounded bg-gray-5 border border-gray-10 flex items-center justify-center flex-shrink-0';
+        icon.innerHTML = '<i class="ti ti-file text-gray-35 text-sm"></i>';
+      }
+      if (label) {
+        label.innerHTML = `<label class="cursor-pointer">
+          <input type="file" accept=".pdf,.png,.jpg,.jpeg" class="hidden" onchange="handleDocUpload(this, '${key}')" />
+          <span class="rounded-full text-tn px-2.5 py-1 bg-gray-5 border border-gray-15 text-gray-50 font-medium flex items-center gap-1 hover:bg-gray-10 transition-colors">
+            <i class="ti ti-upload text-xs"></i> Pilih file
+          </span>
+        </label>`;
+      }
+    });
+
+    // Reset TNC
+    tncAccepted = false;
+    document.getElementById('tnc-cb').checked = false;
+
+    // Reset signing
+    resetSignFlow();
+    closeAuthModal();
+    closePinModal();
+
+    // Reset select to default
+    const sektor = document.getElementById('f-sektor');
+    if (sektor) sektor.value = '';
+
+    // Update progress
+    onFormInput();
+
+    // Navigate to checklist
+    showPage('page-checklist');
+
+    // Visual feedback
+    const btn = document.getElementById('demo-reset-btn');
+    btn.innerHTML = '<i class="ti ti-check text-xs"></i> Reset!';
+    setTimeout(() => { btn.innerHTML = '<i class="ti ti-refresh text-xs"></i> Reset'; }, 1500);
+  }
+</script>
+
+<!-- ============================================================
+     MODAL: Metode Autentikasi
+     ============================================================ -->
+<div id="modal-auth" class="hidden fixed inset-0 z-50 flex items-end justify-center" style="background:rgba(0,0,0,0.45); backdrop-filter:blur(2px);">
+  <div class="bg-white w-full max-w-sm rounded-t-2xl shadow-xl" style="padding-bottom:env(safe-area-inset-bottom,0);">
+    <!-- Handle -->
+    <div class="flex justify-center pt-3 pb-1">
+      <div class="w-10 h-1 rounded-full bg-gray-15"></div>
+    </div>
+    <!-- Header -->
+    <div class="flex items-center justify-between px-5 pt-3 pb-4 border-b border-gray-10">
+      <div>
+        <h3 class="text-base font-bold text-gray-95">Metode autentikasi</h3>
+        <p class="text-xs text-gray-50 mt-0.5">Pilih metode untuk menandatangani dokumen</p>
+      </div>
+      <button onclick="closeAuthModal()" class="w-8 h-8 rounded-full bg-gray-5 flex items-center justify-center text-gray-50 hover:bg-gray-10 transition-colors">
+        <i class="ti ti-x text-sm"></i>
+      </button>
+    </div>
+    <!-- Privy badge -->
+    <div class="mx-5 mt-4 mb-3 flex items-center gap-2 px-3 py-2 bg-info-subtle border border-info-border rounded-md">
+      <img src="logo-privy.png" alt="Privy" class="h-4 w-auto" />
+      <span class="text-xs text-info-fg font-medium flex items-center gap-1"><i class="ti ti-shield-check text-xs"></i> Mitra terpercaya Privy</span>
+    </div>
+    <!-- Method list -->
+    <div class="px-5 space-y-2 mb-4">
+      <!-- PIN (selected) -->
+      <label class="flex items-center gap-3 p-3 rounded-lg border-2 border-brand-accent bg-blue-50/40 cursor-pointer">
+        <div class="w-9 h-9 rounded-lg bg-blue-100 flex items-center justify-center flex-shrink-0">
+          <i class="ti ti-lock text-brand-accent text-base"></i>
+        </div>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-gray-95">PIN</div>
+          <div class="text-xs text-gray-50">6 digit PIN rahasia Anda</div>
+        </div>
+        <div class="w-5 h-5 rounded-full bg-brand-accent flex items-center justify-center flex-shrink-0">
+          <i class="ti ti-check text-white" style="font-size:10px;"></i>
+        </div>
+        <input type="radio" name="auth-method" value="pin" checked class="sr-only" />
+      </label>
+      <!-- Email OTP -->
+      <label class="flex items-center gap-3 p-3 rounded-lg border border-gray-10 bg-white cursor-pointer hover:bg-gray-5 transition-colors">
+        <div class="w-9 h-9 rounded-lg bg-gray-5 flex items-center justify-center flex-shrink-0">
+          <i class="ti ti-mail text-gray-50 text-base"></i>
+        </div>
+        <div class="flex-1">
+          <div class="text-sm font-medium text-gray-95">Email OTP</div>
+          <div class="text-xs text-gray-50">Kode OTP dikirim ke email</div>
+        </div>
+        <div class="w-5 h-5 rounded-full border-2 border-gray-20 flex-shrink-0"></div>
+        <input type="radio" name="auth-method" value="email" class="sr-only" />
+      </label>
+      <!-- WhatsApp -->
+      <label class="flex items-center gap-3 p-3 rounded-lg border border-gray-10 bg-white cursor-pointer hover:bg-gray-5 transition-colors">
+        <div class="w-9 h-9 rounded-lg bg-gray-5 flex items-center justify-center flex-shrink-0">
+          <i class="ti ti-brand-whatsapp text-gray-50 text-base"></i>
+        </div>
+        <div class="flex-1">
+          <div class="text-sm font-medium text-gray-95">WhatsApp</div>
+          <div class="text-xs text-gray-50">Kode OTP via WhatsApp</div>
+        </div>
+        <div class="w-5 h-5 rounded-full border-2 border-gray-20 flex-shrink-0"></div>
+        <input type="radio" name="auth-method" value="wa" class="sr-only" />
+      </label>
+      <!-- SMS -->
+      <label class="flex items-center gap-3 p-3 rounded-lg border border-gray-10 bg-white cursor-pointer hover:bg-gray-5 transition-colors">
+        <div class="w-9 h-9 rounded-lg bg-gray-5 flex items-center justify-center flex-shrink-0">
+          <i class="ti ti-message text-gray-50 text-base"></i>
+        </div>
+        <div class="flex-1">
+          <div class="text-sm font-medium text-gray-95">SMS OTP</div>
+          <div class="text-xs text-gray-50">Kode OTP dikirim via SMS</div>
+        </div>
+        <div class="w-5 h-5 rounded-full border-2 border-gray-20 flex-shrink-0"></div>
+        <input type="radio" name="auth-method" value="sms" class="sr-only" />
+      </label>
+    </div>
+    <!-- Main method checkbox -->
+    <label class="flex items-center gap-2.5 mx-5 mb-5 cursor-pointer">
+      <input type="checkbox" id="auth-main-cb" class="w-4 h-4 rounded accent-brand-accent" />
+      <span class="text-sm text-gray-70">Jadikan metode utama</span>
+    </label>
+    <!-- CTA -->
+    <div class="px-5 pb-6">
+      <button onclick="openPinModal()" class="w-full h-11 bg-brand-accent text-white rounded-lg font-semibold text-sm hover:bg-blue-600 transition-colors flex items-center justify-center gap-2">
+        Lanjutkan
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     MODAL: Konfirmasi + PIN
+     ============================================================ -->
+<div id="modal-pin" class="hidden fixed inset-0 z-50 flex items-end justify-center" style="background:rgba(0,0,0,0.45); backdrop-filter:blur(2px);">
+  <div class="bg-white w-full max-w-sm rounded-t-2xl shadow-xl" style="padding-bottom:env(safe-area-inset-bottom,0);">
+    <!-- Handle -->
+    <div class="flex justify-center pt-3 pb-1">
+      <div class="w-10 h-1 rounded-full bg-gray-15"></div>
+    </div>
+    <!-- Header -->
+    <div class="flex items-center gap-3 px-5 pt-3 pb-4 border-b border-gray-10">
+      <button onclick="backToAuthModal()" class="w-8 h-8 rounded-full bg-gray-5 flex items-center justify-center text-gray-60 hover:bg-gray-10 transition-colors flex-shrink-0">
+        <i class="ti ti-arrow-left text-sm"></i>
+      </button>
+      <h3 class="text-base font-bold text-gray-95">Konfirmasi</h3>
+    </div>
+    <!-- Body -->
+    <div class="px-5 pt-4 pb-2 space-y-4">
+      <!-- Alasan -->
+      <div>
+        <div class="text-xs font-semibold text-gray-50 uppercase tracking-wider mb-1.5">Alasan</div>
+        <div id="pin-reason" class="text-sm text-gray-95 bg-gray-5 rounded-md px-3 py-2.5 leading-snug">—</div>
+      </div>
+      <!-- Catatan -->
+      <div>
+        <div class="text-xs font-semibold text-gray-50 uppercase tracking-wider mb-1.5">Catatan <span class="font-normal normal-case">(opsional)</span></div>
+        <textarea id="pin-notes" oninput="document.getElementById('pin-notes-count').textContent=this.value.length" maxlength="120"
+          class="w-full rounded-md border border-gray-15 px-3 py-2 text-sm text-gray-95 resize-none bg-white focus:border-brand-accent transition-colors" rows="2"
+          placeholder="Tambahkan catatan…"></textarea>
+        <div class="text-right text-tn text-gray-35 mt-0.5"><span id="pin-notes-count">0</span>/120</div>
+      </div>
+      <!-- PIN input -->
+      <div>
+        <div class="text-xs font-semibold text-gray-50 uppercase tracking-wider mb-3">PIN</div>
+        <div class="flex items-center justify-center gap-3">
+          <!-- 6 hidden actual inputs overlaid by dot visuals -->
+          <div class="relative flex gap-3">
+            <!-- Dot visuals -->
+            <div id="pin-dot-1" class="w-10 h-10 rounded-lg border-2 border-gray-15 bg-gray-5 flex items-center justify-center transition-all"></div>
+            <div id="pin-dot-2" class="w-10 h-10 rounded-lg border-2 border-gray-15 bg-gray-5 flex items-center justify-center transition-all"></div>
+            <div id="pin-dot-3" class="w-10 h-10 rounded-lg border-2 border-gray-15 bg-gray-5 flex items-center justify-center transition-all"></div>
+            <div id="pin-dot-4" class="w-10 h-10 rounded-lg border-2 border-gray-15 bg-gray-5 flex items-center justify-center transition-all"></div>
+            <div id="pin-dot-5" class="w-10 h-10 rounded-lg border-2 border-gray-15 bg-gray-5 flex items-center justify-center transition-all"></div>
+            <div id="pin-dot-6" class="w-10 h-10 rounded-lg border-2 border-gray-15 bg-gray-5 flex items-center justify-center transition-all"></div>
+            <!-- Actual invisible inputs stacked on top -->
+            <div class="absolute inset-0 flex gap-3">
+              <input id="pin-1" type="tel" maxlength="1" inputmode="numeric" oninput="handlePinInput(this,1)" onkeydown="handlePinKeydown(event,1)" class="w-10 h-10 opacity-0 cursor-pointer" autocomplete="one-time-code" />
+              <input id="pin-2" type="tel" maxlength="1" inputmode="numeric" oninput="handlePinInput(this,2)" onkeydown="handlePinKeydown(event,2)" class="w-10 h-10 opacity-0 cursor-pointer" />
+              <input id="pin-3" type="tel" maxlength="1" inputmode="numeric" oninput="handlePinInput(this,3)" onkeydown="handlePinKeydown(event,3)" class="w-10 h-10 opacity-0 cursor-pointer" />
+              <input id="pin-4" type="tel" maxlength="1" inputmode="numeric" oninput="handlePinInput(this,4)" onkeydown="handlePinKeydown(event,4)" class="w-10 h-10 opacity-0 cursor-pointer" />
+              <input id="pin-5" type="tel" maxlength="1" inputmode="numeric" oninput="handlePinInput(this,5)" onkeydown="handlePinKeydown(event,5)" class="w-10 h-10 opacity-0 cursor-pointer" />
+              <input id="pin-6" type="tel" maxlength="1" inputmode="numeric" oninput="handlePinInput(this,6)" onkeydown="handlePinKeydown(event,6)" class="w-10 h-10 opacity-0 cursor-pointer" />
+            </div>
+          </div>
+        </div>
+        <!-- Ganti metode link -->
+        <div class="text-center mt-3">
+          <button onclick="backToAuthModal()" class="text-sm text-brand-accent hover:underline">Ganti metode</button>
+        </div>
+      </div>
+    </div>
+    <!-- CTA -->
+    <div class="px-5 pb-6 pt-3">
+      <button id="btn-tanda-tangan" onclick="completeSigning()" disabled
+        class="w-full h-11 bg-brand-action/40 text-white rounded-lg font-semibold text-sm cursor-not-allowed transition-all flex items-center justify-center gap-2">
+        <i class="ti ti-writing text-base"></i> Tanda tangan
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ── Demo floating bar ────────────────────────────────────── -->
+<div class="fixed z-40 flex items-center gap-1.5 bg-white border border-gray-15 rounded-lg shadow-lg px-3 py-2" style="bottom:20px; right:20px;">
+  <span class="text-tn font-semibold text-gray-35 uppercase tracking-wider mr-0.5">Demo</span>
+  <button id="demo-autofill-btn" onclick="autofillDemo()" class="bg-brand-action hover:bg-red-600 text-white rounded text-xs font-medium px-3 h-7 flex items-center gap-1 transition-colors">
+    <i class="ti ti-wand text-xs"></i> Autofill
+  </button>
+  <button id="demo-reset-btn" onclick="resetDemo()" class="border border-gray-15 text-gray-60 hover:bg-gray-5 rounded text-xs font-medium px-3 h-7 flex items-center gap-1 transition-colors">
+    <i class="ti ti-refresh text-xs"></i> Reset
+  </button>
+</div>
+
+</body>
+</html>
