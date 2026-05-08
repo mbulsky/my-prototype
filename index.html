@@ -677,7 +677,7 @@
           <button onclick="rejectStamp()" class="h-9 px-4 border border-gray-20 text-gray-60 rounded text-sm font-medium hover:bg-gray-5 transition-colors flex items-center gap-1.5">
             <i class="ti ti-x text-sm"></i> <span data-i18n="btn-tolak">Tolak</span>
           </button>
-          <button onclick="openAuthModal()" class="h-9 px-4 bg-brand-accent text-white rounded text-sm font-medium hover:bg-blue-600 transition-colors flex items-center gap-1.5">
+          <button onclick="openAuthModal()" class="h-9 px-4 bg-brand-action text-white rounded text-sm font-medium hover:bg-red-600 transition-colors flex items-center gap-1.5">
             <i class="ti ti-check text-sm"></i> <span data-i18n="btn-konfirmasi">Konfirmasi</span>
           </button>
         </div>
@@ -914,7 +914,7 @@
           <i class="ti ti-chevron-right text-gray-35 text-sm flex-shrink-0"></i>
         </div>
         <div class="flex items-center gap-3 px-4 py-3 hover:bg-gray-10 cursor-pointer transition-colors">
-          <div class="w-7 h-7 rounded bg-success-subtle flex items-center justify-center flex-shrink-0"><i class="ti ti-stamp text-success text-sm"></i></div>
+          <div class="w-7 h-7 rounded bg-success-subtle flex items-center justify-center flex-shrink-0"><i class="ti ti-rubber-stamp text-success text-sm"></i></div>
           <div class="text-left flex-1"><p data-i18n="verified-action3-title" class="text-xs font-semibold text-gray-95">Atur enterprise seal</p><p data-i18n="verified-action3-sub" class="text-tn text-gray-50">Aktifkan stempel dan cap digital perusahaan kamu</p></div>
           <i class="ti ti-chevron-right text-gray-35 text-sm flex-shrink-0"></i>
         </div>
@@ -1482,7 +1482,6 @@
       'verified-cta':'Mulai gunakan Privy Enterprise',
       'verified-help':'Butuh bantuan? <a href="#" onclick="return false;" class="text-brand-accent font-medium">Pelajari cara menggunakan Privy Enterprise</a>',
       'auth-title':'Metode autentikasi','auth-sub':'Pilih metode untuk menandatangani dokumen',
-      'auth-badge':'Mitra terpercaya Privy',
       'auth-pin-title':'PIN','auth-pin-desc':'6 digit PIN rahasia Anda',
       'auth-email-title':'Email OTP','auth-email-desc':'Kode OTP dikirim ke email',
       'auth-wa-title':'WhatsApp','auth-wa-desc':'Kode OTP via WhatsApp',
@@ -2148,12 +2147,9 @@
 <!-- ============================================================
      MODAL: Metode Autentikasi
      ============================================================ -->
-<div id="modal-auth" class="hidden fixed inset-0 z-50 flex items-end justify-center" style="background:rgba(0,0,0,0.45); backdrop-filter:blur(2px);">
-  <div class="bg-white w-full max-w-sm rounded-t-2xl shadow-xl" style="padding-bottom:env(safe-area-inset-bottom,0);">
-    <!-- Handle -->
-    <div class="flex justify-center pt-3 pb-1">
-      <div class="w-10 h-1 rounded-full bg-gray-15"></div>
-    </div>
+<div id="modal-auth" class="hidden fixed inset-0 z-50 flex items-center justify-center" style="background:rgba(0,0,0,0.45); backdrop-filter:blur(2px);">
+  <div class="bg-white w-full max-w-sm rounded-2xl shadow-xl mx-4" style="padding-bottom:env(safe-area-inset-bottom,0);">
+    <!-- Handle (hidden for center modal) -->
     <!-- Header -->
     <div class="flex items-center justify-between px-5 pt-3 pb-4 border-b border-gray-10">
       <div>
@@ -2164,23 +2160,18 @@
         <i class="ti ti-x text-sm"></i>
       </button>
     </div>
-    <!-- Privy badge -->
-    <div class="mx-5 mt-4 mb-3 flex items-center gap-2 px-3 py-2 bg-info-subtle border border-info-border rounded-md">
-      <img src="logo-privy.png" alt="Privy" class="h-4 w-auto" />
-      <span class="text-xs text-info-fg font-medium flex items-center gap-1"><i class="ti ti-shield-check text-xs"></i> <span data-i18n="auth-badge">Mitra terpercaya Privy</span></span>
-    </div>
     <!-- Method list -->
-    <div class="px-5 space-y-2 mb-4">
+    <div class="px-5 pt-4 space-y-2 mb-4">
       <!-- PIN (selected) -->
-      <label class="flex items-center gap-3 p-3 rounded-lg border-2 border-brand-accent bg-blue-50/40 cursor-pointer">
-        <div class="w-9 h-9 rounded-lg bg-blue-100 flex items-center justify-center flex-shrink-0">
-          <i class="ti ti-lock text-brand-accent text-base"></i>
+      <label class="flex items-center gap-3 p-3 rounded-lg border-2 border-brand-action bg-red-50/40 cursor-pointer">
+        <div class="w-9 h-9 rounded-lg bg-red-100 flex items-center justify-center flex-shrink-0">
+          <i class="ti ti-lock text-brand-action text-base"></i>
         </div>
         <div class="flex-1">
           <div data-i18n="auth-pin-title" class="text-sm font-semibold text-gray-95">PIN</div>
           <div data-i18n="auth-pin-desc" class="text-xs text-gray-50">6 digit PIN rahasia Anda</div>
         </div>
-        <div class="w-5 h-5 rounded-full bg-brand-accent flex items-center justify-center flex-shrink-0">
+        <div class="w-5 h-5 rounded-full bg-brand-action flex items-center justify-center flex-shrink-0">
           <i class="ti ti-check text-white" style="font-size:10px;"></i>
         </div>
         <input type="radio" name="auth-method" value="pin" checked class="sr-only" />
@@ -2223,13 +2214,14 @@
       </label>
     </div>
     <!-- Main method checkbox -->
-    <label class="flex items-center gap-2.5 mx-5 mb-5 cursor-pointer">
-      <input type="checkbox" id="auth-main-cb" class="w-4 h-4 rounded accent-brand-accent" />
+    <div class="border-t border-gray-10 mx-5"></div>
+    <label class="flex items-center gap-2.5 mx-5 my-4 cursor-pointer">
+      <input type="checkbox" id="auth-main-cb" class="w-4 h-4 rounded accent-brand-action" />
       <span data-i18n="auth-main-method" class="text-sm text-gray-70">Jadikan metode utama</span>
     </label>
     <!-- CTA -->
-    <div class="px-5 pb-6">
-      <button onclick="openPinModal()" class="w-full h-11 bg-brand-accent text-white rounded-lg font-semibold text-sm hover:bg-blue-600 transition-colors flex items-center justify-center gap-2">
+    <div class="px-5 pb-5">
+      <button onclick="openPinModal()" class="w-full h-11 bg-brand-action text-white rounded-lg font-semibold text-sm hover:bg-red-600 transition-colors flex items-center justify-center gap-2">
         <span data-i18n="btn-continue">Lanjutkan</span>
       </button>
     </div>
@@ -2239,14 +2231,10 @@
 <!-- ============================================================
      MODAL: Konfirmasi + PIN
      ============================================================ -->
-<div id="modal-pin" class="hidden fixed inset-0 z-50 flex items-end justify-center" style="background:rgba(0,0,0,0.45); backdrop-filter:blur(2px);">
-  <div class="bg-white w-full max-w-sm rounded-t-2xl shadow-xl" style="padding-bottom:env(safe-area-inset-bottom,0);">
-    <!-- Handle -->
-    <div class="flex justify-center pt-3 pb-1">
-      <div class="w-10 h-1 rounded-full bg-gray-15"></div>
-    </div>
+<div id="modal-pin" class="hidden fixed inset-0 z-50 flex items-center justify-center" style="background:rgba(0,0,0,0.45); backdrop-filter:blur(2px);">
+  <div class="bg-white w-full max-w-sm rounded-2xl shadow-xl mx-4">
     <!-- Header -->
-    <div class="flex items-center gap-3 px-5 pt-3 pb-4 border-b border-gray-10">
+    <div class="flex items-center gap-3 px-5 pt-5 pb-4 border-b border-gray-10">
       <button onclick="backToAuthModal()" class="w-8 h-8 rounded-full bg-gray-5 flex items-center justify-center text-gray-60 hover:bg-gray-10 transition-colors flex-shrink-0">
         <i class="ti ti-arrow-left text-sm"></i>
       </button>
@@ -2298,7 +2286,7 @@
       </div>
     </div>
     <!-- CTA -->
-    <div class="px-5 pb-6 pt-3">
+    <div class="px-5 pb-5 pt-3">
       <button id="btn-tanda-tangan" onclick="completeSigning()" disabled
         class="w-full h-11 bg-brand-action/40 text-white rounded-lg font-semibold text-sm cursor-not-allowed transition-all flex items-center justify-center gap-2">
         <i class="ti ti-writing text-base"></i> <span data-i18n="btn-tanda-tangan">Tanda tangan</span>
