@@ -83,6 +83,54 @@
     .af { background: #E5F3FF; color: #1d4ed8; padding: 0 3px; border-radius: 3px; }
     /* modal backdrop */
     #tnc-modal { backdrop-filter: blur(2px); }
+
+    /* ── Prototype Workbench ──────────────────────────────────── */
+    .prototype-workbench__floating,.prototype-inspect__hud{--wb-surface:rgba(16,18,24,.90);--wb-surface-2:rgba(255,255,255,.07);--wb-border:rgba(255,255,255,.10);--wb-shadow:0 4px 6px rgba(0,0,0,.10),0 12px 32px rgba(0,0,0,.40);--wb-text:rgba(255,255,255,.92);--wb-text-dim:rgba(255,255,255,.54);--wb-text-muted:rgba(255,255,255,.34);--wb-handle-dot:rgba(255,255,255,.32);--wb-track:rgba(255,255,255,.08);--wb-btn-hover:rgba(255,255,255,.10);--wb-active:#0075d9;--wb-active-text:#fff;--wb-asset-row:rgba(255,255,255,.05);--wb-asset-hover:rgba(255,255,255,.10);--wb-link:rgba(168,215,255,.92);--wb-disabled-text:rgba(255,255,255,.24)}
+    @media(prefers-color-scheme:light){.prototype-workbench__floating,.prototype-inspect__hud{--wb-surface:rgba(255,255,255,.94);--wb-surface-2:rgba(0,0,0,.05);--wb-border:rgba(0,0,0,.09);--wb-shadow:0 4px 6px rgba(0,0,0,.06),0 12px 32px rgba(0,0,0,.14);--wb-text:rgba(0,0,0,.88);--wb-text-dim:rgba(0,0,0,.52);--wb-text-muted:rgba(0,0,0,.34);--wb-handle-dot:rgba(0,0,0,.26);--wb-track:rgba(0,0,0,.06);--wb-btn-hover:rgba(0,0,0,.06);--wb-active:#0075d9;--wb-active-text:#fff;--wb-asset-row:rgba(0,0,0,.04);--wb-asset-hover:rgba(0,0,0,.08);--wb-link:#0055b3;--wb-disabled-text:rgba(0,0,0,.28)}}
+    .prototype-workbench__floating{position:fixed;z-index:5000}
+    .prototype-workbench__toolbar{display:inline-flex;flex-direction:column;gap:10px;padding:10px 12px 12px;border:1px solid var(--wb-border);border-radius:18px;background:var(--wb-surface);backdrop-filter:blur(20px) saturate(1.4);-webkit-backdrop-filter:blur(20px) saturate(1.4);box-shadow:var(--wb-shadow)}
+    .prototype-workbench__toolbar-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:2px 0;cursor:grab;user-select:none}
+    .prototype-workbench__toolbar-bar:active{cursor:grabbing}
+    .prototype-workbench__toolbar-handle{display:inline-flex;align-items:center;gap:4px;padding:2px;opacity:.7}
+    .prototype-workbench__toolbar-handle span{width:5px;height:5px;border-radius:999px;background:var(--wb-handle-dot)}
+    .prototype-workbench__toolbar-collapse{width:26px;height:26px;display:inline-flex;align-items:center;justify-content:center;border-radius:999px;color:var(--wb-text-dim);font-size:17px;font-weight:500;line-height:1;transition:background-color 120ms ease,color 120ms ease;flex-shrink:0}
+    .prototype-workbench__toolbar-collapse:hover{background:var(--wb-btn-hover);color:var(--wb-text)}
+    .prototype-workbench__toolbar-body{display:inline-flex;align-items:stretch;gap:10px}
+    .prototype-workbench__toolbar-group{display:flex;flex-direction:column;gap:6px}
+    .prototype-workbench__toolbar-label{color:var(--wb-text-muted);font-size:9.5px;font-weight:700;letter-spacing:.10em;line-height:1;text-transform:uppercase;padding:0 2px}
+    .prototype-workbench__toggle{display:inline-flex;align-items:center;gap:3px;padding:3px;border-radius:12px;background:var(--wb-track)}
+    .prototype-workbench__toggle-button{min-width:60px;height:32px;padding:0 10px;display:inline-flex;align-items:center;justify-content:center;border-radius:9px;color:var(--wb-text-dim);font-size:12.5px;font-weight:600;line-height:1;transition:background-color 150ms ease,color 150ms ease,opacity 150ms ease;white-space:nowrap}
+    .prototype-workbench__toggle-button:hover:not(.prototype-workbench__toggle-button--active):not(.prototype-workbench__toggle-button--disabled){background:var(--wb-btn-hover);color:var(--wb-text)}
+    .prototype-workbench__toggle-button:active:not(.prototype-workbench__toggle-button--disabled){transform:scale(.97)}
+    .prototype-workbench__toggle-button--active{background:var(--wb-active);color:var(--wb-active-text);box-shadow:0 2px 6px rgba(0,117,217,.30)}
+    .prototype-workbench__toggle-button--disabled{color:var(--wb-disabled-text);cursor:not-allowed;pointer-events:auto}
+    .prototype-workbench__bubble{width:52px;height:52px;display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--wb-border);border-radius:999px;background:var(--wb-surface);color:var(--wb-text);font-size:11.5px;font-weight:700;letter-spacing:.02em;backdrop-filter:blur(20px) saturate(1.4);-webkit-backdrop-filter:blur(20px) saturate(1.4);box-shadow:var(--wb-shadow);cursor:grab;transition:transform 120ms ease,opacity 120ms ease}
+    .prototype-workbench__bubble:hover{opacity:1;transform:scale(1.05)}
+    .prototype-workbench__bubble:active{cursor:grabbing;transform:scale(.97)}
+    .prototype-inspect__comparison,.prototype-inspect__target{position:fixed;border-radius:6px;pointer-events:none}
+    .prototype-inspect__comparison{border:1.5px dashed rgba(0,117,217,.40)}
+    .prototype-inspect__target{border:2px solid rgba(0,117,217,.88)}
+    .prototype-inspect__target--selected{border-color:#0075d9;box-shadow:0 0 0 3px rgba(0,117,217,.18)}
+    .prototype-inspect__padding{position:absolute;background-image:repeating-linear-gradient(135deg,rgba(87,176,255,.10) 0 5px,rgba(87,176,255,.50) 5px 8px)}
+    .prototype-inspect__badge{position:fixed;min-width:28px;height:22px;padding:0 7px;display:inline-flex;align-items:center;justify-content:center;border-radius:6px;background:#0075d9;color:#fff;font-size:11px;font-weight:700;line-height:1;white-space:nowrap;box-shadow:0 2px 8px rgba(0,117,217,.28);pointer-events:none}
+    .prototype-inspect__line{position:fixed;background:#0075d9;pointer-events:none}
+    .prototype-inspect__hud{position:fixed;display:flex;flex-direction:column;gap:3px;padding:10px 12px 12px;width:max-content;max-width:min(320px,calc(100vw - 24px));border:1px solid var(--wb-border);border-radius:16px;background:var(--wb-surface);color:var(--wb-text);backdrop-filter:blur(20px) saturate(1.4);-webkit-backdrop-filter:blur(20px) saturate(1.4);box-shadow:var(--wb-shadow);pointer-events:auto;z-index:5001}
+    .prototype-inspect__hud-head{display:flex;align-items:center;gap:7px;margin-bottom:3px;cursor:grab;user-select:none}
+    .prototype-inspect__hud-head:active{cursor:grabbing}
+    .prototype-inspect__hud-handle{display:inline-flex;align-items:center;gap:3px;flex-shrink:0;opacity:.7}
+    .prototype-inspect__hud-handle span{width:4px;height:4px;border-radius:999px;background:var(--wb-handle-dot)}
+    .prototype-inspect__hud-label{color:var(--wb-text);font-size:12.5px;font-weight:700;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:220px}
+    .prototype-inspect__hud-divider{height:1px;background:var(--wb-border);margin:3px -12px}
+    .prototype-inspect__hud-section{margin-top:6px;margin-bottom:1px;color:var(--wb-text-muted);font-size:9.5px;font-weight:700;letter-spacing:.10em;line-height:1;text-transform:uppercase}
+    .prototype-inspect__hud-copy{color:var(--wb-text-dim);font-size:11.5px;font-weight:500;line-height:1.4}
+    .prototype-inspect__hud-color-row{display:flex;align-items:center;gap:7px}
+    .prototype-inspect__hud-swatch{display:inline-block;width:12px;height:12px;border-radius:3px;border:1px solid var(--wb-border);flex-shrink:0}
+    .prototype-inspect__asset{display:flex;flex-direction:column;gap:2px;padding:6px 8px;border-radius:8px;background:var(--wb-asset-row);color:inherit;text-decoration:none}
+    .prototype-inspect__asset:hover{background:var(--wb-asset-hover)}
+    .prototype-inspect__asset-kind{color:var(--wb-text);font-size:11px;font-weight:700;line-height:1.2}
+    .prototype-inspect__asset-url{color:var(--wb-link);font-size:10.5px;font-weight:500;line-height:1.35;word-break:break-all}
+    body.wb-dev-mode *{cursor:crosshair !important}
+    body.wb-dev-mode input,body.wb-dev-mode select,body.wb-dev-mode textarea,body.wb-dev-mode button,body.wb-dev-mode a{cursor:crosshair !important}
   </style>
 </head>
 <body class="bg-gray-5 min-h-screen font-sans text-gray-95">
@@ -1682,13 +1730,16 @@
 
     // Visual feedback on button
     const btn = document.getElementById('demo-autofill-btn');
-    btn.innerHTML = '<i class="ti ti-check text-xs"></i> Terisi!';
-    btn.classList.remove('bg-brand-action', 'hover:bg-red-600');
-    btn.classList.add('bg-success');
+    if (btn) {
+      const prev = btn.className;
+      btn.textContent = '✓ Terisi!';
+      btn.classList.add('prototype-workbench__toggle-button--active');
+    }
     setTimeout(() => {
-      btn.innerHTML = '<i class="ti ti-wand text-xs"></i> Autofill';
-      btn.classList.remove('bg-success');
-      btn.classList.add('bg-brand-action', 'hover:bg-red-600');
+      if (btn) {
+        btn.textContent = 'Autofill';
+        btn.classList.remove('prototype-workbench__toggle-button--active');
+      }
     }, 1800);
   }
 
@@ -1754,9 +1805,344 @@
 
     // Visual feedback
     const btn = document.getElementById('demo-reset-btn');
-    btn.innerHTML = '<i class="ti ti-check text-xs"></i> Reset!';
-    setTimeout(() => { btn.innerHTML = '<i class="ti ti-refresh text-xs"></i> Reset'; }, 1500);
+    if (btn) { btn.textContent = '✓ Reset'; setTimeout(() => { btn.textContent = 'Reset'; }, 1500); }
   }
+
+  // ── Prototype Workbench ──────────────────────────────────────────────────
+
+  const WB_LS = { mode:'wb-mode', collapsed:'wb-collapsed', posX:'wb-pos-x', posY:'wb-pos-y', hudX:'wb-hud-x', hudY:'wb-hud-y' };
+  let wbMode = 'preview';
+  let wbCollapsed = false;
+  let wbToolbarPos = { x: 16, y: 16 };
+  let wbHudPos     = { x: 16, y: 0  };
+  let wbHoveredEl  = null;
+  let wbSelectedEl = null;
+  let wbCompEl     = null;
+  let wbDragState  = null;
+  let wbHudDrag    = null;
+  let wbJustDragged = false;
+
+  function wbClamp(v, lo, hi) { return Math.min(Math.max(v, lo), hi); }
+  function wbLS(k) { try { return localStorage.getItem(k); } catch { return null; } }
+  function wbLSSet(k, v) { try { localStorage.setItem(k, v); } catch {} }
+
+  function wbInit() {
+    const m = wbLS(WB_LS.mode);
+    if (m === 'dev' || m === 'preview') wbMode = m;
+    wbCollapsed = wbLS(WB_LS.collapsed) === '1';
+    const px = parseFloat(wbLS(WB_LS.posX)), py = parseFloat(wbLS(WB_LS.posY));
+    wbToolbarPos = { x: isFinite(px) ? px : Math.max(16, window.innerWidth - 330), y: isFinite(py) ? py : 16 };
+    const hx = parseFloat(wbLS(WB_LS.hudX)), hy = parseFloat(wbLS(WB_LS.hudY));
+    wbHudPos = { x: isFinite(hx) ? hx : 16, y: isFinite(hy) ? hy : Math.min(Math.max(16, window.innerHeight - 320), 480) };
+    wbApplyPos();
+    wbApplyCollapsed();
+    wbApplyMode();
+  }
+
+  function wbApplyPos() {
+    const f = document.getElementById('wb-floating');
+    if (f) { f.style.left = wbToolbarPos.x + 'px'; f.style.top = wbToolbarPos.y + 'px'; }
+    wbLSSet(WB_LS.posX, wbToolbarPos.x); wbLSSet(WB_LS.posY, wbToolbarPos.y);
+  }
+  function wbApplyHudPos() {
+    const h = document.getElementById('wb-hud');
+    if (h) { h.style.left = wbHudPos.x + 'px'; h.style.top = wbHudPos.y + 'px'; }
+    wbLSSet(WB_LS.hudX, wbHudPos.x); wbLSSet(WB_LS.hudY, wbHudPos.y);
+  }
+  function wbApplyCollapsed() {
+    const t = document.getElementById('wb-toolbar'), b = document.getElementById('wb-bubble');
+    if (t) t.style.display = wbCollapsed ? 'none' : '';
+    if (b) b.style.display = wbCollapsed ? '' : 'none';
+    wbLSSet(WB_LS.collapsed, wbCollapsed ? '1' : '0');
+  }
+  function wbCollapse() { wbCollapsed = true; wbApplyCollapsed(); }
+  function wbExpand()   { if (wbJustDragged) { wbJustDragged = false; return; } wbCollapsed = false; wbApplyCollapsed(); }
+
+  function wbSetMode(mode) {
+    wbMode = mode; wbLSSet(WB_LS.mode, mode); wbApplyMode();
+  }
+  function wbApplyMode() {
+    const A = 'prototype-workbench__toggle-button prototype-workbench__toggle-button--active';
+    const I = 'prototype-workbench__toggle-button';
+    const p = document.getElementById('wb-mode-preview'), d = document.getElementById('wb-mode-dev');
+    if (p) p.className = wbMode === 'preview' ? A : I;
+    if (d) d.className = wbMode === 'dev'     ? A : I;
+    document.body.classList.toggle('wb-dev-mode', wbMode === 'dev');
+    if (wbMode === 'preview') wbClearInspect();
+  }
+
+  // Drag — toolbar
+  function wbOnDragDown(e) {
+    const f = document.getElementById('wb-floating');
+    const r = f ? f.getBoundingClientRect() : { left: wbToolbarPos.x, top: wbToolbarPos.y };
+    wbDragState = { ox: e.clientX - r.left, oy: e.clientY - r.top, didDrag: false };
+    e.preventDefault();
+  }
+  function wbOnBubbleDown(e) {
+    wbDragState = { ox: e.clientX - wbToolbarPos.x, oy: e.clientY - wbToolbarPos.y, didDrag: false };
+  }
+  // Drag — HUD
+  function wbOnHudDown(e) {
+    const h = document.getElementById('wb-hud');
+    const r = h ? h.getBoundingClientRect() : { left: wbHudPos.x, top: wbHudPos.y };
+    wbHudDrag = { ox: e.clientX - r.left, oy: e.clientY - r.top, didDrag: false };
+    e.preventDefault(); e.stopPropagation();
+  }
+  window.addEventListener('pointermove', e => {
+    if (wbDragState) {
+      wbDragState.didDrag = true; wbJustDragged = true;
+      const el = wbCollapsed ? document.getElementById('wb-bubble') : document.getElementById('wb-toolbar');
+      const tw = el ? el.offsetWidth : 200, th = el ? el.offsetHeight : 80;
+      wbToolbarPos = { x: wbClamp(e.clientX - wbDragState.ox, 8, window.innerWidth - tw - 8), y: wbClamp(e.clientY - wbDragState.oy, 8, window.innerHeight - th - 8) };
+      wbApplyPos();
+    }
+    if (wbHudDrag) {
+      wbHudDrag.didDrag = true;
+      wbHudPos = { x: wbClamp(e.clientX - wbHudDrag.ox, 8, window.innerWidth - 340), y: wbClamp(e.clientY - wbHudDrag.oy, 8, window.innerHeight - 120) };
+      wbApplyHudPos();
+    }
+  });
+  window.addEventListener('pointerup', () => { wbDragState = null; wbHudDrag = null; });
+
+  // ── Inspect helpers ──
+  function wbColorToHex(v) {
+    v = (v || '').trim().toLowerCase();
+    if (!v || v === 'transparent' || v === 'initial' || v === 'inherit') return null;
+    if (v.startsWith('#')) return v.toUpperCase();
+    const m = v.match(/rgba?\(([^)]+)\)/);
+    if (!m) return null;
+    const parts = m[1].split(',').map(s => parseFloat(s.trim())).filter(n => isFinite(n));
+    const [r, g, b, a] = parts;
+    if (r === undefined || g === undefined || b === undefined) return null;
+    if (typeof a === 'number' && a <= 0) return null;
+    const hex = [r,g,b].map(c => Math.round(c).toString(16).padStart(2,'0')).join('').toUpperCase();
+    return typeof a === 'number' && a < 1
+      ? '#' + hex + Math.round(a*255).toString(16).padStart(2,'0').toUpperCase()
+      : '#' + hex;
+  }
+  function wbWtLabel(v) { const n=parseInt(v,10); if(!isFinite(n)) return v; if(n>=800) return 'Extra Bold'; if(n>=700) return 'Bold'; if(n>=600) return 'Semi Bold'; if(n>=500) return 'Medium'; if(n>=400) return 'Regular'; return 'Light'; }
+  function wbFmtFont(v) { return (v||'').split(',')[0].replace(/["']/g,'').trim(); }
+  function wbLabel(el) {
+    const a = el.getAttribute('aria-label'); if (a) return a;
+    const t = (el.textContent||'').trim(); if (t) return t.slice(0,40);
+    const c = (el.getAttribute('class')||'').split(/\s+/).find(Boolean); if (c) return c;
+    return el.tagName.toLowerCase();
+  }
+  function wbPx(v) { const n = parseFloat(v); return isFinite(n) ? Math.max(0, Math.round(n)) : 0; }
+  function wbIsTextEl(el) {
+    const tag = el.tagName.toLowerCase();
+    if (['p','span','strong','em','label','input','textarea','button','a','h1','h2','h3','h4','h5','h6'].includes(tag)) return true;
+    return [...el.childNodes].some(n => n.nodeType === 3 && (n.textContent||'').trim());
+  }
+  function wbIgnored(el) {
+    let cur = el;
+    while (cur) { if (cur.dataset && cur.dataset.devIgnore === 'true') return true; cur = cur.parentElement; }
+    return false;
+  }
+  function wbMeaningful(el, opts) {
+    if (wbIgnored(el)) return false;
+    const r = el.getBoundingClientRect(), min = opts && opts.small ? 6 : 12;
+    if (r.width < min || r.height < min) return false;
+    const s = getComputedStyle(el);
+    if (s.display === 'contents' || s.visibility === 'hidden' || s.opacity === '0') return false;
+    if (el.getAttribute('aria-hidden') === 'true' && !['svg','img'].includes(el.tagName.toLowerCase())) return false;
+    return true;
+  }
+  function wbAssets(el) {
+    const out = [], seen = new Set();
+    const add = (kind, url) => {
+      if (!url) return;
+      let u = url.trim().replace(/^["']|["']$/g,'');
+      if (!u || u.startsWith('data:')) return;
+      try { u = new URL(u, location.href).href; } catch {}
+      if (seen.has(u)) return; seen.add(u);
+      out.push({ kind, url: u });
+    };
+    [el, ...el.querySelectorAll('*')].forEach(n => {
+      if (n instanceof HTMLImageElement) add('Image', n.currentSrc || n.src);
+      const s = getComputedStyle(n);
+      [...(s.backgroundImage||'').matchAll(/url\(['"]?(.*?)['"]?\)/g)].forEach(m => add('Background', m[1]));
+    });
+    return out;
+  }
+  function wbBuild(el, selected, compEl) {
+    const r  = el.getBoundingClientRect();
+    const s  = getComputedStyle(el);
+    const pad = { top: wbPx(s.paddingTop), right: wbPx(s.paddingRight), bottom: wbPx(s.paddingBottom), left: wbPx(s.paddingLeft) };
+    const colors = {
+      text:   wbColorToHex(s.color),
+      bg:     wbColorToHex(s.backgroundColor),
+      border: (wbPx(s.borderTopWidth) > 0 || wbPx(s.borderLeftWidth) > 0) ? wbColorToHex(s.borderTopColor) : null,
+    };
+    const typo = wbIsTextEl(el) ? { family: wbFmtFont(s.fontFamily), size: s.fontSize, weight: wbWtLabel(s.fontWeight), lineH: s.lineHeight === 'normal' ? 'Normal' : s.lineHeight, tracking: s.letterSpacing === 'normal' ? 'Normal' : s.letterSpacing } : null;
+    let comp = null;
+    if (compEl && compEl !== el) {
+      const cr = compEl.getBoundingClientRect();
+      const rOvlp = Math.max(r.left, cr.left) <= Math.min(r.right, cr.right);
+      const bOvlp = Math.max(r.top, cr.top)   <= Math.min(r.bottom, cr.bottom);
+      if (rOvlp) {
+        if (r.bottom <= cr.top)  comp = { gap: Math.round(cr.top - r.bottom), axis: 'v', cr, lbl: wbLabel(compEl) };
+        else if (cr.bottom <= r.top) comp = { gap: Math.round(r.top - cr.bottom), axis: 'v', cr, lbl: wbLabel(compEl) };
+      } else if (bOvlp) {
+        if (r.right <= cr.left)  comp = { gap: Math.round(cr.left - r.right), axis: 'h', cr, lbl: wbLabel(compEl) };
+        else if (cr.right <= r.left) comp = { gap: Math.round(r.left - cr.right), axis: 'h', cr, lbl: wbLabel(compEl) };
+      }
+    }
+    return { el, r, pad, colors, typo, selected, comp, assets: wbAssets(el), lbl: wbLabel(el) };
+  }
+  function wbCandidate(x, y) {
+    const seen = new Set(), out = [];
+    for (const node of document.elementsFromPoint(x, y)) {
+      const el = node instanceof HTMLElement ? node : (node.parentElement instanceof HTMLElement ? node.parentElement : null);
+      if (!el || wbIgnored(el)) continue;
+      let cur = el;
+      while (cur && cur !== document.documentElement) {
+        if (!seen.has(cur) && wbMeaningful(cur)) { seen.add(cur); out.push(cur); }
+        cur = cur.parentElement;
+      }
+      if (out.length) break;
+    }
+    const iw = window.innerWidth, ih = window.innerHeight;
+    return out.map(el => {
+      const r = el.getBoundingClientRect(), tag = el.tagName.toLowerCase();
+      let sc = 0;
+      if (r.width / iw > 0.95 && r.height / ih > 0.65) sc -= 500;
+      else if (r.width * r.height > iw * ih * 0.45) sc -= 200;
+      if (['button','a','input','textarea','label'].includes(tag)) sc += 200;
+      if (r.height <= 140 && r.width >= 40) sc += 50;
+      const cls = (el.getAttribute('class')||'').toLowerCase();
+      if (['card','badge','chip','row','button','field','tab','item','action'].some(t => cls.includes(t))) sc += 70;
+      return { el, sc, area: r.width * r.height };
+    }).sort((a,b) => b.sc - a.sc || a.area - b.area)[0]?.el || null;
+  }
+  function wbFindComp(selEl, x, y) {
+    const sr = selEl.getBoundingClientRect(), out = [];
+    for (const node of document.elementsFromPoint(x, y)) {
+      const el = node instanceof HTMLElement ? node : null;
+      if (!el || el === selEl || selEl.contains(el) || el.contains(selEl)) continue;
+      if (wbIgnored(el) || !wbMeaningful(el, { small: true })) continue;
+      const cr = el.getBoundingClientRect();
+      out.push({ el, d: Math.hypot(x - (cr.left + cr.width/2), y - (cr.top + cr.height/2)) });
+    }
+    return out.sort((a,b) => a.d - b.d)[0]?.el || null;
+  }
+
+  // ── Render ──
+  function wbRender(state) {
+    const ov = document.getElementById('wb-overlay'), hud = document.getElementById('wb-hud');
+    if (!ov || !hud) return;
+    if (!state) { ov.style.display = 'none'; hud.style.display = 'none'; ov.innerHTML = ''; return; }
+    ov.style.display = ''; hud.style.display = '';
+    const { r, pad, colors, typo, selected, comp, assets, lbl } = state;
+    // Overlay HTML
+    let h = '';
+    if (comp) h += `<div class="prototype-inspect__comparison" style="left:${comp.cr.left}px;top:${comp.cr.top}px;width:${comp.cr.width}px;height:${comp.cr.height}px;"></div>`;
+    h += `<div class="prototype-inspect__target${selected?' prototype-inspect__target--selected':''}" style="left:${r.left}px;top:${r.top}px;width:${r.width}px;height:${r.height}px;">`;
+    if (pad.top)    h += `<div class="prototype-inspect__padding" style="left:0;top:0;width:${r.width}px;height:${pad.top}px;"></div>`;
+    if (pad.right)  h += `<div class="prototype-inspect__padding" style="left:${r.width-pad.right}px;top:${pad.top}px;width:${pad.right}px;height:${Math.max(0,r.height-pad.top-pad.bottom)}px;"></div>`;
+    if (pad.bottom) h += `<div class="prototype-inspect__padding" style="left:0;top:${r.height-pad.bottom}px;width:${r.width}px;height:${pad.bottom}px;"></div>`;
+    if (pad.left)   h += `<div class="prototype-inspect__padding" style="left:0;top:${pad.top}px;width:${pad.left}px;height:${Math.max(0,r.height-pad.top-pad.bottom)}px;"></div>`;
+    h += `</div>`;
+    h += `<div class="prototype-inspect__badge" style="left:${r.left+r.width/2}px;top:${Math.max(8,r.top-18)}px;transform:translateX(-50%);">W ${Math.round(r.width)}</div>`;
+    h += `<div class="prototype-inspect__badge" style="left:${r.right+8}px;top:${r.top+r.height/2}px;transform:translateY(-50%);">H ${Math.round(r.height)}</div>`;
+    if (comp && comp.gap > 0) {
+      if (comp.axis === 'v') {
+        const cx = Math.max(r.left,comp.cr.left) + Math.max(0,Math.min(r.right,comp.cr.right)-Math.max(r.left,comp.cr.left))/2;
+        const lt = Math.min(r.bottom, comp.cr.bottom);
+        h += `<div class="prototype-inspect__line" style="left:${cx}px;top:${lt}px;width:1px;height:${comp.gap}px;"></div>`;
+        h += `<div class="prototype-inspect__badge" style="left:${cx}px;top:${lt+comp.gap/2}px;transform:translate(-50%,-50%);">${comp.gap}</div>`;
+      } else {
+        const cy = Math.max(r.top,comp.cr.top) + Math.max(0,Math.min(r.bottom,comp.cr.bottom)-Math.max(r.top,comp.cr.top))/2;
+        const ll = Math.min(r.right, comp.cr.right);
+        h += `<div class="prototype-inspect__line" style="left:${ll}px;top:${cy}px;width:${comp.gap}px;height:1px;"></div>`;
+        h += `<div class="prototype-inspect__badge" style="left:${ll+comp.gap/2}px;top:${cy}px;transform:translate(-50%,-50%);">${comp.gap}</div>`;
+      }
+    }
+    ov.innerHTML = h;
+    // HUD HTML
+    let hh = `<div class="prototype-inspect__hud-head" id="wb-hud-head"><div class="prototype-inspect__hud-handle" aria-hidden="true"><span></span><span></span><span></span></div><div class="prototype-inspect__hud-label">${lbl}</div></div>`;
+    hh += `<div class="prototype-inspect__hud-divider" aria-hidden="true"></div>`;
+    hh += `<div class="prototype-inspect__hud-copy">${Math.round(r.width)} × ${Math.round(r.height)}<span style="opacity:.45;margin-left:6px;font-size:10px;font-weight:600;">px</span></div>`;
+    hh += `<div class="prototype-inspect__hud-copy">Padding ${pad.top} / ${pad.right} / ${pad.bottom} / ${pad.left}</div>`;
+    if (comp) hh += `<div class="prototype-inspect__hud-copy">Space to ${comp.lbl}: ${comp.gap}px</div>`;
+    if (typo) {
+      hh += `<div class="prototype-inspect__hud-section">Typography</div>`;
+      hh += `<div class="prototype-inspect__hud-copy">Font ${typo.family}</div>`;
+      hh += `<div class="prototype-inspect__hud-copy">Size ${typo.size} · ${typo.weight}</div>`;
+      hh += `<div class="prototype-inspect__hud-copy">Line ${typo.lineH} · Letter ${typo.tracking}</div>`;
+    }
+    hh += `<div class="prototype-inspect__hud-section">Colors</div>`;
+    if (colors.text)   hh += `<div class="prototype-inspect__hud-color-row"><span class="prototype-inspect__hud-swatch" style="background:${colors.text};"></span><span class="prototype-inspect__hud-copy">Text ${colors.text}</span></div>`;
+    if (colors.bg)     hh += `<div class="prototype-inspect__hud-color-row"><span class="prototype-inspect__hud-swatch" style="background:${colors.bg};"></span><span class="prototype-inspect__hud-copy">Background ${colors.bg}</span></div>`;
+    if (colors.border) hh += `<div class="prototype-inspect__hud-color-row"><span class="prototype-inspect__hud-swatch" style="background:${colors.border};"></span><span class="prototype-inspect__hud-copy">Border ${colors.border}</span></div>`;
+    if (assets.length) {
+      hh += `<div class="prototype-inspect__hud-section">Assets</div>`;
+      assets.forEach(a => { hh += `<a class="prototype-inspect__asset" href="${a.url}" download target="_blank" rel="noreferrer"><span class="prototype-inspect__asset-kind">${a.kind}</span><span class="prototype-inspect__asset-url">${a.url}</span></a>`; });
+    }
+    hud.innerHTML = hh;
+    wbApplyHudPos();
+    const hhead = document.getElementById('wb-hud-head');
+    if (hhead) hhead.addEventListener('pointerdown', wbOnHudDown);
+  }
+  function wbClearInspect() { wbHoveredEl = null; wbSelectedEl = null; wbCompEl = null; wbRender(null); }
+
+  // ── Event handlers ──
+  document.addEventListener('mousemove', e => {
+    if (wbMode !== 'dev') return;
+    if (wbSelectedEl) {
+      wbCompEl = wbFindComp(wbSelectedEl, e.clientX, e.clientY);
+      wbRender(wbBuild(wbSelectedEl, true, wbCompEl));
+      return;
+    }
+    const c = wbCandidate(e.clientX, e.clientY);
+    if (c === wbHoveredEl) return;
+    wbHoveredEl = c;
+    wbRender(c ? wbBuild(c, false, null) : null);
+  });
+  document.addEventListener('click', e => {
+    if (wbMode !== 'dev') return;
+    if (e.target && e.target.closest && e.target.closest('[data-dev-ignore="true"]')) return;
+    e.preventDefault(); e.stopPropagation();
+    const c = wbCandidate(e.clientX, e.clientY);
+    if (!c) { wbSelectedEl = null; wbCompEl = null; wbRender(null); return; }
+    if (wbSelectedEl && wbSelectedEl === c) {
+      // Drill into smallest child near pointer
+      const kids = [...wbSelectedEl.querySelectorAll('*')]
+        .filter(k => wbMeaningful(k, { small: true }))
+        .map(k => { const kr = k.getBoundingClientRect(); return { el: k, d: Math.hypot(e.clientX-(kr.left+kr.width/2), e.clientY-(kr.top+kr.height/2)), a: kr.width*kr.height }; })
+        .sort((a,b) => a.a - b.a || a.d - b.d);
+      if (kids.length) { wbSelectedEl = kids[0].el; } else { wbSelectedEl = c; }
+    } else {
+      wbSelectedEl = c;
+    }
+    wbHoveredEl = wbSelectedEl; wbCompEl = null;
+    wbRender(wbBuild(wbSelectedEl, true, null));
+  }, true);
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && wbMode === 'dev') {
+      wbSelectedEl = null; wbCompEl = null;
+      wbRender(wbHoveredEl ? wbBuild(wbHoveredEl, false, null) : null);
+    }
+  });
+  window.addEventListener('scroll', () => {
+    if (wbMode !== 'dev') return;
+    const a = wbSelectedEl || wbHoveredEl;
+    if (a) wbRender(wbBuild(a, !!wbSelectedEl, wbSelectedEl ? wbCompEl : null));
+  }, true);
+  window.addEventListener('resize', () => {
+    if (wbMode !== 'dev') return;
+    const a = wbSelectedEl || wbHoveredEl;
+    if (a) wbRender(wbBuild(a, !!wbSelectedEl, wbSelectedEl ? wbCompEl : null));
+  });
+
+  // Bootstrap on load
+  document.addEventListener('DOMContentLoaded', () => {
+    wbInit();
+    const dragBar = document.getElementById('wb-drag-bar');
+    if (dragBar) dragBar.addEventListener('pointerdown', wbOnDragDown);
+    const bubble = document.getElementById('wb-bubble');
+    if (bubble) bubble.addEventListener('pointerdown', wbOnBubbleDown);
+  });
 </script>
 
 <!-- ============================================================
@@ -1921,16 +2307,50 @@
   </div>
 </div>
 
-<!-- ── Demo floating bar ────────────────────────────────────── -->
-<div class="fixed z-40 flex items-center gap-1.5 bg-white border border-gray-15 rounded-lg shadow-lg px-3 py-2" style="bottom:20px; right:20px;">
-  <span class="text-tn font-semibold text-gray-35 uppercase tracking-wider mr-0.5">Demo</span>
-  <button id="demo-autofill-btn" onclick="autofillDemo()" class="bg-brand-action hover:bg-red-600 text-white rounded text-xs font-medium px-3 h-7 flex items-center gap-1 transition-colors">
-    <i class="ti ti-wand text-xs"></i> Autofill
-  </button>
-  <button id="demo-reset-btn" onclick="resetDemo()" class="border border-gray-15 text-gray-60 hover:bg-gray-5 rounded text-xs font-medium px-3 h-7 flex items-center gap-1 transition-colors">
-    <i class="ti ti-refresh text-xs"></i> Reset
-  </button>
+<!-- ── Prototype Workbench ───────────────────────────────────── -->
+<div id="wb-root" data-dev-ignore="true">
+  <div id="wb-floating" class="prototype-workbench__floating">
+    <!-- Collapsed bubble -->
+    <button id="wb-bubble" class="prototype-workbench__bubble" style="display:none;" onclick="wbExpand()">Dev</button>
+    <!-- Expanded toolbar -->
+    <div id="wb-toolbar" class="prototype-workbench__toolbar">
+      <div class="prototype-workbench__toolbar-bar" id="wb-drag-bar">
+        <div class="prototype-workbench__toolbar-handle" aria-hidden="true"><span></span><span></span><span></span></div>
+        <button class="prototype-workbench__toolbar-collapse" aria-label="Collapse" onclick="wbCollapse()">−</button>
+      </div>
+      <div class="prototype-workbench__toolbar-body">
+        <!-- View -->
+        <div class="prototype-workbench__toolbar-group">
+          <div class="prototype-workbench__toolbar-label">View</div>
+          <div class="prototype-workbench__toggle">
+            <button id="wb-view-mobile" class="prototype-workbench__toggle-button prototype-workbench__toggle-button--disabled" title="Mobile view not available">Mobile</button>
+            <button id="wb-view-desktop" class="prototype-workbench__toggle-button prototype-workbench__toggle-button--active">Desktop</button>
+          </div>
+        </div>
+        <!-- Mode -->
+        <div class="prototype-workbench__toolbar-group">
+          <div class="prototype-workbench__toolbar-label">Mode</div>
+          <div class="prototype-workbench__toggle">
+            <button id="wb-mode-preview" class="prototype-workbench__toggle-button prototype-workbench__toggle-button--active" onclick="wbSetMode('preview')">Preview</button>
+            <button id="wb-mode-dev" class="prototype-workbench__toggle-button" onclick="wbSetMode('dev')">Dev</button>
+          </div>
+        </div>
+        <!-- Demo -->
+        <div class="prototype-workbench__toolbar-group">
+          <div class="prototype-workbench__toolbar-label">Demo</div>
+          <div class="prototype-workbench__toggle">
+            <button id="demo-autofill-btn" class="prototype-workbench__toggle-button" onclick="autofillDemo()">Autofill</button>
+            <button id="demo-reset-btn" class="prototype-workbench__toggle-button" onclick="resetDemo()">Reset</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+<!-- Inspect overlay (visual highlight boxes, badges — pointer-events:none) -->
+<div id="wb-overlay" aria-hidden="true" style="display:none; position:fixed; inset:0; z-index:4500; pointer-events:none;"></div>
+<!-- Inspect HUD panel -->
+<div id="wb-hud" class="prototype-inspect__hud" data-dev-ignore="true" style="display:none;"></div>
 
 </body>
 </html>
