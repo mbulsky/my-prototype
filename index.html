@@ -94,8 +94,8 @@
   <div class="bg-white rounded-lg w-full max-w-2xl flex flex-col shadow-xl" style="max-height:88vh;">
     <!-- Modal header -->
     <div class="px-6 pt-5 pb-3 text-center flex-shrink-0 border-b border-gray-10">
-      <h2 class="text-base font-bold text-gray-95">Ketentuan Penggunaan Layanan Enterprise Suite</h2>
-      <p class="text-xs text-gray-50 mt-0.5">Tanggal efektif: 20 Agustus 2024</p>
+      <h2 data-i18n="tnc-title" class="text-base font-bold text-gray-95">Ketentuan Penggunaan Layanan Enterprise Suite</h2>
+      <p data-i18n="tnc-date" class="text-xs text-gray-50 mt-0.5">Tanggal efektif: 20 Agustus 2024</p>
     </div>
     <!-- Scrollable body -->
     <div id="tnc-body" onscroll="checkTncScroll()" class="tnc-scroll overflow-y-auto flex-1 px-6 py-4 text-sm text-gray-70 leading-relaxed space-y-3">
@@ -131,7 +131,7 @@
     <!-- Scroll hint -->
     <div id="tnc-scroll-hint" class="px-6 py-1 text-right transition-opacity duration-300">
       <span class="text-tn text-gray-35 flex items-center justify-end gap-1">
-        <i class="ti ti-chevrons-down text-xs"></i> Gulir ke bawah untuk melanjutkan
+        <i class="ti ti-chevrons-down text-xs"></i> <span data-i18n="tnc-scroll-hint">Gulir ke bawah untuk melanjutkan</span>
       </span>
     </div>
     <!-- Footer -->
@@ -141,8 +141,8 @@
         <button id="tnc-lang-en" onclick="setTncLang('en')" class="text-xs px-3 py-1.5 rounded border border-transparent font-medium text-gray-35">English</button>
       </div>
       <div class="flex items-center gap-2">
-        <button onclick="closeTncModal(false)" class="h-9 px-4 border border-gray-20 text-gray-60 rounded text-sm font-medium hover:bg-gray-5 transition-colors">Batal</button>
-        <button id="tnc-accept-btn" disabled onclick="closeTncModal(true)" class="h-9 px-4 bg-brand-action/40 text-white rounded text-sm font-medium cursor-not-allowed transition-all">Lanjutkan</button>
+        <button onclick="closeTncModal(false)" class="h-9 px-4 border border-gray-20 text-gray-60 rounded text-sm font-medium hover:bg-gray-5 transition-colors"><span data-i18n="btn-cancel">Batal</span></button>
+        <button id="tnc-accept-btn" disabled onclick="closeTncModal(true)" class="h-9 px-4 bg-brand-action/40 text-white rounded text-sm font-medium cursor-not-allowed transition-all"><span data-i18n="btn-continue">Lanjutkan</span></button>
       </div>
     </div>
   </div>
@@ -161,25 +161,25 @@
     <div class="flex items-center mb-8">
       <div class="flex flex-col items-center flex-1">
         <div class="step-circle active">1</div>
-        <span class="text-tn mt-1 text-brand-action font-medium">Isi data pendaftaran</span>
+        <span data-i18n="step1" class="text-tn mt-1 text-brand-action font-medium">Isi data pendaftaran</span>
       </div>
       <div class="flex-1 h-px bg-gray-15 mb-4"></div>
       <div class="flex flex-col items-center flex-1">
         <div class="step-circle inactive">2</div>
-        <span class="text-tn mt-1 text-gray-35">Review & tanda tangan</span>
+        <span data-i18n="step2" class="text-tn mt-1 text-gray-35">Review & tanda tangan</span>
       </div>
     </div>
 
     <div class="bg-white border border-gray-10 rounded-md overflow-hidden shadow-sm">
       <div class="px-5 pt-5 pb-4 border-b border-gray-10">
-        <h1 class="text-xl font-bold text-gray-95">Daftar Privy Enterprise</h1>
-        <p class="text-sm text-gray-50 mt-1">Lengkapi dokumen berikut sebelum memulai pendaftaran</p>
+        <h1 data-i18n="checklist-title" class="text-xl font-bold text-gray-95">Daftar Privy Enterprise</h1>
+        <p data-i18n="checklist-sub" class="text-sm text-gray-50 mt-1">Lengkapi dokumen berikut sebelum memulai pendaftaran</p>
       </div>
       <div class="px-5 py-4 space-y-4">
         <div class="flex items-center gap-2">
           <i class="ti ti-clock text-gray-50 text-base"></i>
-          <span class="text-sm text-gray-60">Estimasi waktu pengisian</span>
-          <span class="border border-gray-15 rounded-full text-tn px-2.5 py-0.5 text-gray-60 font-medium">~10–15 menit</span>
+          <span data-i18n="checklist-time-lbl" class="text-sm text-gray-60">Estimasi waktu pengisian</span>
+          <span data-i18n="checklist-time-val" class="border border-gray-15 rounded-full text-tn px-2.5 py-0.5 text-gray-60 font-medium">~10–15 menit</span>
         </div>
         <div class="space-y-2">
           <div class="flex items-start gap-3 rounded-md p-3 bg-success-subtle">
@@ -187,9 +187,9 @@
               <i class="ti ti-check text-white text-xs"></i>
             </div>
             <div>
-              <p class="text-sm font-medium text-gray-95">Akun Privy (PrivyID)</p>
-              <p class="text-xs text-gray-50 mt-0.5">Diperlukan untuk menandatangani perjanjian layanan dan menjadi pemilik enterprise.</p>
-              <a href="#" onclick="return false;" class="text-xs text-brand-accent font-medium mt-1 inline-block">Belum punya? Daftar di sini →</a>
+              <p data-i18n="checklist-item1-title" class="text-sm font-medium text-gray-95">Akun Privy (PrivyID)</p>
+              <p data-i18n="checklist-item1-desc" class="text-xs text-gray-50 mt-0.5">Diperlukan untuk menandatangani perjanjian layanan dan menjadi pemilik enterprise.</p>
+              <a href="#" onclick="return false;" class="text-xs text-brand-accent font-medium mt-1 inline-block"><span data-i18n="checklist-item1-link">Belum punya? Daftar di sini</span></a>
             </div>
           </div>
           <div class="flex items-start gap-3 rounded-md p-3 bg-success-subtle">
@@ -197,8 +197,8 @@
               <i class="ti ti-check text-white text-xs"></i>
             </div>
             <div>
-              <p class="text-sm font-medium text-gray-95">NPWP perusahaan</p>
-              <p class="text-xs text-gray-50 mt-0.5">File asli NPWP.</p>
+              <p data-i18n="checklist-item2-title" class="text-sm font-medium text-gray-95">NPWP perusahaan</p>
+              <p data-i18n="checklist-item2-desc" class="text-xs text-gray-50 mt-0.5">File asli NPWP.</p>
             </div>
           </div>
           <div class="flex items-start gap-3 rounded-md p-3 bg-success-subtle">
@@ -206,8 +206,8 @@
               <i class="ti ti-check text-white text-xs"></i>
             </div>
             <div>
-              <p class="text-sm font-medium text-gray-95">Akta pendirian perusahaan</p>
-              <p class="text-xs text-gray-50 mt-0.5">File akta asli atau salinan yang dilegalisir.</p>
+              <p data-i18n="checklist-item3-title" class="text-sm font-medium text-gray-95">Akta pendirian perusahaan</p>
+              <p data-i18n="checklist-item3-desc" class="text-xs text-gray-50 mt-0.5">File akta asli atau salinan yang dilegalisir.</p>
             </div>
           </div>
           <div class="flex items-start gap-3 rounded-md p-3 bg-success-subtle">
@@ -215,8 +215,8 @@
               <i class="ti ti-check text-white text-xs"></i>
             </div>
             <div>
-              <p class="text-sm font-medium text-gray-95">SK pengesahan badan usaha</p>
-              <p class="text-xs text-gray-50 mt-0.5">Surat keputusan pengesahan dari Kemenkumham.</p>
+              <p data-i18n="checklist-item4-title" class="text-sm font-medium text-gray-95">SK pengesahan badan usaha</p>
+              <p data-i18n="checklist-item4-desc" class="text-xs text-gray-50 mt-0.5">Surat keputusan pengesahan dari Kemenkumham.</p>
             </div>
           </div>
           <div class="flex items-start gap-3 rounded-md p-3 bg-warning-subtle border border-warning-border">
@@ -224,25 +224,27 @@
               <i class="ti ti-alert-triangle text-white text-xs"></i>
             </div>
             <div>
-              <p class="text-sm font-medium text-warning-fg">Surat kuasa <span class="font-normal">(jika diperlukan)</span></p>
-              <p class="text-xs text-warning-fg/75 mt-0.5">Diperlukan jika nama pemilik Enterprise tidak tercantum sebagai pejabat berwenang dalam akta pendirian perusahaan.</p>
+              <p class="text-sm font-medium text-warning-fg"><span data-i18n="checklist-item5-title">Surat kuasa</span> <span data-i18n="checklist-item5-opt" class="font-normal">(jika diperlukan)</span></p>
+              <p data-i18n="checklist-item5-desc" class="text-xs text-warning-fg/75 mt-0.5">Diperlukan jika nama pemilik Enterprise tidak tercantum sebagai pejabat berwenang dalam akta pendirian perusahaan.</p>
             </div>
           </div>
         </div>
         <div class="bg-gray-5 border border-gray-10 rounded-md p-3 flex items-start gap-2">
           <i class="ti ti-device-floppy text-gray-35 text-base mt-0.5 flex-shrink-0"></i>
-          <p class="text-xs text-gray-50">Form ini menyimpan progress kamu secara otomatis. Kamu bisa melanjutkan kapan saja tanpa kehilangan data.</p>
+          <p data-i18n="checklist-autosave" class="text-xs text-gray-50">Form ini menyimpan progress kamu secara otomatis. Kamu bisa melanjutkan kapan saja tanpa kehilangan data.</p>
         </div>
       </div>
       <div class="px-5 pb-5">
         <button onclick="showPage('page-form')" class="w-full h-10 bg-brand-action text-white rounded font-medium text-sm hover:bg-red-600 transition-colors flex items-center justify-center gap-2">
-          Mulai pendaftaran <i class="ti ti-arrow-right text-base"></i>
+          <span data-i18n="checklist-cta">Mulai pendaftaran</span> <i class="ti ti-arrow-right text-base"></i>
         </button>
       </div>
     </div>
     <div class="text-center mt-6 space-y-1">
-      <div class="flex items-center justify-center gap-2 text-xs text-gray-35">
-        <span class="font-medium text-gray-50">Indonesia</span><span>·</span><span>English</span>
+      <div class="flex items-center justify-center gap-2 text-xs">
+        <button data-lang="id" onclick="setLang('id')" class="lang-btn font-medium text-gray-50 hover:text-gray-95 transition-colors">Indonesia</button>
+        <span class="text-gray-35">·</span>
+        <button data-lang="en" onclick="setLang('en')" class="lang-btn text-gray-35 hover:text-gray-60 transition-colors">English</button>
       </div>
       <p class="text-tn text-gray-35">© 2025 Privy</p>
     </div>
@@ -261,19 +263,19 @@
     <div class="flex items-center mb-6">
       <div class="flex flex-col items-center flex-1">
         <div class="step-circle active">1</div>
-        <span class="text-tn mt-1 text-brand-action font-medium">Isi data pendaftaran</span>
+        <span data-i18n="step1" class="text-tn mt-1 text-brand-action font-medium">Isi data pendaftaran</span>
       </div>
       <div class="flex-1 h-px bg-gray-15 mb-4"></div>
       <div class="flex flex-col items-center flex-1">
         <div class="step-circle inactive">2</div>
-        <span class="text-tn mt-1 text-gray-35">Review & tanda tangan</span>
+        <span data-i18n="step2" class="text-tn mt-1 text-gray-35">Review & tanda tangan</span>
       </div>
     </div>
     <div class="bg-white border border-gray-10 rounded-md p-3 mb-4 flex items-center gap-3">
       <div class="flex-1 h-1.5 bg-gray-10 rounded-full overflow-hidden">
         <div id="progress-bar" class="h-full bg-brand-action rounded-full transition-all duration-300" style="width:0%"></div>
       </div>
-      <span class="text-tn text-gray-50 whitespace-nowrap"><span id="progress-text" class="text-gray-35 font-medium">0 dari 3</span> section selesai</span>
+      <span class="text-tn text-gray-50 whitespace-nowrap"><span id="progress-text" class="text-gray-35 font-medium">0 dari 3</span> <span data-i18n="progress-suffix">section selesai</span></span>
     </div>
 
     <!-- CARD 1 -->
@@ -281,37 +283,37 @@
       <div class="px-5 py-4 border-b border-gray-10 flex items-center justify-between">
         <div>
           <h2 class="text-sm font-semibold text-gray-95 flex items-center gap-2">
-            Siapa yang mendaftar?
-            <span id="card1-badge" class="hidden rounded-full text-tn px-2 py-0.5 bg-success-subtle border border-success-border text-success font-medium">✓ Lengkap</span>
+            <span data-i18n="card1-title">Siapa yang mendaftar?</span>
+            <span id="card1-badge" class="hidden rounded-full text-tn px-2 py-0.5 bg-success-subtle border border-success-border text-success font-medium"><span data-i18n="badge-complete">✓ Lengkap</span></span>
           </h2>
-          <p class="text-xs text-gray-50 mt-0.5">Data pribadi PIC Enterprise kamu</p>
+          <p data-i18n="card1-sub" class="text-xs text-gray-50 mt-0.5">Data pribadi PIC Enterprise kamu</p>
         </div>
         <span class="rounded-full text-tn px-2.5 py-1 font-medium bg-warning-subtle text-warning-fg border border-warning-border flex items-center gap-1">
-          <i class="ti ti-device-floppy text-xs"></i> Tersimpan otomatis
+          <i class="ti ti-device-floppy text-xs"></i> <span data-i18n="badge-autosave">Tersimpan otomatis</span>
         </span>
       </div>
       <div class="px-5 py-4 space-y-3">
         <div>
-          <label class="block text-xs font-medium text-gray-70 mb-1">Nama lengkap <span class="text-danger">*</span></label>
-          <input id="f-nama" type="text" placeholder="Masukkan nama lengkap..." oninput="onFormInput()" class="w-full h-9 px-3 border border-gray-20 bg-white rounded text-sm text-gray-95 focus:border-brand-accent transition-colors" />
+          <label class="block text-xs font-medium text-gray-70 mb-1"><span data-i18n="lbl-nama">Nama lengkap</span> <span class="text-danger">*</span></label>
+          <input id="f-nama" type="text" placeholder="Masukkan nama lengkap..." data-i18n-ph="ph-nama" oninput="onFormInput()" class="w-full h-9 px-3 border border-gray-20 bg-white rounded text-sm text-gray-95 focus:border-brand-accent transition-colors" />
         </div>
         <div>
-          <label class="block text-xs font-medium text-gray-70 mb-1">Alamat email <span class="text-danger">*</span></label>
+          <label class="block text-xs font-medium text-gray-70 mb-1"><span data-i18n="lbl-email">Alamat email</span> <span class="text-danger">*</span></label>
           <input id="f-email" type="email" placeholder="nama@email.com" oninput="onFormInput()" class="w-full h-9 px-3 border border-gray-20 bg-white rounded text-sm text-gray-95 focus:border-brand-accent transition-colors" />
         </div>
         <div>
-          <label class="block text-xs font-medium text-gray-70 mb-1">Nomor telepon <span class="text-danger">*</span></label>
+          <label class="block text-xs font-medium text-gray-70 mb-1"><span data-i18n="lbl-telepon">Nomor telepon</span> <span class="text-danger">*</span></label>
           <input id="f-telepon" type="tel" placeholder="+62..." oninput="onFormInput()" class="w-full h-9 px-3 border border-gray-20 bg-white rounded text-sm text-gray-95 focus:border-brand-accent transition-colors" />
         </div>
         <div>
-          <label class="block text-xs font-medium text-gray-70 mb-1">Nama perusahaan <span class="text-danger">*</span></label>
-          <input id="f-perusahaan" type="text" placeholder="PT / CV / ..." oninput="onFormInput()" class="w-full h-9 px-3 border border-gray-20 bg-white rounded text-sm text-gray-95 focus:border-brand-accent transition-colors" />
+          <label class="block text-xs font-medium text-gray-70 mb-1"><span data-i18n="lbl-perusahaan">Nama perusahaan</span> <span class="text-danger">*</span></label>
+          <input id="f-perusahaan" type="text" placeholder="PT / CV / ..." data-i18n-ph="ph-perusahaan" oninput="onFormInput()" class="w-full h-9 px-3 border border-gray-20 bg-white rounded text-sm text-gray-95 focus:border-brand-accent transition-colors" />
         </div>
         <div>
-          <label class="block text-xs font-medium text-gray-70 mb-1">Sektor bisnis <span class="text-danger">*</span></label>
+          <label class="block text-xs font-medium text-gray-70 mb-1"><span data-i18n="lbl-sektor">Sektor bisnis</span> <span class="text-danger">*</span></label>
           <div class="relative">
             <select id="f-sektor" onchange="onFormInput()" class="w-full h-9 px-3 pr-9 border border-gray-20 bg-white rounded text-sm text-gray-95 focus:border-brand-accent appearance-none transition-colors">
-              <option value="">Pilih sektor bisnis...</option>
+              <option value="" data-i18n-opt="ph-sektor">Pilih sektor bisnis...</option>
               <option value="Teknologi informasi">Teknologi informasi</option>
               <option value="Keuangan & perbankan">Keuangan &amp; perbankan</option>
               <option value="Kesehatan">Kesehatan</option>
@@ -333,16 +335,16 @@
     <div class="bg-white border border-gray-10 rounded-md overflow-hidden shadow-sm mb-4">
       <div class="px-5 py-4 border-b border-gray-10">
         <h2 class="text-sm font-semibold text-gray-95 flex items-center gap-2">
-          Data perusahaan
-          <span id="card2-badge" class="hidden rounded-full text-tn px-2 py-0.5 bg-success-subtle border border-success-border text-success font-medium">✓ Lengkap</span>
+          <span data-i18n="card2-title">Data perusahaan</span>
+          <span id="card2-badge" class="hidden rounded-full text-tn px-2 py-0.5 bg-success-subtle border border-success-border text-success font-medium"><span data-i18n="badge-complete">✓ Lengkap</span></span>
         </h2>
-        <p class="text-xs text-gray-50 mt-0.5">Informasi legal perusahaan kamu</p>
+        <p data-i18n="card2-sub" class="text-xs text-gray-50 mt-0.5">Informasi legal perusahaan kamu</p>
       </div>
       <div class="px-5 py-4 space-y-4">
         <!-- PrivyID -->
         <div>
           <label class="block text-xs font-medium text-gray-70 mb-1 flex items-center gap-1">
-            PrivyID pemilik enterprise <span class="text-danger">*</span>
+            <span data-i18n="lbl-privyid">PrivyID pemilik enterprise</span> <span class="text-danger">*</span>
             <span class="w-4 h-4 rounded-full bg-gray-10 flex items-center justify-center ml-1 cursor-help" title="PrivyID adalah akun Privy personal kamu">
               <i class="ti ti-question-mark text-gray-35" style="font-size:9px;"></i>
             </span>
@@ -350,7 +352,7 @@
           <!-- STATE A -->
           <div id="privyid-empty">
             <input id="f-privy-input" type="text" placeholder="Masukkan PrivyID..." class="w-full h-9 px-3 border border-gray-20 bg-white rounded text-sm text-gray-95 focus:border-brand-accent transition-colors" />
-            <p class="text-xs text-gray-50 mt-1.5">PrivyID adalah akun Privy personal kamu. <a href="#" onclick="return false;" class="text-brand-accent font-medium">Belum punya PrivyID? Daftar dulu →</a></p>
+            <p class="text-xs text-gray-50 mt-1.5"><span data-i18n="privyid-hint">PrivyID adalah akun Privy personal kamu.</span> <a href="#" onclick="return false;" class="text-brand-accent font-medium"><span data-i18n="privyid-register-link">Belum punya PrivyID? Daftar dulu</span></a></p>
             <button onclick="fetchPrivyId()" class="mt-2 text-xs text-brand-accent border border-info-border bg-info-subtle rounded px-3 py-1.5 font-medium hover:bg-blue-50 transition-colors flex items-center gap-1">
               <i class="ti ti-player-play text-xs"></i> Simulasi: input PrivyID →
             </button>
@@ -361,7 +363,7 @@
               <input type="text" id="privy-loading-input" readonly class="w-full h-9 px-3 pr-9 border border-brand-accent bg-white rounded text-sm text-gray-95" />
               <span class="spinner absolute right-3 top-1/2 -translate-y-1/2 text-brand-accent"><i class="ti ti-loader-2 text-base"></i></span>
             </div>
-            <p class="text-xs text-gray-50 mt-1.5 flex items-center gap-1"><i class="ti ti-loader-2 spinner text-brand-accent text-xs"></i> Memverifikasi PrivyID...</p>
+            <p class="text-xs text-gray-50 mt-1.5 flex items-center gap-1"><i class="ti ti-loader-2 spinner text-brand-accent text-xs"></i> <span data-i18n="privyid-verifying">Memverifikasi PrivyID...</span></p>
           </div>
           <!-- STATE C -->
           <div id="privyid-success" class="hidden">
@@ -373,34 +375,34 @@
               <div id="privy-avatar" class="privy-avatar w-9 h-9 rounded-full bg-brand-action text-white flex items-center justify-center font-semibold text-sm flex-shrink-0">?</div>
               <div class="flex-1 min-w-0">
                 <p id="privy-nama-display" class="text-sm font-semibold text-gray-95">—</p>
-                <p class="text-xs text-gray-50">Akun Privy terverifikasi · <span id="privy-id-display">—</span></p>
+                <p class="text-xs text-gray-50"><span data-i18n="privy-verified-label">Akun Privy terverifikasi · </span><span id="privy-id-display">—</span></p>
               </div>
               <span class="rounded-full text-tn px-2 py-0.5 bg-success-subtle border border-success-border text-success font-medium flex items-center gap-1 flex-shrink-0">
-                <i class="ti ti-check text-xs"></i> Terverifikasi
+                <i class="ti ti-check text-xs"></i> <span data-i18n="badge-verified">Terverifikasi</span>
               </span>
             </div>
-            <p class="text-xs text-gray-50 mt-1.5">Nama di atas otomatis digunakan sebagai penandatangan perjanjian layanan Enterprise.</p>
-            <button onclick="resetPrivyId()" class="mt-1.5 text-xs text-gray-50 hover:text-gray-70 underline">Ganti PrivyID</button>
+            <p data-i18n="privyid-autofill-hint" class="text-xs text-gray-50 mt-1.5">Nama di atas otomatis digunakan sebagai penandatangan perjanjian layanan Enterprise.</p>
+            <button onclick="resetPrivyId()" class="mt-1.5 text-xs text-gray-50 hover:text-gray-70 underline"><span data-i18n="btn-change-privyid">Ganti PrivyID</span></button>
           </div>
         </div>
 
         <!-- Kuasa Section -->
         <div id="kuasa-section" class="hidden">
           <div class="bg-gray-5 border border-gray-15 rounded-md p-3">
-            <p class="text-xs font-semibold text-gray-95 mb-0.5">Apakah kamu direktur utama perusahaan?</p>
-            <p class="text-xs text-gray-50 mb-2">Jika tidak, kamu perlu melampirkan surat kuasa dari direktur utama.</p>
+            <p data-i18n="kuasa-title" class="text-xs font-semibold text-gray-95 mb-0.5">Apakah kamu direktur utama perusahaan?</p>
+            <p data-i18n="kuasa-sub" class="text-xs text-gray-50 mb-2">Jika tidak, kamu perlu melampirkan surat kuasa dari direktur utama.</p>
             <label class="flex items-start gap-2 cursor-pointer">
               <input type="checkbox" id="kuasa-cb" onchange="toggleKuasa(this)" class="mt-0.5 accent-brand-action flex-shrink-0" />
-              <span class="text-xs text-gray-70">Nama pemilik PrivyID tidak tercantum dalam akta pendirian — saya perlu melampirkan surat kuasa</span>
+              <span data-i18n="kuasa-cb-text" class="text-xs text-gray-70">Nama pemilik PrivyID tidak tercantum dalam akta pendirian — saya perlu melampirkan surat kuasa</span>
             </label>
           </div>
           <div id="kuasa-upload" class="hidden mt-2 border border-warning-border rounded-md overflow-hidden">
             <div class="bg-warning-subtle px-3 py-2 flex items-center gap-2">
               <i class="ti ti-file-upload text-warning-fg text-sm"></i>
-              <span class="text-xs font-semibold text-warning-fg">Unggah surat kuasa</span>
+              <span data-i18n="kuasa-upload-title" class="text-xs font-semibold text-warning-fg">Unggah surat kuasa</span>
             </div>
             <div class="p-3 bg-white">
-              <p class="text-xs text-gray-50 mb-2">Surat kuasa bermaterai dari direktur utama yang memberikan wewenang kepada kamu.</p>
+              <p data-i18n="kuasa-upload-desc" class="text-xs text-gray-50 mb-2">Surat kuasa bermaterai dari direktur utama yang memberikan wewenang kepada kamu.</p>
               <label class="flex items-center gap-2 cursor-pointer border-2 border-dashed border-warning-border rounded-md p-3 hover:bg-warning-subtle transition-colors">
                 <i class="ti ti-upload text-warning text-base"></i>
                 <span class="text-xs text-gray-50">Pilih file atau seret ke sini... <span class="text-tn">(PDF/PNG/JPG, maks. 2 MB)</span></span>
@@ -413,39 +415,39 @@
         <div id="jabatan-section" class="hidden">
           <div class="bg-info-subtle border border-info-border rounded-md p-3 flex items-start gap-2 mb-3">
             <i class="ti ti-wand text-info text-base flex-shrink-0 mt-0.5"></i>
-            <p class="text-xs text-info-fg">Nama penandatangan terisi otomatis dari PrivyID kamu dan tidak dapat diubah.</p>
+            <p data-i18n="autofill-hint" class="text-xs text-info-fg">Nama penandatangan terisi otomatis dari PrivyID kamu dan tidak dapat diubah.</p>
           </div>
           <div class="grid grid-cols-2 gap-3">
             <div>
-              <label class="block text-xs font-medium text-gray-70 mb-1">Nama penandatangan</label>
+              <label class="block text-xs font-medium text-gray-70 mb-1"><span data-i18n="lbl-nama-penanda">Nama penandatangan</span></label>
               <div class="relative">
                 <input id="f-nama-penanda" type="text" disabled class="w-full h-9 px-3 pr-9 border border-gray-10 bg-gray-5 rounded text-sm text-gray-35 cursor-not-allowed" />
                 <i class="ti ti-lock text-gray-35 absolute right-3 top-1/2 -translate-y-1/2 text-sm"></i>
               </div>
             </div>
             <div>
-              <label class="block text-xs font-medium text-gray-70 mb-1">Jabatan <span class="text-danger">*</span></label>
-              <input id="f-jabatan" type="text" placeholder="Direktur / Head of ..." oninput="onFormInput()" class="w-full h-9 px-3 border border-gray-20 bg-white rounded text-sm text-gray-95 focus:border-brand-accent transition-colors" />
+              <label class="block text-xs font-medium text-gray-70 mb-1"><span data-i18n="lbl-jabatan">Jabatan</span> <span class="text-danger">*</span></label>
+              <input id="f-jabatan" type="text" placeholder="Direktur / Head of ..." data-i18n-ph="ph-jabatan" oninput="onFormInput()" class="w-full h-9 px-3 border border-gray-20 bg-white rounded text-sm text-gray-95 focus:border-brand-accent transition-colors" />
             </div>
           </div>
         </div>
 
         <div>
-          <label class="block text-xs font-medium text-gray-70 mb-1">Email perusahaan <span class="text-danger">*</span></label>
+          <label class="block text-xs font-medium text-gray-70 mb-1"><span data-i18n="lbl-email-kantor">Email perusahaan</span> <span class="text-danger">*</span></label>
           <input id="f-email-kantor" type="email" placeholder="info@perusahaan.com" oninput="onFormInput()" class="w-full h-9 px-3 border border-gray-20 bg-white rounded text-sm text-gray-95 focus:border-brand-accent transition-colors" />
-          <p class="text-xs text-gray-50 mt-1">Digunakan untuk korespondensi resmi Enterprise.</p>
+          <p data-i18n="email-kantor-hint" class="text-xs text-gray-50 mt-1">Digunakan untuk korespondensi resmi Enterprise.</p>
         </div>
         <div>
-          <label class="block text-xs font-medium text-gray-70 mb-1">Nomor telepon perusahaan <span class="text-danger">*</span></label>
+          <label class="block text-xs font-medium text-gray-70 mb-1"><span data-i18n="lbl-hp-kantor">Nomor telepon perusahaan</span> <span class="text-danger">*</span></label>
           <input id="f-hp-kantor" type="tel" placeholder="+62..." oninput="onFormInput()" class="w-full h-9 px-3 border border-gray-20 bg-white rounded text-sm text-gray-95 focus:border-brand-accent transition-colors" />
         </div>
         <div>
-          <label class="block text-xs font-medium text-gray-70 mb-1">Alamat perusahaan <span class="text-danger">*</span></label>
+          <label class="block text-xs font-medium text-gray-70 mb-1"><span data-i18n="lbl-alamat">Alamat perusahaan</span> <span class="text-danger">*</span></label>
           <input id="f-alamat" type="text" placeholder="Jl. ..." oninput="onFormInput()" class="w-full h-9 px-3 border border-gray-20 bg-white rounded text-sm text-gray-95 focus:border-brand-accent transition-colors" />
-          <p class="text-xs text-gray-50 mt-1">Digunakan pada dokumen perjanjian layanan.</p>
+          <p data-i18n="alamat-hint" class="text-xs text-gray-50 mt-1">Digunakan pada dokumen perjanjian layanan.</p>
         </div>
         <div>
-          <label class="block text-xs font-medium text-gray-70 mb-1">Nomor NPWP perusahaan <span class="text-danger">*</span></label>
+          <label class="block text-xs font-medium text-gray-70 mb-1"><span data-i18n="lbl-npwp">Nomor NPWP perusahaan</span> <span class="text-danger">*</span></label>
           <input id="f-npwp" type="text" placeholder="00.000.000.0-000.000" oninput="onFormInput()" class="w-full h-9 px-3 border border-gray-20 bg-white rounded text-sm text-gray-95 focus:border-brand-accent transition-colors" />
         </div>
       </div>
@@ -455,10 +457,10 @@
     <div class="bg-white border border-gray-10 rounded-md overflow-hidden shadow-sm mb-4">
       <div class="px-5 py-4 border-b border-gray-10">
         <h2 class="text-sm font-semibold text-gray-95 flex items-center gap-2">
-          Unggah dokumen
-          <span id="card3-badge" class="hidden rounded-full text-tn px-2 py-0.5 bg-success-subtle border border-success-border text-success font-medium">✓ Lengkap</span>
+          <span data-i18n="card3-title">Unggah dokumen</span>
+          <span id="card3-badge" class="hidden rounded-full text-tn px-2 py-0.5 bg-success-subtle border border-success-border text-success font-medium"><span data-i18n="badge-complete">✓ Lengkap</span></span>
         </h2>
-        <p class="text-xs text-gray-50 mt-0.5">Dokumen legal perusahaan untuk verifikasi</p>
+        <p data-i18n="card3-sub" class="text-xs text-gray-50 mt-0.5">Dokumen legal perusahaan untuk verifikasi</p>
       </div>
       <div class="px-5 py-3 space-y-0 divide-y divide-gray-10">
         <!-- NPWP doc -->
@@ -467,8 +469,8 @@
             <i class="ti ti-file text-gray-35 text-sm"></i>
           </div>
           <div class="flex-1 min-w-0">
-            <p class="text-sm font-medium text-gray-95">Dokumen NPWP</p>
-            <p class="text-xs text-gray-50">PDF/PNG/JPG · maks. 2 MB</p>
+            <p data-i18n="doc1-name" class="text-sm font-medium text-gray-95">Dokumen NPWP</p>
+            <p data-i18n="doc-hint" class="text-xs text-gray-50">PDF/PNG/JPG · maks. 2 MB</p>
           </div>
           <label id="doc1-label" class="cursor-pointer">
             <input type="file" accept=".pdf,.png,.jpg,.jpeg" class="hidden" onchange="handleDocUpload(this, 'doc1')" />
@@ -483,8 +485,8 @@
             <i class="ti ti-file text-gray-35 text-sm"></i>
           </div>
           <div class="flex-1 min-w-0">
-            <p class="text-sm font-medium text-gray-95">Akta pendirian perusahaan</p>
-            <p class="text-xs text-gray-50">PDF/PNG/JPG · maks. 2 MB</p>
+            <p data-i18n="doc2-name" class="text-sm font-medium text-gray-95">Akta pendirian perusahaan</p>
+            <p data-i18n="doc-hint" class="text-xs text-gray-50">PDF/PNG/JPG · maks. 2 MB</p>
           </div>
           <label id="doc2-label" class="cursor-pointer">
             <input type="file" accept=".pdf,.png,.jpg,.jpeg" class="hidden" onchange="handleDocUpload(this, 'doc2')" />
@@ -499,8 +501,8 @@
             <i class="ti ti-file text-gray-35 text-sm"></i>
           </div>
           <div class="flex-1 min-w-0">
-            <p class="text-sm font-medium text-gray-95">SK pengesahan badan usaha</p>
-            <p class="text-xs text-gray-50">PDF/PNG/JPG · maks. 2 MB</p>
+            <p data-i18n="doc3-name" class="text-sm font-medium text-gray-95">SK pengesahan badan usaha</p>
+            <p data-i18n="doc-hint" class="text-xs text-gray-50">PDF/PNG/JPG · maks. 2 MB</p>
           </div>
           <label id="doc3-label" class="cursor-pointer">
             <input type="file" accept=".pdf,.png,.jpg,.jpeg" class="hidden" onchange="handleDocUpload(this, 'doc3')" />
@@ -516,18 +518,20 @@
     <div class="bg-gray-5 border border-gray-10 rounded-md p-4 mb-4">
       <label class="flex items-start gap-2 cursor-pointer" onclick="handleTncClick(event)">
         <input type="checkbox" id="tnc-cb" class="mt-0.5 accent-brand-action flex-shrink-0 pointer-events-none" readonly />
-        <span class="text-xs text-gray-70 select-none">Saya telah membaca dan menyetujui <span class="text-brand-accent font-medium">Syarat &amp; Ketentuan</span> serta <span class="text-brand-accent font-medium">Kebijakan Privasi</span> Privy Enterprise.</span>
+        <span id="tnc-cb-text" data-i18n-html="tnc-cb-html" class="text-xs text-gray-70 select-none">Saya telah membaca dan menyetujui <span class="text-brand-accent font-medium">Syarat &amp; Ketentuan</span> serta <span class="text-brand-accent font-medium">Kebijakan Privasi</span> Privy Enterprise.</span>
       </label>
-      <p class="text-tn text-gray-50 mt-2 ml-5">Dengan mendaftar, kamu menyetujui penggunaan tanda tangan elektronik sesuai UU ITE dan regulasi PSrE yang berlaku.</p>
+      <p data-i18n="tnc-footer" class="text-tn text-gray-50 mt-2 ml-5">Dengan mendaftar, kamu menyetujui penggunaan tanda tangan elektronik sesuai UU ITE dan regulasi PSrE yang berlaku.</p>
     </div>
 
     <button id="form-cta" onclick="goToReview()" disabled class="w-full h-10 bg-brand-action/40 text-white rounded font-medium text-sm cursor-not-allowed flex items-center justify-center gap-2 transition-all">
-      Lanjut ke review &amp; tanda tangan <i class="ti ti-arrow-right text-base"></i>
+      <span data-i18n="form-cta">Lanjut ke review &amp; tanda tangan</span> <i class="ti ti-arrow-right text-base"></i>
     </button>
 
     <div class="text-center mt-6 space-y-1">
-      <div class="flex items-center justify-center gap-2 text-xs text-gray-35">
-        <span class="font-medium text-gray-50">Indonesia</span><span>·</span><span>English</span>
+      <div class="flex items-center justify-center gap-2 text-xs">
+        <button data-lang="id" onclick="setLang('id')" class="lang-btn font-medium text-gray-50 hover:text-gray-95 transition-colors">Indonesia</button>
+        <span class="text-gray-35">·</span>
+        <button data-lang="en" onclick="setLang('en')" class="lang-btn text-gray-35 hover:text-gray-60 transition-colors">English</button>
       </div>
       <p class="text-tn text-gray-35">© 2025 Privy</p>
     </div>
@@ -546,12 +550,12 @@
     <div class="flex items-center mb-6">
       <div class="flex flex-col items-center flex-1">
         <div class="step-circle done"><i class="ti ti-check" style="font-size:13px;"></i></div>
-        <span class="text-tn mt-1 text-success font-medium">Isi data pendaftaran</span>
+        <span data-i18n="step1" class="text-tn mt-1 text-success font-medium">Isi data pendaftaran</span>
       </div>
       <div class="flex-1 h-px bg-success mb-4"></div>
       <div class="flex flex-col items-center flex-1">
         <div class="step-circle active">2</div>
-        <span class="text-tn mt-1 text-brand-action font-medium">Review &amp; tanda tangan</span>
+        <span data-i18n="step2" class="text-tn mt-1 text-brand-action font-medium">Review &amp; tanda tangan</span>
       </div>
     </div>
 
@@ -559,52 +563,52 @@
     <div class="bg-white border border-gray-10 rounded-md overflow-hidden shadow-sm mb-4">
       <div class="px-5 py-4 border-b border-gray-10 flex items-center justify-between">
         <div>
-          <h2 class="text-sm font-semibold text-gray-95">Ringkasan pendaftaran</h2>
-          <p class="text-xs text-gray-50 mt-0.5">Periksa kembali data yang akan dikirimkan</p>
+          <h2 data-i18n="rv-card-title" class="text-sm font-semibold text-gray-95">Ringkasan pendaftaran</h2>
+          <p data-i18n="rv-card-sub" class="text-xs text-gray-50 mt-0.5">Periksa kembali data yang akan dikirimkan</p>
         </div>
         <button onclick="showPage('page-form')" class="h-8 px-3 border border-gray-15 text-gray-60 rounded text-xs font-medium hover:bg-gray-5 transition-colors flex items-center gap-1">
-          <i class="ti ti-pencil text-xs"></i> Ubah
+          <i class="ti ti-pencil text-xs"></i> <span data-i18n="btn-edit">Ubah</span>
         </button>
       </div>
       <div class="px-5 py-4 space-y-1 text-sm">
         <!-- INFORMASI KONTAK -->
         <div class="flex items-center gap-2 my-2">
           <div class="flex-1 h-px bg-gray-10"></div>
-          <span class="text-tn text-gray-35 uppercase tracking-widest font-medium">INFORMASI KONTAK</span>
+          <span data-i18n="section-contact" class="text-tn text-gray-35 uppercase tracking-widest font-medium">INFORMASI KONTAK</span>
           <div class="flex-1 h-px bg-gray-10"></div>
         </div>
-        <div class="flex justify-between border-b border-gray-10 py-1.5"><span class="text-gray-60">Nama lengkap</span><span id="rv-nama" class="text-gray-95 font-medium text-right ml-4">—</span></div>
-        <div class="flex justify-between border-b border-gray-10 py-1.5"><span class="text-gray-60">Email</span><span id="rv-email" class="text-gray-95 font-medium text-right ml-4 break-all">—</span></div>
-        <div class="flex justify-between border-b border-gray-10 py-1.5"><span class="text-gray-60">Telepon</span><span id="rv-telepon" class="text-gray-95 font-medium text-right ml-4">—</span></div>
-        <div class="flex justify-between border-b border-gray-10 py-1.5"><span class="text-gray-60">Perusahaan</span><span id="rv-perusahaan" class="text-gray-95 font-medium text-right ml-4">—</span></div>
-        <div class="flex justify-between border-b border-gray-10 py-1.5"><span class="text-gray-60">Sektor bisnis</span><span id="rv-sektor" class="text-gray-95 font-medium text-right ml-4">—</span></div>
+        <div class="flex justify-between border-b border-gray-10 py-1.5"><span data-i18n="rv-nama-lbl" class="text-gray-60">Nama lengkap</span><span id="rv-nama" class="text-gray-95 font-medium text-right ml-4">—</span></div>
+        <div class="flex justify-between border-b border-gray-10 py-1.5"><span data-i18n="rv-email-lbl" class="text-gray-60">Email</span><span id="rv-email" class="text-gray-95 font-medium text-right ml-4 break-all">—</span></div>
+        <div class="flex justify-between border-b border-gray-10 py-1.5"><span data-i18n="rv-telepon-lbl" class="text-gray-60">Telepon</span><span id="rv-telepon" class="text-gray-95 font-medium text-right ml-4">—</span></div>
+        <div class="flex justify-between border-b border-gray-10 py-1.5"><span data-i18n="rv-perusahaan-lbl" class="text-gray-60">Perusahaan</span><span id="rv-perusahaan" class="text-gray-95 font-medium text-right ml-4">—</span></div>
+        <div class="flex justify-between border-b border-gray-10 py-1.5"><span data-i18n="rv-sektor-lbl" class="text-gray-60">Sektor bisnis</span><span id="rv-sektor" class="text-gray-95 font-medium text-right ml-4">—</span></div>
         <!-- DATA PERUSAHAAN -->
         <div class="flex items-center gap-2 my-2">
           <div class="flex-1 h-px bg-gray-10"></div>
-          <span class="text-tn text-gray-35 uppercase tracking-widest font-medium">DATA PERUSAHAAN</span>
+          <span data-i18n="section-company" class="text-tn text-gray-35 uppercase tracking-widest font-medium">DATA PERUSAHAAN</span>
           <div class="flex-1 h-px bg-gray-10"></div>
         </div>
         <div class="flex justify-between border-b border-gray-10 py-1.5">
-          <span class="text-gray-60">PrivyID</span>
+          <span data-i18n="rv-privyid-lbl" class="text-gray-60">PrivyID</span>
           <div class="flex items-center gap-1.5 ml-4">
             <div id="rv-privy-avatar" class="privy-avatar w-5 h-5 rounded-full bg-brand-action text-white flex items-center justify-center text-tn font-bold flex-shrink-0">?</div>
             <span id="rv-privyid" class="text-gray-95 font-medium">—</span>
           </div>
         </div>
-        <div class="flex justify-between border-b border-gray-10 py-1.5"><span class="text-gray-60">Jabatan</span><span id="rv-jabatan" class="text-gray-95 font-medium text-right ml-4">—</span></div>
-        <div class="flex justify-between border-b border-gray-10 py-1.5"><span class="text-gray-60">Email kantor</span><span id="rv-email-kantor" class="text-gray-95 font-medium text-right ml-4 break-all">—</span></div>
-        <div class="flex justify-between border-b border-gray-10 py-1.5"><span class="text-gray-60">Telepon kantor</span><span id="rv-hp" class="text-gray-95 font-medium text-right ml-4">—</span></div>
-        <div class="flex justify-between border-b border-gray-10 py-1.5"><span class="text-gray-60">Alamat</span><span id="rv-alamat" class="text-gray-95 font-medium text-right ml-4">—</span></div>
-        <div class="flex justify-between border-b border-gray-10 py-1.5"><span class="text-gray-60">NPWP</span><span id="rv-npwp" class="text-gray-95 font-medium text-right ml-4">—</span></div>
+        <div class="flex justify-between border-b border-gray-10 py-1.5"><span data-i18n="rv-jabatan-lbl" class="text-gray-60">Jabatan</span><span id="rv-jabatan" class="text-gray-95 font-medium text-right ml-4">—</span></div>
+        <div class="flex justify-between border-b border-gray-10 py-1.5"><span data-i18n="rv-email-kantor-lbl" class="text-gray-60">Email kantor</span><span id="rv-email-kantor" class="text-gray-95 font-medium text-right ml-4 break-all">—</span></div>
+        <div class="flex justify-between border-b border-gray-10 py-1.5"><span data-i18n="rv-hp-lbl" class="text-gray-60">Telepon kantor</span><span id="rv-hp" class="text-gray-95 font-medium text-right ml-4">—</span></div>
+        <div class="flex justify-between border-b border-gray-10 py-1.5"><span data-i18n="rv-alamat-lbl" class="text-gray-60">Alamat</span><span id="rv-alamat" class="text-gray-95 font-medium text-right ml-4">—</span></div>
+        <div class="flex justify-between border-b border-gray-10 py-1.5"><span data-i18n="rv-npwp-lbl" class="text-gray-60">NPWP</span><span id="rv-npwp" class="text-gray-95 font-medium text-right ml-4">—</span></div>
         <!-- DOKUMEN -->
         <div class="flex items-center gap-2 my-2">
           <div class="flex-1 h-px bg-gray-10"></div>
-          <span class="text-tn text-gray-35 uppercase tracking-widest font-medium">DOKUMEN DIUNGGAH</span>
+          <span data-i18n="section-docs" class="text-tn text-gray-35 uppercase tracking-widest font-medium">DOKUMEN DIUNGGAH</span>
           <div class="flex-1 h-px bg-gray-10"></div>
         </div>
-        <div class="flex justify-between border-b border-gray-10 py-1.5"><span class="text-gray-60">Dokumen NPWP</span><span id="rv-doc1" class="text-success font-medium flex items-center gap-1"><i class="ti ti-file-check text-sm"></i> —</span></div>
-        <div class="flex justify-between border-b border-gray-10 py-1.5"><span class="text-gray-60">Akta pendirian</span><span id="rv-doc2" class="text-success font-medium flex items-center gap-1"><i class="ti ti-file-check text-sm"></i> —</span></div>
-        <div class="flex justify-between py-1.5"><span class="text-gray-60">SK badan usaha</span><span id="rv-doc3" class="text-success font-medium flex items-center gap-1"><i class="ti ti-file-check text-sm"></i> —</span></div>
+        <div class="flex justify-between border-b border-gray-10 py-1.5"><span data-i18n="doc1-name" class="text-gray-60">Dokumen NPWP</span><span id="rv-doc1" class="text-success font-medium flex items-center gap-1"><i class="ti ti-file-check text-sm"></i> —</span></div>
+        <div class="flex justify-between border-b border-gray-10 py-1.5"><span data-i18n="rv-doc2-lbl" class="text-gray-60">Akta pendirian</span><span id="rv-doc2" class="text-success font-medium flex items-center gap-1"><i class="ti ti-file-check text-sm"></i> —</span></div>
+        <div class="flex justify-between py-1.5"><span data-i18n="rv-doc3-lbl" class="text-gray-60">SK badan usaha</span><span id="rv-doc3" class="text-success font-medium flex items-center gap-1"><i class="ti ti-file-check text-sm"></i> —</span></div>
       </div>
     </div>
 
@@ -617,22 +621,22 @@
         <div id="toolbar-place" style="display:flex; align-items:center;">
           <button onclick="placeSigStamp()" class="h-9 px-4 bg-brand-action text-white rounded text-sm font-medium hover:bg-red-600 transition-colors flex items-center gap-2">
             <i class="ti ti-writing text-sm"></i>
-            <span>Taruh tanda tangan (1)</span>
+            <span data-i18n="toolbar-place-text">Taruh tanda tangan (1)</span>
           </button>
         </div>
         <!-- State B: confirm / reject -->
         <div id="toolbar-confirm" style="display:none; align-items:center; gap:8px;">
           <button onclick="rejectStamp()" class="h-9 px-4 border border-gray-20 text-gray-60 rounded text-sm font-medium hover:bg-gray-5 transition-colors flex items-center gap-1.5">
-            <i class="ti ti-x text-sm"></i> Tolak
+            <i class="ti ti-x text-sm"></i> <span data-i18n="btn-tolak">Tolak</span>
           </button>
           <button onclick="openAuthModal()" class="h-9 px-4 bg-brand-accent text-white rounded text-sm font-medium hover:bg-blue-600 transition-colors flex items-center gap-1.5">
-            <i class="ti ti-check text-sm"></i> Konfirmasi
+            <i class="ti ti-check text-sm"></i> <span data-i18n="btn-konfirmasi">Konfirmasi</span>
           </button>
         </div>
         <!-- State C: signed -->
         <div id="toolbar-signed" style="display:none; align-items:center;">
           <span class="h-9 px-3 bg-success text-white rounded text-sm font-medium flex items-center gap-1.5">
-            <i class="ti ti-rosette-discount-check text-sm"></i> Ditandatangani
+            <i class="ti ti-rosette-discount-check text-sm"></i> <span data-i18n="toolbar-signed-text">Ditandatangani</span>
           </span>
         </div>
       </div>
@@ -755,18 +759,20 @@
     <!-- Status bar -->
     <div class="flex items-center gap-2 mb-3">
       <span id="sign-dot" class="w-2 h-2 rounded-full bg-danger inline-block flex-shrink-0"></span>
-      <span id="sign-status-text" class="text-sm text-gray-50">Belum ditandatangani — klik tombol "Taruh tanda tangan" di atas</span>
+      <span id="sign-status-text" data-i18n="sign-status-idle" class="text-sm text-gray-50">Belum ditandatangani — klik tombol "Taruh tanda tangan" di atas</span>
     </div>
     <button id="submit-btn" disabled onclick="showPage('page-pending')" class="w-full h-10 bg-brand-action/40 text-white rounded font-medium text-sm cursor-not-allowed flex items-center justify-center gap-2 transition-all mb-2">
-      <i class="ti ti-send text-base"></i> Submit untuk verifikasi
+      <i class="ti ti-send text-base"></i> <span data-i18n="btn-submit">Submit untuk verifikasi</span>
     </button>
     <button onclick="showPage('page-form')" class="w-full h-10 bg-transparent border border-gray-20 text-gray-60 rounded font-medium text-sm hover:bg-gray-5 transition-colors flex items-center justify-center gap-2">
-      <i class="ti ti-arrow-left text-base"></i> Kembali ke form
+      <i class="ti ti-arrow-left text-base"></i> <span data-i18n="btn-back-form">Kembali ke form</span>
     </button>
 
     <div class="text-center mt-6 space-y-1">
-      <div class="flex items-center justify-center gap-2 text-xs text-gray-35">
-        <span class="font-medium text-gray-50">Indonesia</span><span>·</span><span>English</span>
+      <div class="flex items-center justify-center gap-2 text-xs">
+        <button data-lang="id" onclick="setLang('id')" class="lang-btn font-medium text-gray-50 hover:text-gray-95 transition-colors">Indonesia</button>
+        <span class="text-gray-35">·</span>
+        <button data-lang="en" onclick="setLang('en')" class="lang-btn text-gray-35 hover:text-gray-60 transition-colors">English</button>
       </div>
       <p class="text-tn text-gray-35">© 2025 Privy</p>
     </div>
@@ -785,45 +791,49 @@
     <div class="flex flex-col items-center text-center space-y-4">
       <div class="w-24 h-24 rounded-full bg-blue-50 flex items-center justify-center text-4xl">⏳</div>
       <div>
-        <h1 class="text-xl font-bold text-gray-95">Pendaftaran berhasil dikirim!</h1>
-        <p class="text-sm text-gray-50 mt-2 max-w-xs mx-auto">Data dan dokumen kamu sudah kami terima. Tim Privy akan memverifikasi dalam waktu 10–30 menit.</p>
+        <h1 data-i18n="pending-title" class="text-xl font-bold text-gray-95">Pendaftaran berhasil dikirim!</h1>
+        <p data-i18n="pending-sub" class="text-sm text-gray-50 mt-2 max-w-xs mx-auto">Data dan dokumen kamu sudah kami terima. Tim Privy akan memverifikasi dalam waktu 10–30 menit.</p>
       </div>
       <div class="bg-gray-5 border border-gray-10 rounded-md px-4 py-3 flex items-center gap-2 w-full max-w-sm">
         <i class="ti ti-hash text-gray-35 text-base flex-shrink-0"></i>
-        <span class="text-xs text-gray-50 flex-shrink-0">ID Registrasi:</span>
+        <span data-i18n="pending-reg-id-lbl" class="text-xs text-gray-50 flex-shrink-0">ID Registrasi:</span>
         <strong class="text-xs text-gray-95 font-mono flex-1 truncate" id="reg-id">23942937428937428348237</strong>
         <button onclick="copyRegId()" id="copy-btn" class="flex-shrink-0 text-brand-accent hover:text-blue-600 transition-colors">
           <i class="ti ti-copy text-base"></i>
         </button>
       </div>
       <div class="bg-gray-5 rounded-md p-4 text-left w-full max-w-sm">
-        <p class="text-xs font-semibold text-gray-95 mb-3">Apa yang terjadi selanjutnya?</p>
+        <p data-i18n="pending-next-title" class="text-xs font-semibold text-gray-95 mb-3">Apa yang terjadi selanjutnya?</p>
         <div class="space-y-3">
           <div class="flex items-start gap-3">
             <div class="w-6 h-6 rounded-full bg-success flex items-center justify-center flex-shrink-0 mt-0.5"><i class="ti ti-check text-white" style="font-size:10px;"></i></div>
-            <div><p class="text-xs font-medium text-gray-95">Dokumen diterima</p><p class="text-tn text-gray-50">Semua dokumen berhasil diunggah</p></div>
+            <div><p data-i18n="pending-step1-title" class="text-xs font-medium text-gray-95">Dokumen diterima</p><p data-i18n="pending-step1-desc" class="text-tn text-gray-50">Semua dokumen berhasil diunggah</p></div>
           </div>
           <div class="flex items-start gap-3">
             <div class="w-6 h-6 rounded-full bg-brand-action flex items-center justify-center flex-shrink-0 mt-0.5"><span class="spinner"><i class="ti ti-loader-2 text-white" style="font-size:10px;"></i></span></div>
-            <div><p class="text-xs font-medium text-gray-95">Verifikasi oleh tim Privy</p><p class="text-tn text-gray-50">SLA: 10–30 menit kerja</p></div>
+            <div><p data-i18n="pending-step2-title" class="text-xs font-medium text-gray-95">Verifikasi oleh tim Privy</p><p data-i18n="pending-step2-desc" class="text-tn text-gray-50">SLA: 10–30 menit kerja</p></div>
           </div>
           <div class="flex items-start gap-3">
             <div class="w-6 h-6 rounded-full bg-gray-10 flex items-center justify-center flex-shrink-0 mt-0.5"><span class="text-gray-35" style="font-size:10px;font-weight:600;">3</span></div>
-            <div><p class="text-xs font-medium text-gray-35">Notifikasi via email</p><p class="text-tn text-gray-35">ke <span id="pending-email">—</span></p></div>
+            <div><p data-i18n="pending-step3-title" class="text-xs font-medium text-gray-35">Notifikasi via email</p><p class="text-tn text-gray-35"><span data-i18n="pending-step3-to">ke</span> <span id="pending-email">—</span></p></div>
           </div>
           <div class="flex items-start gap-3">
             <div class="w-6 h-6 rounded-full bg-gray-10 flex items-center justify-center flex-shrink-0 mt-0.5"><span class="text-gray-35" style="font-size:10px;font-weight:600;">4</span></div>
-            <div><p class="text-xs font-medium text-gray-35">Enterprise aktif</p><p class="text-tn text-gray-35">Mulai gunakan semua fitur Enterprise</p></div>
+            <div><p data-i18n="pending-step4-title" class="text-xs font-medium text-gray-35">Enterprise aktif</p><p data-i18n="pending-step4-desc" class="text-tn text-gray-35">Mulai gunakan semua fitur Enterprise</p></div>
           </div>
         </div>
       </div>
       <button onclick="showPage('page-verified')" class="text-xs text-gray-35 border border-dashed border-gray-15 rounded px-3 py-1.5 hover:text-gray-50 transition-colors">
         Simulasi: enterprise terverifikasi →
       </button>
-      <p class="text-xs text-gray-50">Mengalami kendala? <a href="#" onclick="return false;" class="text-brand-accent font-medium">Hubungi tim Privy</a> atau pelajari <a href="#" onclick="return false;" class="text-brand-accent font-medium">cara menggunakan Privy Enterprise</a></p>
+      <p id="pending-help-text" data-i18n-html="pending-help" class="text-xs text-gray-50">Mengalami kendala? <a href="#" onclick="return false;" class="text-brand-accent font-medium">Hubungi tim Privy</a> atau pelajari <a href="#" onclick="return false;" class="text-brand-accent font-medium">cara menggunakan Privy Enterprise</a></p>
     </div>
     <div class="text-center mt-8 space-y-1">
-      <div class="flex items-center justify-center gap-2 text-xs text-gray-35"><span class="font-medium text-gray-50">Indonesia</span><span>·</span><span>English</span></div>
+      <div class="flex items-center justify-center gap-2 text-xs">
+        <button data-lang="id" onclick="setLang('id')" class="lang-btn font-medium text-gray-50 hover:text-gray-95 transition-colors">Indonesia</button>
+        <span class="text-gray-35">·</span>
+        <button data-lang="en" onclick="setLang('en')" class="lang-btn text-gray-35 hover:text-gray-60 transition-colors">English</button>
+      </div>
       <p class="text-tn text-gray-35">© 2025 Privy</p>
     </div>
   </div>
@@ -841,33 +851,37 @@
     <div class="flex flex-col items-center text-center space-y-4">
       <div class="w-24 h-24 rounded-full bg-success-subtle flex items-center justify-center text-4xl">🎉</div>
       <div>
-        <h1 class="text-xl font-bold text-gray-95">Selamat! Enterprise kamu terverifikasi</h1>
+        <h1 data-i18n="verified-title" class="text-xl font-bold text-gray-95">Selamat! Enterprise kamu terverifikasi</h1>
         <p class="text-sm text-gray-50 mt-2 max-w-xs mx-auto">Akun enterprise <strong id="verified-perusahaan" class="text-gray-95">—</strong> sudah aktif dan siap digunakan.</p>
       </div>
       <div class="bg-gray-5 border border-gray-10 rounded-md overflow-hidden w-full max-w-sm divide-y divide-gray-10">
         <div class="flex items-center gap-3 px-4 py-3 hover:bg-gray-10 cursor-pointer transition-colors">
           <div class="w-7 h-7 rounded bg-success-subtle flex items-center justify-center flex-shrink-0"><i class="ti ti-users text-success text-sm"></i></div>
-          <div class="text-left flex-1"><p class="text-xs font-semibold text-gray-95">Undang karyawan</p><p class="text-tn text-gray-50">Tambahkan anggota tim ke akun enterprise kamu</p></div>
+          <div class="text-left flex-1"><p data-i18n="verified-action1-title" class="text-xs font-semibold text-gray-95">Undang karyawan</p><p data-i18n="verified-action1-sub" class="text-tn text-gray-50">Tambahkan anggota tim ke akun enterprise kamu</p></div>
           <i class="ti ti-chevron-right text-gray-35 text-sm flex-shrink-0"></i>
         </div>
         <div class="flex items-center gap-3 px-4 py-3 hover:bg-gray-10 cursor-pointer transition-colors">
           <div class="w-7 h-7 rounded bg-success-subtle flex items-center justify-center flex-shrink-0"><i class="ti ti-file-plus text-success text-sm"></i></div>
-          <div class="text-left flex-1"><p class="text-xs font-semibold text-gray-95">Buat dokumen pertama</p><p class="text-tn text-gray-50">Mulai tanda tangani dokumen secara digital</p></div>
+          <div class="text-left flex-1"><p data-i18n="verified-action2-title" class="text-xs font-semibold text-gray-95">Buat dokumen pertama</p><p data-i18n="verified-action2-sub" class="text-tn text-gray-50">Mulai tanda tangani dokumen secara digital</p></div>
           <i class="ti ti-chevron-right text-gray-35 text-sm flex-shrink-0"></i>
         </div>
         <div class="flex items-center gap-3 px-4 py-3 hover:bg-gray-10 cursor-pointer transition-colors">
           <div class="w-7 h-7 rounded bg-success-subtle flex items-center justify-center flex-shrink-0"><i class="ti ti-stamp text-success text-sm"></i></div>
-          <div class="text-left flex-1"><p class="text-xs font-semibold text-gray-95">Atur enterprise seal</p><p class="text-tn text-gray-50">Aktifkan stempel dan cap digital perusahaan kamu</p></div>
+          <div class="text-left flex-1"><p data-i18n="verified-action3-title" class="text-xs font-semibold text-gray-95">Atur enterprise seal</p><p data-i18n="verified-action3-sub" class="text-tn text-gray-50">Aktifkan stempel dan cap digital perusahaan kamu</p></div>
           <i class="ti ti-chevron-right text-gray-35 text-sm flex-shrink-0"></i>
         </div>
       </div>
       <button class="w-full max-w-sm h-10 bg-brand-action text-white rounded font-medium text-sm hover:bg-red-600 transition-colors flex items-center justify-center gap-2">
-        <i class="ti ti-rocket text-base"></i> Mulai gunakan Privy Enterprise
+        <i class="ti ti-rocket text-base"></i> <span data-i18n="verified-cta">Mulai gunakan Privy Enterprise</span>
       </button>
-      <p class="text-xs text-gray-50">Butuh bantuan? <a href="#" onclick="return false;" class="text-brand-accent font-medium">Pelajari cara menggunakan Privy Enterprise</a></p>
+      <p id="verified-help-text" data-i18n-html="verified-help" class="text-xs text-gray-50">Butuh bantuan? <a href="#" onclick="return false;" class="text-brand-accent font-medium">Pelajari cara menggunakan Privy Enterprise</a></p>
     </div>
     <div class="text-center mt-8 space-y-1">
-      <div class="flex items-center justify-center gap-2 text-xs text-gray-35"><span class="font-medium text-gray-50">Indonesia</span><span>·</span><span>English</span></div>
+      <div class="flex items-center justify-center gap-2 text-xs">
+        <button data-lang="id" onclick="setLang('id')" class="lang-btn font-medium text-gray-50 hover:text-gray-95 transition-colors">Indonesia</button>
+        <span class="text-gray-35">·</span>
+        <button data-lang="en" onclick="setLang('en')" class="lang-btn text-gray-35 hover:text-gray-60 transition-colors">English</button>
+      </div>
       <p class="text-tn text-gray-35">© 2025 Privy</p>
     </div>
   </div>
@@ -1337,6 +1351,254 @@
     if (pdfArea) setTimeout(() => pdfArea.scrollTo({ top: pdfArea.scrollHeight, behavior: 'smooth' }), 200);
   }
 
+  // ── i18n ────────────────────────────────────────────────────
+  let currentLang = 'id';
+
+  const STRINGS = {
+    id: {
+      'step1':'Isi data pendaftaran','step2':'Review & tanda tangan',
+      'badge-complete':'✓ Lengkap','badge-verified':'Terverifikasi','badge-autosave':'Tersimpan otomatis',
+      'btn-cancel':'Batal','btn-continue':'Lanjutkan','btn-edit':'Ubah',
+      'tnc-title':'Ketentuan Penggunaan Layanan Enterprise Suite',
+      'tnc-date':'Tanggal efektif: 20 Agustus 2024',
+      'tnc-scroll-hint':'Gulir ke bawah untuk melanjutkan',
+      'checklist-title':'Daftar Privy Enterprise',
+      'checklist-sub':'Lengkapi dokumen berikut sebelum memulai pendaftaran',
+      'checklist-time-lbl':'Estimasi waktu pengisian','checklist-time-val':'~10–15 menit',
+      'checklist-item1-title':'Akun Privy (PrivyID)',
+      'checklist-item1-desc':'Diperlukan untuk menandatangani perjanjian layanan dan menjadi pemilik enterprise.',
+      'checklist-item1-link':'Belum punya? Daftar di sini →',
+      'checklist-item2-title':'NPWP perusahaan','checklist-item2-desc':'File asli NPWP.',
+      'checklist-item3-title':'Akta pendirian perusahaan',
+      'checklist-item3-desc':'File akta asli atau salinan yang dilegalisir.',
+      'checklist-item4-title':'SK pengesahan badan usaha',
+      'checklist-item4-desc':'Surat keputusan pengesahan dari Kemenkumham.',
+      'checklist-item5-title':'Surat kuasa','checklist-item5-opt':'(jika diperlukan)',
+      'checklist-item5-desc':'Diperlukan jika nama pemilik Enterprise tidak tercantum sebagai pejabat berwenang dalam akta pendirian perusahaan.',
+      'checklist-autosave':'Form ini menyimpan progress kamu secara otomatis. Kamu bisa melanjutkan kapan saja tanpa kehilangan data.',
+      'checklist-cta':'Mulai pendaftaran',
+      'progress-of':'dari','progress-suffix':'section selesai',
+      'card1-title':'Siapa yang mendaftar?','card1-sub':'Data pribadi PIC Enterprise kamu',
+      'lbl-nama':'Nama lengkap','lbl-email':'Alamat email','lbl-telepon':'Nomor telepon',
+      'lbl-perusahaan':'Nama perusahaan','lbl-sektor':'Sektor bisnis',
+      'ph-nama':'Masukkan nama lengkap...','ph-perusahaan':'PT / CV / ...','ph-sektor':'Pilih sektor bisnis...',
+      'card2-title':'Data perusahaan','card2-sub':'Informasi legal perusahaan kamu',
+      'lbl-privyid':'PrivyID pemilik enterprise',
+      'privyid-hint':'PrivyID adalah akun Privy personal kamu.',
+      'privyid-register-link':'Belum punya PrivyID? Daftar dulu',
+      'privyid-verifying':'Memverifikasi PrivyID...',
+      'privy-verified-label':'Akun Privy terverifikasi · ',
+      'privyid-autofill-hint':'Nama di atas otomatis digunakan sebagai penandatangan perjanjian layanan Enterprise.',
+      'btn-change-privyid':'Ganti PrivyID',
+      'kuasa-title':'Apakah kamu direktur utama perusahaan?',
+      'kuasa-sub':'Jika tidak, kamu perlu melampirkan surat kuasa dari direktur utama.',
+      'kuasa-cb-text':'Nama pemilik PrivyID tidak tercantum dalam akta pendirian — saya perlu melampirkan surat kuasa',
+      'kuasa-upload-title':'Unggah surat kuasa',
+      'kuasa-upload-desc':'Surat kuasa bermaterai dari direktur utama yang memberikan wewenang kepada kamu.',
+      'autofill-hint':'Nama penandatangan terisi otomatis dari PrivyID kamu dan tidak dapat diubah.',
+      'lbl-nama-penanda':'Nama penandatangan','lbl-jabatan':'Jabatan','ph-jabatan':'Direktur / Head of ...',
+      'lbl-email-kantor':'Email perusahaan','email-kantor-hint':'Digunakan untuk korespondensi resmi Enterprise.',
+      'lbl-hp-kantor':'Nomor telepon perusahaan',
+      'lbl-alamat':'Alamat perusahaan','alamat-hint':'Digunakan pada dokumen perjanjian layanan.',
+      'lbl-npwp':'Nomor NPWP perusahaan',
+      'card3-title':'Unggah dokumen','card3-sub':'Dokumen legal perusahaan untuk verifikasi',
+      'doc1-name':'Dokumen NPWP','doc2-name':'Akta pendirian perusahaan','doc3-name':'SK pengesahan badan usaha',
+      'doc-hint':'PDF/PNG/JPG · maks. 2 MB',
+      'tnc-cb-html':'Saya telah membaca dan menyetujui <span class="text-brand-accent font-medium">Syarat &amp; Ketentuan</span> serta <span class="text-brand-accent font-medium">Kebijakan Privasi</span> Privy Enterprise.',
+      'tnc-footer':'Dengan mendaftar, kamu menyetujui penggunaan tanda tangan elektronik sesuai UU ITE dan regulasi PSrE yang berlaku.',
+      'form-cta':'Lanjut ke review & tanda tangan',
+      'rv-card-title':'Ringkasan pendaftaran','rv-card-sub':'Periksa kembali data yang akan dikirimkan',
+      'section-contact':'INFORMASI KONTAK','section-company':'DATA PERUSAHAAN','section-docs':'DOKUMEN DIUNGGAH',
+      'rv-nama-lbl':'Nama lengkap','rv-email-lbl':'Email','rv-telepon-lbl':'Telepon',
+      'rv-perusahaan-lbl':'Perusahaan','rv-sektor-lbl':'Sektor bisnis','rv-privyid-lbl':'PrivyID',
+      'rv-jabatan-lbl':'Jabatan','rv-email-kantor-lbl':'Email kantor','rv-hp-lbl':'Telepon kantor',
+      'rv-alamat-lbl':'Alamat','rv-npwp-lbl':'NPWP',
+      'rv-doc2-lbl':'Akta pendirian','rv-doc3-lbl':'SK badan usaha',
+      'toolbar-place-text':'Taruh tanda tangan (1)','btn-tolak':'Tolak','btn-konfirmasi':'Konfirmasi',
+      'toolbar-signed-text':'Ditandatangani',
+      'sign-status-idle':'Belum ditandatangani — klik tombol "Taruh tanda tangan" di atas',
+      'sign-status-signed-prefix':'Dokumen telah ditandatangani secara digital · ',
+      'btn-submit':'Submit untuk verifikasi','btn-back-form':'Kembali ke form',
+      'pending-title':'Pendaftaran berhasil dikirim!',
+      'pending-sub':'Data dan dokumen kamu sudah kami terima. Tim Privy akan memverifikasi dalam waktu 10–30 menit.',
+      'pending-reg-id-lbl':'ID Registrasi:','pending-next-title':'Apa yang terjadi selanjutnya?',
+      'pending-step1-title':'Dokumen diterima','pending-step1-desc':'Semua dokumen berhasil diunggah',
+      'pending-step2-title':'Verifikasi oleh tim Privy','pending-step2-desc':'SLA: 10–30 menit kerja',
+      'pending-step3-title':'Notifikasi via email','pending-step3-to':'ke',
+      'pending-step4-title':'Enterprise aktif','pending-step4-desc':'Mulai gunakan semua fitur Enterprise',
+      'pending-help':'Mengalami kendala? <a href="#" onclick="return false;" class="text-brand-accent font-medium">Hubungi tim Privy</a> atau pelajari <a href="#" onclick="return false;" class="text-brand-accent font-medium">cara menggunakan Privy Enterprise</a>',
+      'verified-title':'Selamat! Enterprise kamu terverifikasi',
+      'verified-action1-title':'Undang karyawan','verified-action1-sub':'Tambahkan anggota tim ke akun enterprise kamu',
+      'verified-action2-title':'Buat dokumen pertama','verified-action2-sub':'Mulai tanda tangani dokumen secara digital',
+      'verified-action3-title':'Atur enterprise seal','verified-action3-sub':'Aktifkan stempel dan cap digital perusahaan kamu',
+      'verified-cta':'Mulai gunakan Privy Enterprise',
+      'verified-help':'Butuh bantuan? <a href="#" onclick="return false;" class="text-brand-accent font-medium">Pelajari cara menggunakan Privy Enterprise</a>',
+      'auth-title':'Metode autentikasi','auth-sub':'Pilih metode untuk menandatangani dokumen',
+      'auth-badge':'Mitra terpercaya Privy',
+      'auth-pin-title':'PIN','auth-pin-desc':'6 digit PIN rahasia Anda',
+      'auth-email-title':'Email OTP','auth-email-desc':'Kode OTP dikirim ke email',
+      'auth-wa-title':'WhatsApp','auth-wa-desc':'Kode OTP via WhatsApp',
+      'auth-sms-title':'SMS OTP','auth-sms-desc':'Kode OTP dikirim via SMS',
+      'auth-main-method':'Jadikan metode utama',
+      'pin-modal-title':'Konfirmasi','pin-alasan-lbl':'Alasan',
+      'pin-catatan-lbl':'Catatan','pin-catatan-opt':'(opsional)','pin-ph-catatan':'Tambahkan catatan…',
+      'pin-lbl':'PIN','btn-ganti-metode':'Ganti metode','btn-tanda-tangan':'Tanda tangan',
+    },
+    en: {
+      'step1':'Fill registration data','step2':'Review & sign',
+      'badge-complete':'✓ Complete','badge-verified':'Verified','badge-autosave':'Auto-saved',
+      'btn-cancel':'Cancel','btn-continue':'Continue','btn-edit':'Edit',
+      'tnc-title':'Enterprise Suite Terms of Service',
+      'tnc-date':'Effective date: August 20, 2024',
+      'tnc-scroll-hint':'Scroll to the bottom to continue',
+      'checklist-title':'Register for Privy Enterprise',
+      'checklist-sub':'Prepare the following documents before starting registration',
+      'checklist-time-lbl':'Estimated time','checklist-time-val':'~10–15 minutes',
+      'checklist-item1-title':'Privy Account (PrivyID)',
+      'checklist-item1-desc':'Required to sign the service agreement and become the enterprise owner.',
+      'checklist-item1-link':"Don't have one? Register here",
+      'checklist-item2-title':'Company Tax ID (NPWP)','checklist-item2-desc':'Original NPWP document.',
+      'checklist-item3-title':'Deed of establishment',
+      'checklist-item3-desc':'Original or certified copy of the deed.',
+      'checklist-item4-title':'Company validation decree (SK)',
+      'checklist-item4-desc':'Ministerial decree from Kemenkumham.',
+      'checklist-item5-title':'Power of attorney','checklist-item5-opt':'(if required)',
+      'checklist-item5-desc':'Required if the enterprise owner is not listed as an authorized official in the deed of establishment.',
+      'checklist-autosave':'This form auto-saves your progress. You can continue anytime without losing your data.',
+      'checklist-cta':'Start registration',
+      'progress-of':'of','progress-suffix':'sections complete',
+      'card1-title':'Who is registering?','card1-sub':'Personal data of the Enterprise PIC',
+      'lbl-nama':'Full name','lbl-email':'Email address','lbl-telepon':'Phone number',
+      'lbl-perusahaan':'Company name','lbl-sektor':'Business sector',
+      'ph-nama':'Enter full name...','ph-perusahaan':'PT / Ltd / ...','ph-sektor':'Select business sector...',
+      'card2-title':'Company data','card2-sub':'Legal information of your company',
+      'lbl-privyid':'Enterprise owner PrivyID',
+      'privyid-hint':'PrivyID is your personal Privy account.',
+      'privyid-register-link':"Don't have a PrivyID? Register first",
+      'privyid-verifying':'Verifying PrivyID...',
+      'privy-verified-label':'Verified Privy account · ',
+      'privyid-autofill-hint':'The name above is automatically used as the signatory for the Enterprise service agreement.',
+      'btn-change-privyid':'Change PrivyID',
+      'kuasa-title':'Are you the company director?',
+      'kuasa-sub':'If not, you need to attach a power of attorney from the director.',
+      'kuasa-cb-text':'The PrivyID owner is not listed in the deed of establishment — I need to attach a power of attorney',
+      'kuasa-upload-title':'Upload power of attorney',
+      'kuasa-upload-desc':'Stamped power of attorney from the director granting you authority.',
+      'autofill-hint':'Signatory name is auto-filled from your PrivyID and cannot be changed.',
+      'lbl-nama-penanda':'Signatory name','lbl-jabatan':'Title','ph-jabatan':'Director / Head of ...',
+      'lbl-email-kantor':'Company email','email-kantor-hint':'Used for official Enterprise correspondence.',
+      'lbl-hp-kantor':'Company phone number',
+      'lbl-alamat':'Company address','alamat-hint':'Used in the service agreement document.',
+      'lbl-npwp':'Company NPWP number',
+      'card3-title':'Upload documents','card3-sub':'Legal documents for verification',
+      'doc1-name':'NPWP document','doc2-name':'Deed of establishment','doc3-name':'Company validation decree (SK)',
+      'doc-hint':'PDF/PNG/JPG · max. 2 MB',
+      'tnc-cb-html':'I have read and agreed to the <span class="text-brand-accent font-medium">Terms &amp; Conditions</span> and <span class="text-brand-accent font-medium">Privacy Policy</span> of Privy Enterprise.',
+      'tnc-footer':'By registering, you agree to the use of electronic signatures in accordance with applicable ITE Law and PSrE regulations.',
+      'form-cta':'Continue to review & sign',
+      'rv-card-title':'Registration summary','rv-card-sub':'Review the data to be submitted',
+      'section-contact':'CONTACT INFORMATION','section-company':'COMPANY DATA','section-docs':'UPLOADED DOCUMENTS',
+      'rv-nama-lbl':'Full name','rv-email-lbl':'Email','rv-telepon-lbl':'Phone',
+      'rv-perusahaan-lbl':'Company','rv-sektor-lbl':'Business sector','rv-privyid-lbl':'PrivyID',
+      'rv-jabatan-lbl':'Title','rv-email-kantor-lbl':'Office email','rv-hp-lbl':'Office phone',
+      'rv-alamat-lbl':'Address','rv-npwp-lbl':'NPWP',
+      'rv-doc2-lbl':'Deed of establishment','rv-doc3-lbl':'Validation decree (SK)',
+      'toolbar-place-text':'Place signature (1)','btn-tolak':'Reject','btn-konfirmasi':'Confirm',
+      'toolbar-signed-text':'Signed',
+      'sign-status-idle':'Not yet signed — click "Place signature" above',
+      'sign-status-signed-prefix':'Document digitally signed · ',
+      'btn-submit':'Submit for verification','btn-back-form':'Back to form',
+      'pending-title':'Registration submitted successfully!',
+      'pending-sub':'We have received your data and documents. The Privy team will verify within 10–30 minutes.',
+      'pending-reg-id-lbl':'Registration ID:','pending-next-title':'What happens next?',
+      'pending-step1-title':'Documents received','pending-step1-desc':'All documents uploaded successfully',
+      'pending-step2-title':'Verification by Privy team','pending-step2-desc':'SLA: 10–30 business minutes',
+      'pending-step3-title':'Email notification','pending-step3-to':'to',
+      'pending-step4-title':'Enterprise activated','pending-step4-desc':'Start using all Enterprise features',
+      'pending-help':'Having issues? <a href="#" onclick="return false;" class="text-brand-accent font-medium">Contact Privy team</a> or learn <a href="#" onclick="return false;" class="text-brand-accent font-medium">how to use Privy Enterprise</a>',
+      'verified-title':'Congratulations! Your Enterprise is verified',
+      'verified-action1-title':'Invite employees','verified-action1-sub':'Add team members to your enterprise account',
+      'verified-action2-title':'Create first document','verified-action2-sub':'Start signing documents digitally',
+      'verified-action3-title':'Set up enterprise seal','verified-action3-sub':'Activate your company digital stamp and seal',
+      'verified-cta':'Start using Privy Enterprise',
+      'verified-help':'Need help? <a href="#" onclick="return false;" class="text-brand-accent font-medium">Learn how to use Privy Enterprise</a>',
+      'auth-title':'Authentication method','auth-sub':'Choose a method to sign the document',
+      'auth-badge':'Privy trusted partner',
+      'auth-pin-title':'PIN','auth-pin-desc':'Your 6-digit secret PIN',
+      'auth-email-title':'Email OTP','auth-email-desc':'OTP code sent to your email',
+      'auth-wa-title':'WhatsApp','auth-wa-desc':'OTP code via WhatsApp',
+      'auth-sms-title':'SMS OTP','auth-sms-desc':'OTP code sent via SMS',
+      'auth-main-method':'Set as primary method',
+      'pin-modal-title':'Confirm','pin-alasan-lbl':'Reason',
+      'pin-catatan-lbl':'Notes','pin-catatan-opt':'(optional)','pin-ph-catatan':'Add notes…',
+      'pin-lbl':'PIN','btn-ganti-metode':'Change method','btn-tanda-tangan':'Sign document',
+    }
+  };
+
+  function t(key) { return (STRINGS[currentLang] || STRINGS.id)[key] || STRINGS.id[key] || key; }
+
+  function setLang(lang) {
+    if (lang === currentLang) return;
+    currentLang = lang;
+    applyLang();
+    // Sync TNC modal internal lang switcher
+    setTncLang(lang);
+  }
+
+  function applyLang() {
+    const L = STRINGS[currentLang];
+
+    // textContent
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const v = L[el.getAttribute('data-i18n')];
+      if (v !== undefined) el.textContent = v;
+    });
+
+    // innerHTML
+    document.querySelectorAll('[data-i18n-html]').forEach(el => {
+      const v = L[el.getAttribute('data-i18n-html')];
+      if (v !== undefined) el.innerHTML = v;
+    });
+
+    // placeholders
+    document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+      const v = L[el.getAttribute('data-i18n-ph')];
+      if (v !== undefined) el.placeholder = v;
+    });
+
+    // select first option
+    document.querySelectorAll('[data-i18n-opt]').forEach(el => {
+      const v = L[el.getAttribute('data-i18n-opt')];
+      if (v !== undefined) el.textContent = v;
+    });
+
+    // Progress text (re-apply current progress count with correct "of" word)
+    const progressEl = document.getElementById('progress-text');
+    if (progressEl) {
+      const match = progressEl.textContent.match(/\d+/);
+      const done  = match ? match[0] : '0';
+      progressEl.textContent = done + ' ' + L['progress-of'] + ' 3';
+    }
+
+    // Sign status text — only update if still idle
+    if (signState === 'idle') {
+      const stxt = document.getElementById('sign-status-text');
+      if (stxt) stxt.textContent = L['sign-status-idle'];
+    }
+
+    // Page title
+    document.title = currentLang === 'en' ? 'Privy Enterprise — Registration' : 'Privy Enterprise — Registrasi';
+    document.documentElement.lang = currentLang;
+
+    // Update lang button active states
+    document.querySelectorAll('[data-lang]').forEach(btn => {
+      const isActive = btn.dataset.lang === currentLang;
+      btn.className = isActive
+        ? 'lang-btn font-semibold text-gray-95 hover:text-gray-95 transition-colors'
+        : 'lang-btn text-gray-35 hover:text-gray-60 transition-colors';
+    });
+  }
+
   // ── Copy reg ID ─────────────────────────────────────────────
   function copyRegId() {
     const id  = document.getElementById('reg-id').textContent;
@@ -1509,8 +1771,8 @@
     <!-- Header -->
     <div class="flex items-center justify-between px-5 pt-3 pb-4 border-b border-gray-10">
       <div>
-        <h3 class="text-base font-bold text-gray-95">Metode autentikasi</h3>
-        <p class="text-xs text-gray-50 mt-0.5">Pilih metode untuk menandatangani dokumen</p>
+        <h3 data-i18n="auth-title" class="text-base font-bold text-gray-95">Metode autentikasi</h3>
+        <p data-i18n="auth-sub" class="text-xs text-gray-50 mt-0.5">Pilih metode untuk menandatangani dokumen</p>
       </div>
       <button onclick="closeAuthModal()" class="w-8 h-8 rounded-full bg-gray-5 flex items-center justify-center text-gray-50 hover:bg-gray-10 transition-colors">
         <i class="ti ti-x text-sm"></i>
@@ -1519,7 +1781,7 @@
     <!-- Privy badge -->
     <div class="mx-5 mt-4 mb-3 flex items-center gap-2 px-3 py-2 bg-info-subtle border border-info-border rounded-md">
       <img src="logo-privy.png" alt="Privy" class="h-4 w-auto" />
-      <span class="text-xs text-info-fg font-medium flex items-center gap-1"><i class="ti ti-shield-check text-xs"></i> Mitra terpercaya Privy</span>
+      <span class="text-xs text-info-fg font-medium flex items-center gap-1"><i class="ti ti-shield-check text-xs"></i> <span data-i18n="auth-badge">Mitra terpercaya Privy</span></span>
     </div>
     <!-- Method list -->
     <div class="px-5 space-y-2 mb-4">
@@ -1529,8 +1791,8 @@
           <i class="ti ti-lock text-brand-accent text-base"></i>
         </div>
         <div class="flex-1">
-          <div class="text-sm font-semibold text-gray-95">PIN</div>
-          <div class="text-xs text-gray-50">6 digit PIN rahasia Anda</div>
+          <div data-i18n="auth-pin-title" class="text-sm font-semibold text-gray-95">PIN</div>
+          <div data-i18n="auth-pin-desc" class="text-xs text-gray-50">6 digit PIN rahasia Anda</div>
         </div>
         <div class="w-5 h-5 rounded-full bg-brand-accent flex items-center justify-center flex-shrink-0">
           <i class="ti ti-check text-white" style="font-size:10px;"></i>
@@ -1543,8 +1805,8 @@
           <i class="ti ti-mail text-gray-50 text-base"></i>
         </div>
         <div class="flex-1">
-          <div class="text-sm font-medium text-gray-95">Email OTP</div>
-          <div class="text-xs text-gray-50">Kode OTP dikirim ke email</div>
+          <div data-i18n="auth-email-title" class="text-sm font-medium text-gray-95">Email OTP</div>
+          <div data-i18n="auth-email-desc" class="text-xs text-gray-50">Kode OTP dikirim ke email</div>
         </div>
         <div class="w-5 h-5 rounded-full border-2 border-gray-20 flex-shrink-0"></div>
         <input type="radio" name="auth-method" value="email" class="sr-only" />
@@ -1555,8 +1817,8 @@
           <i class="ti ti-brand-whatsapp text-gray-50 text-base"></i>
         </div>
         <div class="flex-1">
-          <div class="text-sm font-medium text-gray-95">WhatsApp</div>
-          <div class="text-xs text-gray-50">Kode OTP via WhatsApp</div>
+          <div data-i18n="auth-wa-title" class="text-sm font-medium text-gray-95">WhatsApp</div>
+          <div data-i18n="auth-wa-desc" class="text-xs text-gray-50">Kode OTP via WhatsApp</div>
         </div>
         <div class="w-5 h-5 rounded-full border-2 border-gray-20 flex-shrink-0"></div>
         <input type="radio" name="auth-method" value="wa" class="sr-only" />
@@ -1567,8 +1829,8 @@
           <i class="ti ti-message text-gray-50 text-base"></i>
         </div>
         <div class="flex-1">
-          <div class="text-sm font-medium text-gray-95">SMS OTP</div>
-          <div class="text-xs text-gray-50">Kode OTP dikirim via SMS</div>
+          <div data-i18n="auth-sms-title" class="text-sm font-medium text-gray-95">SMS OTP</div>
+          <div data-i18n="auth-sms-desc" class="text-xs text-gray-50">Kode OTP dikirim via SMS</div>
         </div>
         <div class="w-5 h-5 rounded-full border-2 border-gray-20 flex-shrink-0"></div>
         <input type="radio" name="auth-method" value="sms" class="sr-only" />
@@ -1577,12 +1839,12 @@
     <!-- Main method checkbox -->
     <label class="flex items-center gap-2.5 mx-5 mb-5 cursor-pointer">
       <input type="checkbox" id="auth-main-cb" class="w-4 h-4 rounded accent-brand-accent" />
-      <span class="text-sm text-gray-70">Jadikan metode utama</span>
+      <span data-i18n="auth-main-method" class="text-sm text-gray-70">Jadikan metode utama</span>
     </label>
     <!-- CTA -->
     <div class="px-5 pb-6">
       <button onclick="openPinModal()" class="w-full h-11 bg-brand-accent text-white rounded-lg font-semibold text-sm hover:bg-blue-600 transition-colors flex items-center justify-center gap-2">
-        Lanjutkan
+        <span data-i18n="btn-continue">Lanjutkan</span>
       </button>
     </div>
   </div>
@@ -1602,26 +1864,26 @@
       <button onclick="backToAuthModal()" class="w-8 h-8 rounded-full bg-gray-5 flex items-center justify-center text-gray-60 hover:bg-gray-10 transition-colors flex-shrink-0">
         <i class="ti ti-arrow-left text-sm"></i>
       </button>
-      <h3 class="text-base font-bold text-gray-95">Konfirmasi</h3>
+      <h3 class="text-base font-bold text-gray-95"><span data-i18n="pin-modal-title">Konfirmasi</span></h3>
     </div>
     <!-- Body -->
     <div class="px-5 pt-4 pb-2 space-y-4">
       <!-- Alasan -->
       <div>
-        <div class="text-xs font-semibold text-gray-50 uppercase tracking-wider mb-1.5">Alasan</div>
+        <div data-i18n="pin-alasan-lbl" class="text-xs font-semibold text-gray-50 uppercase tracking-wider mb-1.5">Alasan</div>
         <div id="pin-reason" class="text-sm text-gray-95 bg-gray-5 rounded-md px-3 py-2.5 leading-snug">—</div>
       </div>
       <!-- Catatan -->
       <div>
-        <div class="text-xs font-semibold text-gray-50 uppercase tracking-wider mb-1.5">Catatan <span class="font-normal normal-case">(opsional)</span></div>
+        <div class="text-xs font-semibold text-gray-50 uppercase tracking-wider mb-1.5"><span data-i18n="pin-catatan-lbl">Catatan</span> <span data-i18n="pin-catatan-opt" class="font-normal normal-case">(opsional)</span></div>
         <textarea id="pin-notes" oninput="document.getElementById('pin-notes-count').textContent=this.value.length" maxlength="120"
           class="w-full rounded-md border border-gray-15 px-3 py-2 text-sm text-gray-95 resize-none bg-white focus:border-brand-accent transition-colors" rows="2"
-          placeholder="Tambahkan catatan…"></textarea>
+          placeholder="Tambahkan catatan…" data-i18n-ph="pin-ph-catatan"></textarea>
         <div class="text-right text-tn text-gray-35 mt-0.5"><span id="pin-notes-count">0</span>/120</div>
       </div>
       <!-- PIN input -->
       <div>
-        <div class="text-xs font-semibold text-gray-50 uppercase tracking-wider mb-3">PIN</div>
+        <div data-i18n="pin-lbl" class="text-xs font-semibold text-gray-50 uppercase tracking-wider mb-3">PIN</div>
         <div class="flex items-center justify-center gap-3">
           <!-- 6 hidden actual inputs overlaid by dot visuals -->
           <div class="relative flex gap-3">
@@ -1645,7 +1907,7 @@
         </div>
         <!-- Ganti metode link -->
         <div class="text-center mt-3">
-          <button onclick="backToAuthModal()" class="text-sm text-brand-accent hover:underline">Ganti metode</button>
+          <button onclick="backToAuthModal()" class="text-sm text-brand-accent hover:underline"><span data-i18n="btn-ganti-metode">Ganti metode</span></button>
         </div>
       </div>
     </div>
@@ -1653,7 +1915,7 @@
     <div class="px-5 pb-6 pt-3">
       <button id="btn-tanda-tangan" onclick="completeSigning()" disabled
         class="w-full h-11 bg-brand-action/40 text-white rounded-lg font-semibold text-sm cursor-not-allowed transition-all flex items-center justify-center gap-2">
-        <i class="ti ti-writing text-base"></i> Tanda tangan
+        <i class="ti ti-writing text-base"></i> <span data-i18n="btn-tanda-tangan">Tanda tangan</span>
       </button>
     </div>
   </div>
