@@ -131,9 +131,90 @@
     .prototype-inspect__asset-url{color:var(--wb-link);font-size:10.5px;font-weight:500;line-height:1.35;word-break:break-all}
     body.wb-dev-mode *{cursor:crosshair !important}
     body.wb-dev-mode input,body.wb-dev-mode select,body.wb-dev-mode textarea,body.wb-dev-mode button,body.wb-dev-mode a{cursor:crosshair !important}
+
+    /* ── Mobile View Frame (Workbench) ──────────────────────────── */
+    .wb-mobile-view {
+      background: #18181b !important;
+    }
+    .wb-mobile-view #app-shell {
+      max-width: 390px;
+      min-height: 100vh;
+      margin: 0 auto;
+      background: #F4F5F7;
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.07), 0 8px 64px rgba(0,0,0,0.55);
+    }
+    /* modals need to be scoped to the shell in mobile view */
+    .wb-mobile-view #tnc-modal,
+    .wb-mobile-view #modal-auth,
+    .wb-mobile-view #modal-pin {
+      position: absolute;
+    }
+    .wb-mobile-view #app-shell {
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* ── Responsive ≤ 480px ────────────────────────────────────── */
+    @media (max-width: 480px) {
+      /* Page containers full-width */
+      .max-w-xl { max-width: 100% !important; }
+
+      /* Toolbar: icon-only buttons */
+      [data-i18n="toolbar-place-text"],
+      #toolbar-confirm [data-i18n="btn-tolak"],
+      #toolbar-confirm [data-i18n="btn-konfirmasi"] { display: none; }
+      #toolbar-place button,
+      #toolbar-confirm button { padding-left: 10px !important; padding-right: 10px !important; }
+
+      /* Toolbar signed badge: hide text, icon only */
+      #toolbar-signed [data-i18n="toolbar-signed-text"] { display: none; }
+
+      /* Review summary data rows: prevent label from shrinking */
+      .px-5.py-4.space-y-1 .flex.justify-between > span:first-child {
+        flex-shrink: 0;
+        white-space: nowrap;
+        padding-right: 8px;
+      }
+      /* Review PrivyID row value */
+      .px-5.py-4.space-y-1 .flex.justify-between > div { min-width: 0; }
+
+      /* Checklist time row: allow wrap if needed */
+      .flex.items-center.gap-2 > span.border { white-space: nowrap; }
+
+      /* TNC modal footer: stack on very small screens */
+      #tnc-modal .border-t.flex.items-center.justify-between { gap: 8px; }
+    }
+
+    /* ── Responsive ≤ 520px: PDF document ──────────────────────── */
+    @media (max-width: 520px) {
+      /* Reduce PDF page padding */
+      #pdf-page { padding: 24px 16px !important; }
+
+      /* Reduce PDF table label column so values have room */
+      #pdf-page table { table-layout: fixed; }
+      #pdf-page table td:first-child {
+        width: 72px !important;
+        min-width: 72px;
+        word-break: break-word;
+        vertical-align: top;
+      }
+      #pdf-page table td:nth-child(2) {
+        width: 12px;
+        vertical-align: top;
+      }
+      #pdf-page table td:last-child {
+        vertical-align: top;
+        word-break: break-word;
+      }
+
+      /* PDF outer wrapper padding: tighter */
+      .doc-scroll > div { padding: 16px 10px !important; }
+    }
   </style>
 </head>
 <body class="bg-gray-5 min-h-screen font-sans text-gray-95">
+
+<div id="app-shell">
 
 <!-- ============================================================
      TNC MODAL
@@ -328,15 +409,15 @@
 
     <!-- CARD 1 -->
     <div class="bg-white border border-gray-10 rounded-md overflow-hidden shadow-sm mb-4">
-      <div class="px-5 py-4 border-b border-gray-10 flex items-center justify-between">
-        <div>
-          <h2 class="text-sm font-semibold text-gray-95 flex items-center gap-2">
+      <div class="px-5 py-4 border-b border-gray-10 flex items-start justify-between gap-2 flex-wrap">
+        <div class="min-w-0 flex-1">
+          <h2 class="text-sm font-semibold text-gray-95 flex items-center gap-2 flex-wrap">
             <span data-i18n="card1-title">Siapa yang mendaftar?</span>
             <span id="card1-badge" class="hidden rounded-full text-tn px-2 py-0.5 bg-success-subtle border border-success-border text-success font-medium"><span data-i18n="badge-complete">✓ Lengkap</span></span>
           </h2>
           <p data-i18n="card1-sub" class="text-xs text-gray-50 mt-0.5">Data pribadi PIC Enterprise kamu</p>
         </div>
-        <span class="rounded-full text-tn px-2.5 py-1 font-medium bg-warning-subtle text-warning-fg border border-warning-border flex items-center gap-1">
+        <span class="flex-shrink-0 rounded-full text-tn px-2.5 py-1 font-medium bg-warning-subtle text-warning-fg border border-warning-border flex items-center gap-1 whitespace-nowrap">
           <i class="ti ti-device-floppy text-xs"></i> <span data-i18n="badge-autosave">Tersimpan otomatis</span>
         </span>
       </div>
@@ -419,13 +500,13 @@
               <input id="privy-success-input" type="text" readonly class="w-full h-9 px-3 pr-9 border border-success-border bg-white rounded text-sm text-gray-95" />
               <i class="ti ti-circle-check-filled text-success absolute right-3 top-1/2 -translate-y-1/2 text-base"></i>
             </div>
-            <div class="mt-2 border border-success-border bg-success-subtle rounded-md p-3 flex items-center gap-3">
+            <div class="mt-2 border border-success-border bg-success-subtle rounded-md p-3 flex items-center gap-3 flex-wrap">
               <div id="privy-avatar" class="privy-avatar w-9 h-9 rounded-full bg-brand-action text-white flex items-center justify-center font-semibold text-sm flex-shrink-0">?</div>
-              <div class="flex-1 min-w-0">
-                <p id="privy-nama-display" class="text-sm font-semibold text-gray-95">—</p>
-                <p class="text-xs text-gray-50"><span data-i18n="privy-verified-label">Akun Privy terverifikasi · </span><span id="privy-id-display">—</span></p>
+              <div class="flex-1 min-w-0" style="min-width:120px;">
+                <p id="privy-nama-display" class="text-sm font-semibold text-gray-95 truncate">—</p>
+                <p class="text-xs text-gray-50 truncate"><span data-i18n="privy-verified-label">Akun Privy terverifikasi · </span><span id="privy-id-display">—</span></p>
               </div>
-              <span class="rounded-full text-tn px-2 py-0.5 bg-success-subtle border border-success-border text-success font-medium flex items-center gap-1 flex-shrink-0">
+              <span class="flex-shrink-0 rounded-full text-tn px-2 py-0.5 bg-success-subtle border border-success-border text-success font-medium flex items-center gap-1 whitespace-nowrap">
                 <i class="ti ti-check text-xs"></i> <span data-i18n="badge-verified">Terverifikasi</span>
               </span>
             </div>
@@ -465,7 +546,7 @@
             <i class="ti ti-wand text-info text-base flex-shrink-0 mt-0.5"></i>
             <p data-i18n="autofill-hint" class="text-xs text-info-fg">Nama penandatangan terisi otomatis dari PrivyID kamu dan tidak dapat diubah.</p>
           </div>
-          <div class="grid grid-cols-2 gap-3">
+          <div class="grid grid-cols-1 min-[380px]:grid-cols-2 gap-3">
             <div>
               <label class="block text-xs font-medium text-gray-70 mb-1"><span data-i18n="lbl-nama-penanda">Nama penandatangan</span></label>
               <div class="relative">
@@ -609,12 +690,12 @@
 
     <!-- CARD 1 — Ringkasan -->
     <div class="bg-white border border-gray-10 rounded-md overflow-hidden shadow-sm mb-4">
-      <div class="px-5 py-4 border-b border-gray-10 flex items-center justify-between">
-        <div>
+      <div class="px-5 py-4 border-b border-gray-10 flex items-start justify-between gap-2">
+        <div class="min-w-0 flex-1">
           <h2 data-i18n="rv-card-title" class="text-sm font-semibold text-gray-95">Ringkasan pendaftaran</h2>
           <p data-i18n="rv-card-sub" class="text-xs text-gray-50 mt-0.5">Periksa kembali data yang akan dikirimkan</p>
         </div>
-        <button onclick="showPage('page-form')" class="h-8 px-3 border border-gray-15 text-gray-60 rounded text-xs font-medium hover:bg-gray-5 transition-colors flex items-center gap-1">
+        <button onclick="showPage('page-form')" class="flex-shrink-0 h-8 px-3 border border-gray-15 text-gray-60 rounded text-xs font-medium hover:bg-gray-5 transition-colors flex items-center gap-1">
           <i class="ti ti-pencil text-xs"></i> <span data-i18n="btn-edit">Ubah</span>
         </button>
       </div>
@@ -690,7 +771,7 @@
       </div>
 
       <!-- ── PDF area (gray bg + white paper) ── -->
-      <div class="doc-scroll overflow-y-auto" style="background:#E8EAED; height:580px;">
+      <div class="doc-scroll overflow-y-auto" style="background:#E8EAED; height:clamp(320px, 55vh, 580px);">
         <div style="padding:32px 16px;">
           <!-- White paper page -->
           <div id="pdf-page" class="bg-white mx-auto" style="max-width:660px; min-height:900px; padding:56px 64px; box-shadow:0 2px 8px rgba(0,0,0,0.18);">
@@ -1809,8 +1890,9 @@
 
   // ── Prototype Workbench ──────────────────────────────────────────────────
 
-  const WB_LS = { mode:'wb-mode', collapsed:'wb-collapsed', posX:'wb-pos-x', posY:'wb-pos-y', hudX:'wb-hud-x', hudY:'wb-hud-y' };
+  const WB_LS = { mode:'wb-mode', collapsed:'wb-collapsed', posX:'wb-pos-x', posY:'wb-pos-y', hudX:'wb-hud-x', hudY:'wb-hud-y', view:'wb-view' };
   let wbMode = 'preview';
+  let wbView = 'desktop';
   let wbCollapsed = false;
   let wbToolbarPos = { x: 16, y: 16 };
   let wbHudPos     = { x: 16, y: 0  };
@@ -1828,6 +1910,8 @@
   function wbInit() {
     const m = wbLS(WB_LS.mode);
     if (m === 'dev' || m === 'preview') wbMode = m;
+    const v = wbLS(WB_LS.view);
+    if (v === 'mobile' || v === 'desktop') wbView = v;
     wbCollapsed = wbLS(WB_LS.collapsed) === '1';
     const px = parseFloat(wbLS(WB_LS.posX)), py = parseFloat(wbLS(WB_LS.posY));
     wbToolbarPos = { x: isFinite(px) ? px : Math.max(16, window.innerWidth - 330), y: isFinite(py) ? py : 16 };
@@ -1836,6 +1920,20 @@
     wbApplyPos();
     wbApplyCollapsed();
     wbApplyMode();
+    wbApplyView();
+  }
+
+  function wbSetView(v) {
+    wbView = v; wbLSSet(WB_LS.view, v); wbApplyView();
+  }
+  function wbApplyView() {
+    const A = 'prototype-workbench__toggle-button prototype-workbench__toggle-button--active';
+    const I = 'prototype-workbench__toggle-button';
+    const m = document.getElementById('wb-view-mobile'), d = document.getElementById('wb-view-desktop');
+    if (m) m.className = wbView === 'mobile' ? A : I;
+    if (d) d.className = wbView === 'desktop' ? A : I;
+    document.body.classList.toggle('wb-mobile-view', wbView === 'mobile');
+    window.scrollTo(0, 0);
   }
 
   function wbApplyPos() {
@@ -2295,6 +2393,8 @@
   </div>
 </div>
 
+</div><!-- /#app-shell -->
+
 <!-- ── Prototype Workbench ───────────────────────────────────── -->
 <div id="wb-root" data-dev-ignore="true">
   <div id="wb-floating" class="prototype-workbench__floating">
@@ -2311,8 +2411,8 @@
         <div class="prototype-workbench__toolbar-group">
           <div class="prototype-workbench__toolbar-label">View</div>
           <div class="prototype-workbench__toggle">
-            <button id="wb-view-mobile" class="prototype-workbench__toggle-button prototype-workbench__toggle-button--disabled" title="Mobile view not available">Mobile</button>
-            <button id="wb-view-desktop" class="prototype-workbench__toggle-button prototype-workbench__toggle-button--active">Desktop</button>
+            <button id="wb-view-mobile" class="prototype-workbench__toggle-button" onclick="wbSetView('mobile')">Mobile</button>
+            <button id="wb-view-desktop" class="prototype-workbench__toggle-button prototype-workbench__toggle-button--active" onclick="wbSetView('desktop')">Desktop</button>
           </div>
         </div>
         <!-- Mode -->
