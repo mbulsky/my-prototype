@@ -79,6 +79,7 @@
     /* field states */
     .field-filled  { border-color: #BEEDCA !important; }
     .field-focused { border-color: #008AFF !important; }
+    .field-error   { border-color: #E42E2C !important; }
     /* doc autofill span */
     .af { background: #E5F3FF; color: #1d4ed8; padding: 0 3px; border-radius: 3px; }
     /* modal backdrop */
@@ -424,19 +425,19 @@
       <div class="px-5 py-4 space-y-3">
         <div>
           <label class="block text-xs font-medium text-gray-70 mb-1"><span data-i18n="lbl-nama">Nama lengkap</span> <span class="text-danger">*</span></label>
-          <input id="f-nama" type="text" placeholder="Masukkan nama lengkap..." data-i18n-ph="ph-nama" oninput="onFormInput()" class="w-full h-9 px-3 border border-gray-20 bg-white rounded text-sm text-gray-95 focus:border-brand-accent transition-colors" />
+          <input id="f-nama" type="text" placeholder="Masukkan nama lengkap..." data-i18n-ph="ph-nama" oninput="onFormInput()" onblur="validateField(this)" class="w-full h-9 px-3 border border-gray-20 bg-white rounded text-sm text-gray-95 focus:border-brand-accent transition-colors" />
         </div>
         <div>
           <label class="block text-xs font-medium text-gray-70 mb-1"><span data-i18n="lbl-email">Alamat email</span> <span class="text-danger">*</span></label>
-          <input id="f-email" type="email" placeholder="nama@email.com" oninput="onFormInput()" class="w-full h-9 px-3 border border-gray-20 bg-white rounded text-sm text-gray-95 focus:border-brand-accent transition-colors" />
+          <input id="f-email" type="email" placeholder="nama@email.com" oninput="onFormInput()" onblur="validateField(this)" class="w-full h-9 px-3 border border-gray-20 bg-white rounded text-sm text-gray-95 focus:border-brand-accent transition-colors" />
         </div>
         <div>
           <label class="block text-xs font-medium text-gray-70 mb-1"><span data-i18n="lbl-telepon">Nomor telepon</span> <span class="text-danger">*</span></label>
-          <input id="f-telepon" type="tel" placeholder="+62..." oninput="onFormInput()" class="w-full h-9 px-3 border border-gray-20 bg-white rounded text-sm text-gray-95 focus:border-brand-accent transition-colors" />
+          <input id="f-telepon" type="tel" placeholder="+62..." oninput="onFormInput()" onblur="validateField(this)" class="w-full h-9 px-3 border border-gray-20 bg-white rounded text-sm text-gray-95 focus:border-brand-accent transition-colors" />
         </div>
         <div>
           <label class="block text-xs font-medium text-gray-70 mb-1"><span data-i18n="lbl-perusahaan">Nama perusahaan</span> <span class="text-danger">*</span></label>
-          <input id="f-perusahaan" type="text" placeholder="PT / CV / ..." data-i18n-ph="ph-perusahaan" oninput="onFormInput()" class="w-full h-9 px-3 border border-gray-20 bg-white rounded text-sm text-gray-95 focus:border-brand-accent transition-colors" />
+          <input id="f-perusahaan" type="text" placeholder="PT / CV / ..." data-i18n-ph="ph-perusahaan" oninput="onFormInput()" onblur="validateField(this)" class="w-full h-9 px-3 border border-gray-20 bg-white rounded text-sm text-gray-95 focus:border-brand-accent transition-colors" />
         </div>
         <div>
           <label class="block text-xs font-medium text-gray-70 mb-1"><span data-i18n="lbl-sektor">Sektor bisnis</span> <span class="text-danger">*</span></label>
@@ -480,7 +481,7 @@
           </label>
           <!-- STATE A -->
           <div id="privyid-empty">
-            <input id="f-privy-input" type="text" placeholder="Masukkan PrivyID..." class="w-full h-9 px-3 border border-gray-20 bg-white rounded text-sm text-gray-95 focus:border-brand-accent transition-colors" />
+            <input id="f-privy-input" type="text" placeholder="Masukkan PrivyID..." oninput="filterPrivyId(this)" onblur="validateField(this)" class="w-full h-9 px-3 border border-gray-20 bg-white rounded text-sm text-gray-95 focus:border-brand-accent transition-colors" />
             <p class="text-xs text-gray-50 mt-1.5"><span data-i18n="privyid-hint">PrivyID adalah akun Privy personal kamu.</span> <a href="#" onclick="return false;" class="text-brand-accent font-medium"><span data-i18n="privyid-register-link">Belum punya PrivyID? Daftar dulu</span></a></p>
             <button onclick="fetchPrivyId()" class="mt-2 text-xs text-brand-accent border border-info-border bg-info-subtle rounded px-3 py-1.5 font-medium hover:bg-blue-50 transition-colors flex items-center gap-1">
               <i class="ti ti-player-play text-xs"></i> Simulasi: input PrivyID →
@@ -556,28 +557,28 @@
             </div>
             <div>
               <label class="block text-xs font-medium text-gray-70 mb-1"><span data-i18n="lbl-jabatan">Jabatan</span> <span class="text-danger">*</span></label>
-              <input id="f-jabatan" type="text" placeholder="Direktur / Head of ..." data-i18n-ph="ph-jabatan" oninput="onFormInput()" class="w-full h-9 px-3 border border-gray-20 bg-white rounded text-sm text-gray-95 focus:border-brand-accent transition-colors" />
+              <input id="f-jabatan" type="text" placeholder="Direktur / Head of ..." data-i18n-ph="ph-jabatan" oninput="onFormInput()" onblur="validateField(this)" class="w-full h-9 px-3 border border-gray-20 bg-white rounded text-sm text-gray-95 focus:border-brand-accent transition-colors" />
             </div>
           </div>
         </div>
 
         <div>
           <label class="block text-xs font-medium text-gray-70 mb-1"><span data-i18n="lbl-email-kantor">Email perusahaan</span> <span class="text-danger">*</span></label>
-          <input id="f-email-kantor" type="email" placeholder="info@perusahaan.com" oninput="onFormInput()" class="w-full h-9 px-3 border border-gray-20 bg-white rounded text-sm text-gray-95 focus:border-brand-accent transition-colors" />
+          <input id="f-email-kantor" type="email" placeholder="info@perusahaan.com" oninput="onFormInput()" onblur="validateField(this)" class="w-full h-9 px-3 border border-gray-20 bg-white rounded text-sm text-gray-95 focus:border-brand-accent transition-colors" />
           <p data-i18n="email-kantor-hint" class="text-xs text-gray-50 mt-1">Digunakan untuk korespondensi resmi Enterprise.</p>
         </div>
         <div>
           <label class="block text-xs font-medium text-gray-70 mb-1"><span data-i18n="lbl-hp-kantor">Nomor telepon perusahaan</span> <span class="text-danger">*</span></label>
-          <input id="f-hp-kantor" type="tel" placeholder="+62..." oninput="onFormInput()" class="w-full h-9 px-3 border border-gray-20 bg-white rounded text-sm text-gray-95 focus:border-brand-accent transition-colors" />
+          <input id="f-hp-kantor" type="tel" placeholder="+62..." oninput="onFormInput()" onblur="validateField(this)" class="w-full h-9 px-3 border border-gray-20 bg-white rounded text-sm text-gray-95 focus:border-brand-accent transition-colors" />
         </div>
         <div>
           <label class="block text-xs font-medium text-gray-70 mb-1"><span data-i18n="lbl-alamat">Alamat perusahaan</span> <span class="text-danger">*</span></label>
-          <input id="f-alamat" type="text" placeholder="Jl. ..." oninput="onFormInput()" class="w-full h-9 px-3 border border-gray-20 bg-white rounded text-sm text-gray-95 focus:border-brand-accent transition-colors" />
+          <input id="f-alamat" type="text" placeholder="Jl. ..." oninput="onFormInput()" onblur="validateField(this)" class="w-full h-9 px-3 border border-gray-20 bg-white rounded text-sm text-gray-95 focus:border-brand-accent transition-colors" />
           <p data-i18n="alamat-hint" class="text-xs text-gray-50 mt-1">Digunakan pada dokumen perjanjian layanan.</p>
         </div>
         <div>
           <label class="block text-xs font-medium text-gray-70 mb-1"><span data-i18n="lbl-npwp">Nomor NPWP perusahaan</span> <span class="text-danger">*</span></label>
-          <input id="f-npwp" type="text" placeholder="00.000.000.0-000.000" oninput="onFormInput()" class="w-full h-9 px-3 border border-gray-20 bg-white rounded text-sm text-gray-95 focus:border-brand-accent transition-colors" />
+          <input id="f-npwp" type="text" placeholder="15 atau 16 digit angka" inputmode="numeric" oninput="filterNpwp(this)" onblur="validateField(this)" class="w-full h-9 px-3 border border-gray-20 bg-white rounded text-sm text-gray-95 focus:border-brand-accent transition-colors" />
         </div>
       </div>
     </div>
@@ -1064,7 +1065,16 @@
   // ── PrivyID fetch simulation ────────────────────────────────
   function fetchPrivyId() {
     const input = document.getElementById('f-privy-input');
-    const rawId = input.value.trim() || 'JJ9999';
+    const rawId = input.value.trim();
+    if (!rawId) {
+      showFieldError('f-privy-input', currentLang === 'en' ? 'PrivyID cannot be empty' : 'PrivyID tidak boleh kosong');
+      return;
+    }
+    if (!VALIDATORS['f-privy-input'].test(rawId)) {
+      showFieldError('f-privy-input', VALIDATORS['f-privy-input'].msg[currentLang] || VALIDATORS['f-privy-input'].msg.id);
+      return;
+    }
+    clearFieldError('f-privy-input');
     const name  = g('f-nama') || 'Pengguna Privy';
 
     document.getElementById('privyid-empty').classList.add('hidden');
@@ -1126,10 +1136,117 @@
     onFormInput();
   }
 
+  // ── Validation ──────────────────────────────────────────────
+  const VALIDATORS = {
+    'f-nama': {
+      test: v => v.trim().length >= 3,
+      msg:  { id: 'Nama minimal 3 karakter', en: 'Name must be at least 3 characters' }
+    },
+    'f-email': {
+      test: v => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v),
+      msg:  { id: 'Format email tidak valid', en: 'Invalid email format' }
+    },
+    'f-telepon': {
+      test: v => /^(\+62|0)[0-9]{8,14}$/.test(v.replace(/[\s\-]/g, '')),
+      msg:  { id: 'Awali dengan +62 atau 0, total 9–15 digit', en: 'Start with +62 or 0, 9–15 digits total' }
+    },
+    'f-perusahaan': {
+      test: v => v.trim().length >= 3,
+      msg:  { id: 'Nama perusahaan minimal 3 karakter', en: 'Company name must be at least 3 characters' }
+    },
+    'f-privy-input': {
+      test: v => /^[a-zA-Z0-9]+$/.test(v),
+      msg:  { id: 'Hanya huruf dan angka, tanpa spasi atau karakter khusus', en: 'Letters and numbers only, no spaces or special characters' }
+    },
+    'f-jabatan': {
+      test: v => v.trim().length >= 2,
+      msg:  { id: 'Jabatan minimal 2 karakter', en: 'Title must be at least 2 characters' }
+    },
+    'f-email-kantor': {
+      test: v => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v),
+      msg:  { id: 'Format email tidak valid', en: 'Invalid email format' }
+    },
+    'f-hp-kantor': {
+      test: v => /^(\+62|0)[0-9]{8,14}$/.test(v.replace(/[\s\-]/g, '')),
+      msg:  { id: 'Awali dengan +62 atau 0, total 9–15 digit', en: 'Start with +62 or 0, 9–15 digits total' }
+    },
+    'f-alamat': {
+      test: v => v.trim().length >= 10,
+      msg:  { id: 'Alamat terlalu pendek (min. 10 karakter)', en: 'Address too short (min. 10 characters)' }
+    },
+    'f-npwp': {
+      test: v => /^\d{15,16}$/.test(v),
+      msg:  { id: 'NPWP harus 15–16 digit angka', en: 'NPWP must be 15–16 digits' }
+    },
+  };
+
+  function isFieldComplete(fieldId) {
+    const val = g(fieldId);
+    if (!val) return false;
+    const v = VALIDATORS[fieldId];
+    return v ? v.test(val) : true;
+  }
+
+  function validateField(el) {
+    const v = VALIDATORS[el.id];
+    if (!v) return;
+    const val = el.value.trim();
+    if (!val) { clearFieldError(el.id); return; }
+    if (!v.test(val)) showFieldError(el.id, v.msg[currentLang] || v.msg.id);
+    else clearFieldError(el.id);
+  }
+
+  function showFieldError(fieldId, msg) {
+    const field = document.getElementById(fieldId);
+    if (!field) return;
+    field.classList.add('field-error');
+    field.style.borderColor = '#E42E2C';
+    let err = document.getElementById(fieldId + '-err');
+    if (!err) {
+      err = document.createElement('p');
+      err.id = fieldId + '-err';
+      err.style.cssText = 'font-size:0.75rem;line-height:1rem;margin-top:4px;color:#E42E2C;display:flex;align-items:center;gap:4px;';
+      field.insertAdjacentElement('afterend', err);
+    }
+    err.innerHTML = `<i class="ti ti-alert-circle" style="font-size:0.75rem;flex-shrink:0;"></i> ${msg}`;
+    err.style.display = 'flex';
+  }
+
+  function clearFieldError(fieldId) {
+    const field = document.getElementById(fieldId);
+    if (field) { field.classList.remove('field-error'); field.style.borderColor = ''; }
+    const err = document.getElementById(fieldId + '-err');
+    if (err) err.style.display = 'none';
+  }
+
+  function clearAllErrors() {
+    Object.keys(VALIDATORS).forEach(clearFieldError);
+  }
+
+  /* Strip non-alphanumeric chars from PrivyID in real-time */
+  function filterPrivyId(el) {
+    const pos = el.selectionStart;
+    const cleaned = el.value.replace(/[^a-zA-Z0-9]/g, '');
+    if (el.value !== cleaned) {
+      const diff = el.value.length - cleaned.length;
+      el.value = cleaned;
+      el.setSelectionRange(Math.max(0, pos - diff), Math.max(0, pos - diff));
+    }
+    validateField(el);
+  }
+
+  /* Strip non-digits from NPWP and cap at 16 chars */
+  function filterNpwp(el) {
+    const cleaned = el.value.replace(/\D/g, '').slice(0, 16);
+    el.value = cleaned;
+    validateField(el);
+    onFormInput();
+  }
+
   // ── Progress tracking ───────────────────────────────────────
   function onFormInput() {
-    const c1 = g('f-nama') && g('f-email') && g('f-telepon') && g('f-perusahaan') && g('f-sektor');
-    const c2 = currentPrivyId && g('f-jabatan') && g('f-email-kantor') && g('f-hp-kantor') && g('f-alamat') && g('f-npwp');
+    const c1 = isFieldComplete('f-nama') && isFieldComplete('f-email') && isFieldComplete('f-telepon') && isFieldComplete('f-perusahaan') && g('f-sektor');
+    const c2 = currentPrivyId && isFieldComplete('f-jabatan') && isFieldComplete('f-email-kantor') && isFieldComplete('f-hp-kantor') && isFieldComplete('f-alamat') && isFieldComplete('f-npwp');
     const c3 = docs.doc1 && docs.doc2 && docs.doc3;
 
     const badge1 = document.getElementById('card1-badge');
@@ -1752,7 +1869,7 @@
     'f-email-kantor':'info@techcorp.id',
     'f-hp-kantor':   '+62215551234',
     'f-alamat':      'Jl. Jend. Sudirman Kav. 55, Jakarta Selatan 12190',
-    'f-npwp':        '01.234.567.8-901.000',
+    'f-npwp':        '012345678901000',
   };
   const DEMO_PRIVY_ID   = 'WM0905';
   const DEMO_PRIVY_NAME = 'Dimas Aprilian Sulaiman Putra';
@@ -1824,11 +1941,12 @@
   }
 
   function resetDemo() {
-    // Clear all inputs
+    // Clear all inputs and error states
     Object.keys(DEMO_DATA).forEach(id => {
       const el = document.getElementById(id);
       if (el) el.value = '';
     });
+    clearAllErrors();
 
     // Reset PrivyID
     currentPrivyId   = '';
