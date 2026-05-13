@@ -84,6 +84,11 @@
     .af { background: #E5F3FF; color: #1d4ed8; padding: 0 3px; border-radius: 3px; }
     /* modal backdrop */
     #tnc-modal { backdrop-filter: blur(2px); }
+    /* OTP shake animation */
+    @keyframes otp-shake { 0%,100%{transform:translateX(0)} 20%{transform:translateX(-5px)} 40%{transform:translateX(5px)} 60%{transform:translateX(-5px)} 80%{transform:translateX(5px)} }
+    .otp-shake { animation: otp-shake 0.4s ease; }
+    /* verified field */
+    .field-verified { border-color: #34C759 !important; }
 
     /* ── Prototype Workbench ──────────────────────────────────── */
     .prototype-workbench__floating,.prototype-inspect__hud{--wb-surface:rgba(16,18,24,.90);--wb-surface-2:rgba(255,255,255,.07);--wb-border:rgba(255,255,255,.10);--wb-shadow:0 4px 6px rgba(0,0,0,.10),0 12px 32px rgba(0,0,0,.40);--wb-text:rgba(255,255,255,.92);--wb-text-dim:rgba(255,255,255,.54);--wb-text-muted:rgba(255,255,255,.34);--wb-handle-dot:rgba(255,255,255,.32);--wb-track:rgba(255,255,255,.08);--wb-btn-hover:rgba(255,255,255,.10);--wb-active:#0075d9;--wb-active-text:#fff;--wb-asset-row:rgba(255,255,255,.05);--wb-asset-hover:rgba(255,255,255,.10);--wb-link:rgba(168,215,255,.92);--wb-disabled-text:rgba(255,255,255,.24)}
@@ -147,7 +152,8 @@
     /* modals need to be scoped to the shell in mobile view */
     .wb-mobile-view #tnc-modal,
     .wb-mobile-view #modal-auth,
-    .wb-mobile-view #modal-pin {
+    .wb-mobile-view #modal-pin,
+    .wb-mobile-view #modal-verify {
       position: absolute;
     }
     .wb-mobile-view #app-shell {
@@ -347,6 +353,15 @@
             <div>
               <p data-i18n="checklist-item4-title" class="text-sm font-medium text-gray-95">SK pengesahan badan usaha</p>
               <p data-i18n="checklist-item4-desc" class="text-xs text-gray-50 mt-0.5">Surat keputusan pengesahan dari Kemenkumham.</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-3 rounded-md p-3 bg-success-subtle">
+            <div class="mt-0.5 flex-shrink-0 w-6 h-6 rounded-full bg-success flex items-center justify-center">
+              <i class="ti ti-check text-white text-xs"></i>
+            </div>
+            <div>
+              <p data-i18n="checklist-item6-title" class="text-sm font-medium text-gray-95">NIB (Nomor Induk Berusaha)</p>
+              <p data-i18n="checklist-item6-desc" class="text-xs text-gray-50 mt-0.5">Nomor dan file dokumen NIB perusahaan yang diterbitkan oleh OSS.</p>
             </div>
           </div>
           <div class="flex items-start gap-3 rounded-md p-3 bg-warning-subtle border border-warning-border">
@@ -564,12 +579,26 @@
 
         <div>
           <label class="block text-xs font-medium text-gray-70 mb-1"><span data-i18n="lbl-email-kantor">Email perusahaan</span> <span class="text-danger">*</span></label>
-          <input id="f-email-kantor" type="email" placeholder="info@perusahaan.com" oninput="onFormInput()" onblur="validateField(this)" class="w-full h-9 px-3 border border-gray-20 bg-white rounded text-sm text-gray-95 focus:border-brand-accent transition-colors" />
+          <input id="f-email-kantor" type="email" placeholder="info@perusahaan.com" oninput="onEmailKantorInput(this)" onblur="validateField(this)" class="w-full h-9 px-3 border border-gray-20 bg-white rounded text-sm text-gray-95 focus:border-brand-accent transition-colors" />
+          <div id="email-kantor-verified" style="display:none;" class="mt-1 flex items-center gap-1 text-xs font-medium" style="color:#34C759;">
+            <i class="ti ti-circle-check" style="color:#34C759;"></i> <span data-i18n="verified-label" style="color:#34C759;">Terverifikasi</span>
+          </div>
+          <button id="btn-verify-email" onclick="openVerifyModal('email')" disabled
+            class="mt-1.5 text-xs text-brand-accent border border-info-border bg-info-subtle rounded px-3 py-1.5 font-medium hover:bg-blue-50 transition-colors flex items-center gap-1 disabled:opacity-40 disabled:cursor-not-allowed">
+            <i class="ti ti-mail-check text-xs"></i> <span data-i18n="btn-kirim-kode-email">Kirim kode verifikasi ke email</span>
+          </button>
           <p data-i18n="email-kantor-hint" class="text-xs text-gray-50 mt-1">Digunakan untuk korespondensi resmi Enterprise.</p>
         </div>
         <div>
           <label class="block text-xs font-medium text-gray-70 mb-1"><span data-i18n="lbl-hp-kantor">Nomor telepon perusahaan</span> <span class="text-danger">*</span></label>
-          <input id="f-hp-kantor" type="tel" placeholder="+62..." oninput="onFormInput()" onblur="validateField(this)" class="w-full h-9 px-3 border border-gray-20 bg-white rounded text-sm text-gray-95 focus:border-brand-accent transition-colors" />
+          <input id="f-hp-kantor" type="tel" placeholder="+62..." oninput="onHpKantorInput(this)" onblur="validateField(this)" class="w-full h-9 px-3 border border-gray-20 bg-white rounded text-sm text-gray-95 focus:border-brand-accent transition-colors" />
+          <div id="hp-kantor-verified" style="display:none;" class="mt-1 flex items-center gap-1 text-xs font-medium">
+            <i class="ti ti-circle-check" style="color:#34C759;"></i> <span data-i18n="verified-label" style="color:#34C759;">Terverifikasi</span>
+          </div>
+          <button id="btn-verify-hp" onclick="openVerifyModal('phone')" disabled
+            class="mt-1.5 text-xs text-brand-accent border border-info-border bg-info-subtle rounded px-3 py-1.5 font-medium hover:bg-blue-50 transition-colors flex items-center gap-1 disabled:opacity-40 disabled:cursor-not-allowed">
+            <i class="ti ti-device-mobile-check text-xs"></i> <span data-i18n="btn-kirim-kode-hp">Kirim kode verifikasi via SMS</span>
+          </button>
         </div>
         <div>
           <label class="block text-xs font-medium text-gray-70 mb-1"><span data-i18n="lbl-alamat">Alamat perusahaan</span> <span class="text-danger">*</span></label>
@@ -579,6 +608,10 @@
         <div>
           <label class="block text-xs font-medium text-gray-70 mb-1"><span data-i18n="lbl-npwp">Nomor NPWP perusahaan</span> <span class="text-danger">*</span></label>
           <input id="f-npwp" type="text" placeholder="15 atau 16 digit angka" inputmode="numeric" oninput="filterNpwp(this)" onblur="validateField(this)" class="w-full h-9 px-3 border border-gray-20 bg-white rounded text-sm text-gray-95 focus:border-brand-accent transition-colors" />
+        </div>
+        <div>
+          <label class="block text-xs font-medium text-gray-70 mb-1"><span data-i18n="lbl-nib">Nomor Induk Berusaha (NIB)</span> <span class="text-danger">*</span></label>
+          <input id="f-nib" type="text" placeholder="13 digit angka" inputmode="numeric" oninput="filterNib(this)" onblur="validateField(this)" class="w-full h-9 px-3 border border-gray-20 bg-white rounded text-sm text-gray-95 focus:border-brand-accent transition-colors" />
         </div>
       </div>
     </div>
@@ -636,6 +669,22 @@
           </div>
           <label id="doc3-label" class="cursor-pointer">
             <input type="file" accept=".pdf,.png,.jpg,.jpeg" class="hidden" onchange="handleDocUpload(this, 'doc3')" />
+            <span class="rounded-full text-tn px-2.5 py-1 bg-gray-5 border border-gray-15 text-gray-50 font-medium flex items-center gap-1 hover:bg-gray-10 transition-colors">
+              <i class="ti ti-upload text-xs"></i> Pilih file
+            </span>
+          </label>
+        </div>
+        <!-- NIB -->
+        <div class="flex items-center gap-3 py-3">
+          <div id="doc4-icon" class="w-8 h-8 rounded bg-gray-5 border border-gray-10 flex items-center justify-center flex-shrink-0">
+            <i class="ti ti-file text-gray-35 text-sm"></i>
+          </div>
+          <div class="flex-1 min-w-0">
+            <p data-i18n="doc4-name" class="text-sm font-medium text-gray-95">Dokumen NIB</p>
+            <p data-i18n="doc-hint" class="text-xs text-gray-50">PDF/PNG/JPG · maks. 2 MB</p>
+          </div>
+          <label id="doc4-label" class="cursor-pointer">
+            <input type="file" accept=".pdf,.png,.jpg,.jpeg" class="hidden" onchange="handleDocUpload(this, 'doc4')" />
             <span class="rounded-full text-tn px-2.5 py-1 bg-gray-5 border border-gray-15 text-gray-50 font-medium flex items-center gap-1 hover:bg-gray-10 transition-colors">
               <i class="ti ti-upload text-xs"></i> Pilih file
             </span>
@@ -730,6 +779,7 @@
         <div class="flex justify-between border-b border-gray-10 py-1.5"><span data-i18n="rv-hp-lbl" class="text-gray-60">Telepon kantor</span><span id="rv-hp" class="text-gray-95 font-medium text-right ml-4">—</span></div>
         <div class="flex justify-between border-b border-gray-10 py-1.5"><span data-i18n="rv-alamat-lbl" class="text-gray-60">Alamat</span><span id="rv-alamat" class="text-gray-95 font-medium text-right ml-4">—</span></div>
         <div class="flex justify-between border-b border-gray-10 py-1.5"><span data-i18n="rv-npwp-lbl" class="text-gray-60">NPWP</span><span id="rv-npwp" class="text-gray-95 font-medium text-right ml-4">—</span></div>
+        <div class="flex justify-between border-b border-gray-10 py-1.5"><span data-i18n="rv-nib-lbl" class="text-gray-60">NIB</span><span id="rv-nib" class="text-gray-95 font-medium text-right ml-4">—</span></div>
         <!-- DOKUMEN -->
         <div class="flex items-center gap-2 my-2">
           <div class="flex-1 h-px bg-gray-10"></div>
@@ -738,7 +788,8 @@
         </div>
         <div class="flex justify-between border-b border-gray-10 py-1.5"><span data-i18n="doc1-name" class="text-gray-60">Dokumen NPWP</span><span id="rv-doc1" class="text-success font-medium flex items-center gap-1"><i class="ti ti-file-check text-sm"></i> —</span></div>
         <div class="flex justify-between border-b border-gray-10 py-1.5"><span data-i18n="rv-doc2-lbl" class="text-gray-60">Akta pendirian</span><span id="rv-doc2" class="text-success font-medium flex items-center gap-1"><i class="ti ti-file-check text-sm"></i> —</span></div>
-        <div class="flex justify-between py-1.5"><span data-i18n="rv-doc3-lbl" class="text-gray-60">SK badan usaha</span><span id="rv-doc3" class="text-success font-medium flex items-center gap-1"><i class="ti ti-file-check text-sm"></i> —</span></div>
+        <div class="flex justify-between border-b border-gray-10 py-1.5"><span data-i18n="rv-doc3-lbl" class="text-gray-60">SK badan usaha</span><span id="rv-doc3" class="text-success font-medium flex items-center gap-1"><i class="ti ti-file-check text-sm"></i> —</span></div>
+        <div class="flex justify-between py-1.5"><span data-i18n="rv-doc4-lbl" class="text-gray-60">NIB</span><span id="rv-doc4" class="text-success font-medium flex items-center gap-1"><i class="ti ti-file-check text-sm"></i> —</span></div>
       </div>
     </div>
 
@@ -1027,7 +1078,7 @@
   let privyDisplayName = '';
   let tncAccepted      = false;
   let docExpanded      = false;
-  const docs = { doc1: null, doc2: null, doc3: null };
+  const docs = { doc1: null, doc2: null, doc3: null, doc4: null };
 
   // ── Navigation ─────────────────────────────────────────────
   function showPage(id) {
@@ -1067,7 +1118,7 @@
     const input = document.getElementById('f-privy-input');
     const rawId = input.value.trim();
     if (!rawId) {
-      showFieldError('f-privy-input', currentLang === 'en' ? 'PrivyID cannot be empty' : 'PrivyID tidak boleh kosong');
+      showFieldError('f-privy-input', t('privyid-required'));
       return;
     }
     if (!VALIDATORS['f-privy-input'].test(rawId)) {
@@ -1178,6 +1229,10 @@
       test: v => /^\d{15,16}$/.test(v),
       msg:  { id: 'NPWP harus 15–16 digit angka', en: 'NPWP must be 15–16 digits' }
     },
+    'f-nib': {
+      test: v => /^\d{13}$/.test(v),
+      msg:  { id: 'NIB harus tepat 13 digit angka', en: 'NIB must be exactly 13 digits' }
+    },
   };
 
   function isFieldComplete(fieldId) {
@@ -1243,11 +1298,25 @@
     onFormInput();
   }
 
+  /* Strip non-digits from NIB and cap at 13 chars */
+  function filterNib(el) {
+    const cleaned = el.value.replace(/\D/g, '').slice(0, 13);
+    el.value = cleaned;
+    validateField(el);
+    onFormInput();
+  }
+
   // ── Progress tracking ───────────────────────────────────────
   function onFormInput() {
     const c1 = isFieldComplete('f-nama') && isFieldComplete('f-email') && isFieldComplete('f-telepon') && isFieldComplete('f-perusahaan') && g('f-sektor');
-    const c2 = currentPrivyId && isFieldComplete('f-jabatan') && isFieldComplete('f-email-kantor') && isFieldComplete('f-hp-kantor') && isFieldComplete('f-alamat') && isFieldComplete('f-npwp');
-    const c3 = docs.doc1 && docs.doc2 && docs.doc3;
+    const c2 = currentPrivyId && isFieldComplete('f-jabatan') && emailKantorVerified && hpKantorVerified && isFieldComplete('f-alamat') && isFieldComplete('f-npwp') && isFieldComplete('f-nib');
+
+    // Enable / disable verify buttons based on field validity
+    const btnVEmail = document.getElementById('btn-verify-email');
+    const btnVHp    = document.getElementById('btn-verify-hp');
+    if (btnVEmail) btnVEmail.disabled = !isFieldComplete('f-email-kantor') || emailKantorVerified;
+    if (btnVHp)    btnVHp.disabled    = !isFieldComplete('f-hp-kantor')    || hpKantorVerified;
+    const c3 = docs.doc1 && docs.doc2 && docs.doc3 && docs.doc4;
 
     const badge1 = document.getElementById('card1-badge');
     const badge2 = document.getElementById('card2-badge');
@@ -1356,13 +1425,16 @@
     st('rv-hp',           g('f-hp-kantor'));
     st('rv-alamat',       g('f-alamat'));
     st('rv-npwp',         g('f-npwp'));
+    st('rv-nib',          g('f-nib'));
 
     const doc1 = document.getElementById('rv-doc1');
     const doc2 = document.getElementById('rv-doc2');
     const doc3 = document.getElementById('rv-doc3');
+    const doc4 = document.getElementById('rv-doc4');
     if (doc1) doc1.innerHTML = `<i class="ti ti-file-check text-sm"></i> ${docs.doc1 || '—'}`;
     if (doc2) doc2.innerHTML = `<i class="ti ti-file-check text-sm"></i> ${docs.doc2 || '—'}`;
     if (doc3) doc3.innerHTML = `<i class="ti ti-file-check text-sm"></i> ${docs.doc3 || '—'}`;
+    if (doc4) doc4.innerHTML = `<i class="ti ti-file-check text-sm"></i> ${docs.doc4 || '—'}`;
 
     // Update avatars
     const initials = getInitials(privyDisplayName || g('f-nama'));
@@ -1553,6 +1625,252 @@
     }
   }
 
+  // ── OTP Verification ────────────────────────────────────────
+  let verifyTarget        = '';   // 'email' | 'phone'
+  let emailKantorVerified = false;
+  let hpKantorVerified    = false;
+  let otpTimer            = null;
+  let otpAttemptsLeft     = 3;
+  let otpResendLeft       = 3;
+  const DEMO_OTP          = '123456';
+  const OTP_DURATION      = 120;  // 2 minutes
+
+  function onEmailKantorInput(el) {
+    if (emailKantorVerified) {
+      emailKantorVerified = false;
+      el.readOnly = false;
+      el.classList.remove('field-verified');
+      document.getElementById('email-kantor-verified').style.display = 'none';
+      document.getElementById('btn-verify-email').style.display = '';
+    }
+    validateField(el);
+    onFormInput();
+  }
+
+  function onHpKantorInput(el) {
+    if (hpKantorVerified) {
+      hpKantorVerified = false;
+      el.readOnly = false;
+      el.classList.remove('field-verified');
+      document.getElementById('hp-kantor-verified').style.display = 'none';
+      document.getElementById('btn-verify-hp').style.display = '';
+    }
+    validateField(el);
+    onFormInput();
+  }
+
+  function openVerifyModal(type) {
+    verifyTarget    = type;
+    otpAttemptsLeft = 3;
+    otpResendLeft   = 3;
+    const isEmail   = type === 'email';
+    const value     = isEmail ? g('f-email-kantor') : g('f-hp-kantor');
+    const title       = isEmail ? t('verify-email-title') : t('verify-phone-title');
+    const desc        = t('verify-otp-desc') + '<strong>' + (value || '—') + '</strong>';
+    const changeLabel = isEmail ? t('verify-change-email') : t('verify-change-phone');
+    document.getElementById('verify-modal-title').textContent  = title;
+    document.getElementById('verify-modal-desc').innerHTML     = desc;
+    document.getElementById('btn-change-target-label').textContent = changeLabel;
+    // Reset resend UI
+    const maxMsg    = document.getElementById('resend-max-msg');
+    const resendBtn = document.getElementById('btn-resend');
+    if (maxMsg)    maxMsg.style.display    = 'none';
+    if (resendBtn) { resendBtn.disabled = true; resendBtn.style.display = ''; }
+    resetOtpInputs();
+    setVerifyError('');
+    startOtpCountdown(OTP_DURATION);
+    document.getElementById('modal-verify').classList.remove('hidden');
+    setTimeout(() => document.getElementById('otp-1')?.focus(), 150);
+  }
+
+  function closeVerifyModal() {
+    clearOtpTimer();
+    document.getElementById('modal-verify').classList.add('hidden');
+  }
+
+  function handleOtpInput(el, index) {
+    const val = el.value.replace(/\D/g, '');
+    el.value = val ? val[0] : '';
+    const dot = document.getElementById('otp-dot-' + index);
+    if (dot) {
+      if (val) {
+        dot.style.borderColor = '#008AFF';
+        dot.style.background  = '#EBF5FF';
+        dot.textContent       = '•';
+      } else {
+        dot.style.borderColor = '';
+        dot.style.background  = '';
+        dot.textContent       = '';
+      }
+    }
+    if (val && index < 6) document.getElementById('otp-' + (index + 1))?.focus();
+    setVerifyError('');
+    const filled = [1,2,3,4,5,6].filter(i => document.getElementById('otp-'+i)?.value).length;
+    const btn = document.getElementById('btn-verify-submit');
+    if (btn) {
+      btn.disabled  = filled < 6;
+      btn.className = filled === 6
+        ? 'w-full h-11 bg-brand-action text-white rounded-lg font-semibold text-sm cursor-pointer hover:bg-red-600 transition-all flex items-center justify-center gap-2'
+        : 'w-full h-11 bg-brand-action/40 text-white rounded-lg font-semibold text-sm cursor-not-allowed transition-all flex items-center justify-center gap-2';
+    }
+  }
+
+  function handleOtpKeydown(e, index) {
+    if (e.key === 'Backspace') {
+      if (!e.target.value && index > 1) {
+        const prev = document.getElementById('otp-' + (index - 1));
+        if (prev) { prev.value = ''; handleOtpInput(prev, index - 1); prev.focus(); }
+      }
+    }
+  }
+
+  function submitVerifyOtp() {
+    const entered = [1,2,3,4,5,6].map(i => document.getElementById('otp-'+i)?.value || '').join('');
+    if (entered === DEMO_OTP) {
+      clearOtpTimer();
+      const isEmail = verifyTarget === 'email';
+      if (isEmail) {
+        emailKantorVerified = true;
+        const field = document.getElementById('f-email-kantor');
+        if (field) { field.readOnly = true; field.classList.add('field-verified'); }
+        document.getElementById('email-kantor-verified').style.display = 'flex';
+        document.getElementById('btn-verify-email').style.display = 'none';
+      } else {
+        hpKantorVerified = true;
+        const field = document.getElementById('f-hp-kantor');
+        if (field) { field.readOnly = true; field.classList.add('field-verified'); }
+        document.getElementById('hp-kantor-verified').style.display = 'flex';
+        document.getElementById('btn-verify-hp').style.display = 'none';
+      }
+      onFormInput();
+      closeVerifyModal();
+    } else {
+      otpAttemptsLeft--;
+      shakeOtpDots();
+      if (otpAttemptsLeft <= 0) {
+        setVerifyError(t('otp-too-many'));
+        for (let i = 1; i <= 6; i++) {
+          const inp = document.getElementById('otp-' + i);
+          if (inp) inp.disabled = true;
+        }
+        setTimeout(() => {
+          otpAttemptsLeft = 3;
+          for (let i = 1; i <= 6; i++) {
+            const inp = document.getElementById('otp-' + i);
+            if (inp) inp.disabled = false;
+          }
+          resetOtpInputs();
+          setVerifyError('');
+        }, 30000);
+      } else {
+        setVerifyError(t('otp-wrong').replace('{n}', otpAttemptsLeft));
+      }
+    }
+  }
+
+  function setVerifyError(msg) {
+    const el  = document.getElementById('verify-error');
+    const txt = document.getElementById('verify-error-msg');
+    if (!el) return;
+    if (!msg) { el.style.display = 'none'; return; }
+    if (txt) txt.textContent = msg;
+    el.style.display = 'flex';
+  }
+
+  function shakeOtpDots() {
+    const c = document.getElementById('otp-dots-container');
+    if (!c) return;
+    c.classList.remove('otp-shake');
+    void c.offsetWidth;
+    c.classList.add('otp-shake');
+    setTimeout(() => c.classList.remove('otp-shake'), 500);
+    // Turn dots red briefly
+    for (let i = 1; i <= 6; i++) {
+      const d = document.getElementById('otp-dot-' + i);
+      if (d) { d.style.borderColor = '#E42E2C'; d.style.background = '#FEF2F2'; }
+    }
+    setTimeout(() => {
+      for (let i = 1; i <= 6; i++) {
+        const d = document.getElementById('otp-dot-' + i);
+        if (d) { d.style.borderColor = ''; d.style.background = ''; d.textContent = ''; }
+      }
+      resetOtpInputs();
+    }, 600);
+  }
+
+  function startOtpCountdown(seconds) {
+    clearOtpTimer();
+    let remaining = seconds;
+    const timerEl   = document.getElementById('otp-countdown');
+    const wrapEl    = document.getElementById('otp-countdown-wrap');
+    const resendBtn = document.getElementById('btn-resend');
+    // Resend disabled while counting; countdown wrap visible
+    if (resendBtn) resendBtn.disabled = true;
+    if (wrapEl)    wrapEl.style.display = '';
+    function tick() {
+      if (document.getElementById('modal-verify')?.classList.contains('hidden')) return;
+      const m = Math.floor(remaining / 60), s = remaining % 60;
+      if (timerEl) timerEl.textContent = m + ':' + String(s).padStart(2, '0');
+      if (remaining <= 0) {
+        // Hide countdown, enable resend
+        if (wrapEl)    wrapEl.style.display = 'none';
+        if (resendBtn && otpResendLeft > 0) resendBtn.disabled = false;
+        setVerifyError(t('otp-expired'));
+        for (let i = 1; i <= 6; i++) { const inp = document.getElementById('otp-'+i); if (inp) inp.disabled = true; }
+        return;
+      }
+      remaining--;
+      otpTimer = setTimeout(tick, 1000);
+    }
+    tick();
+  }
+
+  function clearOtpTimer() {
+    if (otpTimer) { clearTimeout(otpTimer); otpTimer = null; }
+  }
+
+  function resendOtp() {
+    if (otpResendLeft <= 0) return;
+    otpResendLeft--;
+    otpAttemptsLeft = 3;
+    for (let i = 1; i <= 6; i++) { const inp = document.getElementById('otp-'+i); if (inp) inp.disabled = false; }
+    resetOtpInputs();
+    setVerifyError('');
+    if (otpResendLeft <= 0) {
+      const resendBtn = document.getElementById('btn-resend');
+      const maxMsg    = document.getElementById('resend-max-msg');
+      if (resendBtn) resendBtn.style.display = 'none';
+      if (maxMsg)    maxMsg.style.display    = 'block';
+    }
+    startOtpCountdown(OTP_DURATION);
+    setTimeout(() => document.getElementById('otp-1')?.focus(), 50);
+  }
+
+  function changeVerifyTarget() {
+    closeVerifyModal();
+    const fieldId = verifyTarget === 'email' ? 'f-email-kantor' : 'f-hp-kantor';
+    const field   = document.getElementById(fieldId);
+    if (field) {
+      field.readOnly = false;
+      field.classList.remove('field-verified');
+      setTimeout(() => { field.focus(); field.select(); }, 100);
+    }
+  }
+
+  function resetOtpInputs() {
+    for (let i = 1; i <= 6; i++) {
+      const inp = document.getElementById('otp-' + i);
+      const dot = document.getElementById('otp-dot-' + i);
+      if (inp) inp.value = '';
+      if (dot) { dot.style.borderColor = ''; dot.style.background = ''; dot.textContent = ''; }
+    }
+    const btn = document.getElementById('btn-verify-submit');
+    if (btn) {
+      btn.disabled  = true;
+      btn.className = 'w-full h-11 bg-brand-action/40 text-white rounded-lg font-semibold text-sm cursor-not-allowed transition-all flex items-center justify-center gap-2';
+    }
+  }
+
   function completeSigning() {
     signState = 'signed';
     closePinModal();
@@ -1619,6 +1937,8 @@
       'checklist-item3-desc':'File akta asli atau salinan yang dilegalisir.',
       'checklist-item4-title':'SK pengesahan badan usaha',
       'checklist-item4-desc':'Surat keputusan pengesahan dari Kemenkumham.',
+      'checklist-item6-title':'NIB (Nomor Induk Berusaha)',
+      'checklist-item6-desc':'Nomor dan file dokumen NIB perusahaan yang diterbitkan oleh OSS.',
       'checklist-item5-title':'Surat kuasa','checklist-item5-opt':'(jika diperlukan)',
       'checklist-item5-desc':'Diperlukan jika nama pemilik Enterprise tidak tercantum sebagai pejabat berwenang dalam akta pendirian perusahaan.',
       'checklist-autosave':'Form ini menyimpan progress kamu secara otomatis. Kamu bisa melanjutkan kapan saja tanpa kehilangan data.',
@@ -1645,6 +1965,9 @@
       'lbl-nama-penanda':'Nama penandatangan','lbl-jabatan':'Jabatan','ph-jabatan':'Direktur / Head of ...',
       'lbl-email-kantor':'Email perusahaan','email-kantor-hint':'Digunakan untuk korespondensi resmi Enterprise.',
       'lbl-hp-kantor':'Nomor telepon perusahaan',
+      'btn-kirim-kode-email':'Kirim kode verifikasi ke email','btn-kirim-kode-hp':'Kirim kode verifikasi via SMS',
+      'verified-label':'Terverifikasi','btn-verifikasi':'Verifikasi','btn-resend':'Kirim ulang kode',
+      'otp-timer-label':'Kode berlaku selama',
       'lbl-alamat':'Alamat perusahaan','alamat-hint':'Digunakan pada dokumen perjanjian layanan.',
       'lbl-npwp':'Nomor NPWP perusahaan',
       'card3-title':'Unggah dokumen','card3-sub':'Dokumen legal perusahaan untuk verifikasi',
@@ -1658,8 +1981,10 @@
       'rv-nama-lbl':'Nama lengkap','rv-email-lbl':'Email','rv-telepon-lbl':'Telepon',
       'rv-perusahaan-lbl':'Perusahaan','rv-sektor-lbl':'Sektor bisnis','rv-privyid-lbl':'PrivyID',
       'rv-jabatan-lbl':'Jabatan','rv-email-kantor-lbl':'Email kantor','rv-hp-lbl':'Telepon kantor',
-      'rv-alamat-lbl':'Alamat','rv-npwp-lbl':'NPWP',
-      'rv-doc2-lbl':'Akta pendirian','rv-doc3-lbl':'SK badan usaha',
+      'rv-alamat-lbl':'Alamat','rv-npwp-lbl':'NPWP','rv-nib-lbl':'NIB',
+      'lbl-nib':'Nomor Induk Berusaha (NIB)',
+      'doc4-name':'Dokumen NIB',
+      'rv-doc2-lbl':'Akta pendirian','rv-doc3-lbl':'SK badan usaha','rv-doc4-lbl':'NIB',
       'toolbar-place-text':'Taruh tanda tangan (1)','btn-tolak':'Tolak','btn-konfirmasi':'Konfirmasi',
       'toolbar-signed-text':'Ditandatangani',
       'sign-status-idle':'Belum ditandatangani — klik tombol "Taruh tanda tangan" di atas',
@@ -1688,6 +2013,20 @@
       'pin-modal-title':'Konfirmasi','pin-alasan-lbl':'Alasan',
       'pin-catatan-lbl':'Catatan','pin-catatan-opt':'(opsional)','pin-ph-catatan':'Tambahkan catatan…',
       'pin-lbl':'PIN','btn-ganti-metode':'Ganti metode','btn-tanda-tangan':'Tanda tangan',
+      'auth-badge':'Mitra terpercaya Privy',
+      'verify-email-title':'Verifikasi email perusahaan',
+      'verify-phone-title':'Verifikasi nomor telepon perusahaan',
+      'verify-otp-desc':'Masukkan kode 6 digit yang dikirim ke ',
+      'verify-change-email':'Ganti email',
+      'verify-change-phone':'Ganti nomor',
+      'otp-not-received':'Tidak menerima kode?',
+      'otp-or':' atau ',
+      'otp-max-resend':'Batas pengiriman tercapai.',
+      'otp-expired':'Kode kedaluwarsa. Kirim ulang atau ganti email/nomor.',
+      'otp-wrong':'Kode tidak sesuai. {n} percobaan tersisa.',
+      'otp-too-many':'Terlalu banyak percobaan. Tunggu 30 detik atau kirim ulang kode.',
+      'otp-prototype-hint-html':'<strong>Prototype:</strong> gunakan kode <strong>123456</strong> untuk sukses, kode lain akan memicu error.',
+      'privyid-required':'PrivyID tidak boleh kosong',
     },
     en: {
       'step1':'Fill registration data','step2':'Review & sign',
@@ -1707,6 +2046,8 @@
       'checklist-item3-desc':'Original or certified copy of the deed.',
       'checklist-item4-title':'Company validation decree (SK)',
       'checklist-item4-desc':'Ministerial decree from Kemenkumham.',
+      'checklist-item6-title':'NIB (Business Registration Number)',
+      'checklist-item6-desc':'NIB number and document issued by OSS (Online Single Submission).',
       'checklist-item5-title':'Power of attorney','checklist-item5-opt':'(if required)',
       'checklist-item5-desc':'Required if the enterprise owner is not listed as an authorized official in the deed of establishment.',
       'checklist-autosave':'This form auto-saves your progress. You can continue anytime without losing your data.',
@@ -1733,6 +2074,9 @@
       'lbl-nama-penanda':'Signatory name','lbl-jabatan':'Title','ph-jabatan':'Director / Head of ...',
       'lbl-email-kantor':'Company email','email-kantor-hint':'Used for official Enterprise correspondence.',
       'lbl-hp-kantor':'Company phone number',
+      'btn-kirim-kode-email':'Send verification code to email','btn-kirim-kode-hp':'Send verification code via SMS',
+      'verified-label':'Verified','btn-verifikasi':'Verify','btn-resend':'Resend code',
+      'otp-timer-label':'Code valid for',
       'lbl-alamat':'Company address','alamat-hint':'Used in the service agreement document.',
       'lbl-npwp':'Company NPWP number',
       'card3-title':'Upload documents','card3-sub':'Legal documents for verification',
@@ -1746,8 +2090,10 @@
       'rv-nama-lbl':'Full name','rv-email-lbl':'Email','rv-telepon-lbl':'Phone',
       'rv-perusahaan-lbl':'Company','rv-sektor-lbl':'Business sector','rv-privyid-lbl':'PrivyID',
       'rv-jabatan-lbl':'Title','rv-email-kantor-lbl':'Office email','rv-hp-lbl':'Office phone',
-      'rv-alamat-lbl':'Address','rv-npwp-lbl':'NPWP',
-      'rv-doc2-lbl':'Deed of establishment','rv-doc3-lbl':'Validation decree (SK)',
+      'rv-alamat-lbl':'Address','rv-npwp-lbl':'NPWP','rv-nib-lbl':'NIB',
+      'lbl-nib':'Business Registration Number (NIB)',
+      'doc4-name':'NIB document',
+      'rv-doc2-lbl':'Deed of establishment','rv-doc3-lbl':'Validation decree (SK)','rv-doc4-lbl':'NIB',
       'toolbar-place-text':'Place signature (1)','btn-tolak':'Reject','btn-konfirmasi':'Confirm',
       'toolbar-signed-text':'Signed',
       'sign-status-idle':'Not yet signed — click "Place signature" above',
@@ -1777,6 +2123,19 @@
       'pin-modal-title':'Confirm','pin-alasan-lbl':'Reason',
       'pin-catatan-lbl':'Notes','pin-catatan-opt':'(optional)','pin-ph-catatan':'Add notes…',
       'pin-lbl':'PIN','btn-ganti-metode':'Change method','btn-tanda-tangan':'Sign document',
+      'verify-email-title':'Verify company email',
+      'verify-phone-title':'Verify company phone',
+      'verify-otp-desc':'Enter the 6-digit code sent to ',
+      'verify-change-email':'Change email',
+      'verify-change-phone':'Change number',
+      'otp-not-received':"Didn't receive the code?",
+      'otp-or':' or ',
+      'otp-max-resend':'Resend limit reached.',
+      'otp-expired':'Code expired. Resend or change your email/number.',
+      'otp-wrong':'Incorrect code. {n} attempts remaining.',
+      'otp-too-many':'Too many incorrect attempts. Wait 30 seconds or resend the code.',
+      'otp-prototype-hint-html':'<strong>Prototype:</strong> use code <strong>123456</strong> to succeed, any other code will trigger an error.',
+      'privyid-required':'PrivyID cannot be empty',
     }
   };
 
@@ -1870,6 +2229,7 @@
     'f-hp-kantor':   '+62215551234',
     'f-alamat':      'Jl. Jend. Sudirman Kav. 55, Jakarta Selatan 12190',
     'f-npwp':        '012345678901000',
+    'f-nib':         '1234567890123',
   };
   const DEMO_PRIVY_ID   = 'WM0905';
   const DEMO_PRIVY_NAME = 'Dimas Aprilian Sulaiman Putra';
@@ -1902,8 +2262,8 @@
     updateAvatars();
 
     // Simulate document uploads
-    ['doc1','doc2','doc3'].forEach((key, i) => {
-      const names = ['NPWP-Perusahaan.pdf', 'Akta-Pendirian.pdf', 'SK-Badan-Usaha.pdf'];
+    ['doc1','doc2','doc3','doc4'].forEach((key, i) => {
+      const names = ['NPWP-Perusahaan.pdf', 'Akta-Pendirian.pdf', 'SK-Badan-Usaha.pdf', 'NIB-Perusahaan.pdf'];
       docs[key] = names[i];
       const icon  = document.getElementById(key + '-icon');
       const label = document.getElementById(key + '-label');
@@ -1917,6 +2277,18 @@
         </span>`;
       }
     });
+
+    // Auto-verify email and phone kantor
+    emailKantorVerified = true;
+    hpKantorVerified    = true;
+    const fEmail = document.getElementById('f-email-kantor');
+    const fHp    = document.getElementById('f-hp-kantor');
+    if (fEmail) { fEmail.readOnly = true; fEmail.classList.add('field-verified'); }
+    if (fHp)    { fHp.readOnly    = true; fHp.classList.add('field-verified'); }
+    document.getElementById('email-kantor-verified').style.display = 'flex';
+    document.getElementById('hp-kantor-verified').style.display    = 'flex';
+    document.getElementById('btn-verify-email').style.display = 'none';
+    document.getElementById('btn-verify-hp').style.display    = 'none';
 
     // Accept TNC
     tncAccepted = true;
@@ -1948,6 +2320,19 @@
     });
     clearAllErrors();
 
+    // Reset verification state
+    emailKantorVerified = false;
+    hpKantorVerified    = false;
+    ['f-email-kantor','f-hp-kantor'].forEach(id => {
+      const f = document.getElementById(id);
+      if (f) { f.readOnly = false; f.classList.remove('field-verified'); }
+    });
+    document.getElementById('email-kantor-verified').style.display = 'none';
+    document.getElementById('hp-kantor-verified').style.display    = 'none';
+    document.getElementById('btn-verify-email').style.display = '';
+    document.getElementById('btn-verify-hp').style.display    = '';
+    closeVerifyModal();
+
     // Reset PrivyID
     currentPrivyId   = '';
     privyDisplayName = '';
@@ -1964,7 +2349,7 @@
     updateAvatars();
 
     // Reset doc uploads
-    ['doc1','doc2','doc3'].forEach(key => {
+    ['doc1','doc2','doc3','doc4'].forEach(key => {
       docs[key] = null;
       const icon  = document.getElementById(key + '-icon');
       const label = document.getElementById(key + '-label');
@@ -2506,6 +2891,83 @@
       <button id="btn-tanda-tangan" onclick="completeSigning()" disabled
         class="w-full h-11 bg-brand-action/40 text-white rounded-lg font-semibold text-sm cursor-not-allowed transition-all flex items-center justify-center gap-2">
         <i class="ti ti-writing text-base"></i> <span data-i18n="btn-tanda-tangan">Tanda tangan</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     MODAL: Verifikasi OTP (email / telepon)
+     ============================================================ -->
+<div id="modal-verify" class="hidden fixed inset-0 z-50 flex items-center justify-center" style="background:rgba(0,0,0,0.45); backdrop-filter:blur(2px);">
+  <div class="bg-white w-full max-w-sm rounded-2xl shadow-xl mx-4">
+    <!-- Header -->
+    <div class="flex items-center justify-between px-5 pt-5 pb-4 border-b border-gray-10">
+      <div>
+        <h3 id="verify-modal-title" class="text-base font-bold text-gray-95">Verifikasi email perusahaan</h3>
+        <p id="verify-modal-desc" class="text-xs text-gray-50 mt-0.5">Masukkan kode 6 digit yang dikirim ke —</p>
+      </div>
+      <button onclick="closeVerifyModal()" class="w-8 h-8 rounded-full bg-gray-5 flex items-center justify-center text-gray-50 hover:bg-gray-10 transition-colors flex-shrink-0">
+        <i class="ti ti-x text-sm"></i>
+      </button>
+    </div>
+    <!-- Body -->
+    <div class="px-5 pt-5 pb-3 space-y-4">
+      <!-- OTP input -->
+      <div>
+        <div class="flex items-center justify-center gap-2" id="otp-dots-container">
+          <!-- Dot visuals -->
+          <div id="otp-dot-1" class="w-11 h-11 rounded-lg border-2 border-gray-15 bg-gray-5 flex items-center justify-center text-base font-bold text-gray-95 transition-all"></div>
+          <div id="otp-dot-2" class="w-11 h-11 rounded-lg border-2 border-gray-15 bg-gray-5 flex items-center justify-center text-base font-bold text-gray-95 transition-all"></div>
+          <div id="otp-dot-3" class="w-11 h-11 rounded-lg border-2 border-gray-15 bg-gray-5 flex items-center justify-center text-base font-bold text-gray-95 transition-all"></div>
+          <div id="otp-dot-4" class="w-11 h-11 rounded-lg border-2 border-gray-15 bg-gray-5 flex items-center justify-center text-base font-bold text-gray-95 transition-all"></div>
+          <div id="otp-dot-5" class="w-11 h-11 rounded-lg border-2 border-gray-15 bg-gray-5 flex items-center justify-center text-base font-bold text-gray-95 transition-all"></div>
+          <div id="otp-dot-6" class="w-11 h-11 rounded-lg border-2 border-gray-15 bg-gray-5 flex items-center justify-center text-base font-bold text-gray-95 transition-all"></div>
+          <!-- Invisible actual inputs stacked on top -->
+          <div class="absolute flex gap-2" style="margin-left:0;"><!-- placeholder, inputs below --></div>
+        </div>
+        <!-- Hidden real inputs (accessible via absolute positioning trick) -->
+        <div class="flex items-center justify-center gap-2 mt-0" style="margin-top:-44px; opacity:0; pointer-events:auto;">
+          <input id="otp-1" type="tel" maxlength="1" inputmode="numeric" oninput="handleOtpInput(this,1)" onkeydown="handleOtpKeydown(event,1)" class="w-11 h-11 cursor-pointer" autocomplete="one-time-code" />
+          <input id="otp-2" type="tel" maxlength="1" inputmode="numeric" oninput="handleOtpInput(this,2)" onkeydown="handleOtpKeydown(event,2)" class="w-11 h-11 cursor-pointer" />
+          <input id="otp-3" type="tel" maxlength="1" inputmode="numeric" oninput="handleOtpInput(this,3)" onkeydown="handleOtpKeydown(event,3)" class="w-11 h-11 cursor-pointer" />
+          <input id="otp-4" type="tel" maxlength="1" inputmode="numeric" oninput="handleOtpInput(this,4)" onkeydown="handleOtpKeydown(event,4)" class="w-11 h-11 cursor-pointer" />
+          <input id="otp-5" type="tel" maxlength="1" inputmode="numeric" oninput="handleOtpInput(this,5)" onkeydown="handleOtpKeydown(event,5)" class="w-11 h-11 cursor-pointer" />
+          <input id="otp-6" type="tel" maxlength="1" inputmode="numeric" oninput="handleOtpInput(this,6)" onkeydown="handleOtpKeydown(event,6)" class="w-11 h-11 cursor-pointer" />
+        </div>
+      </div>
+      <!-- Error message -->
+      <div id="verify-error" style="display:none; color:#E42E2C; font-size:0.75rem; align-items:center; gap:6px;">
+        <i class="ti ti-alert-circle" style="font-size:0.75rem; flex-shrink:0;"></i>
+        <span id="verify-error-msg"></span>
+      </div>
+      <!-- Resend / change inline row - always visible -->
+      <div class="space-y-0.5">
+        <p data-i18n="otp-not-received" class="text-xs text-gray-50">Tidak menerima kode?</p>
+        <p class="text-xs">
+          <button id="btn-resend" onclick="resendOtp()"
+            class="text-brand-accent hover:underline font-medium transition-colors disabled:text-gray-35 disabled:cursor-not-allowed"
+            disabled><span data-i18n="btn-resend">Kirim ulang kode</span></button>
+          <span data-i18n="otp-or" class="text-gray-50"> atau </span>
+          <button id="btn-change-target" onclick="changeVerifyTarget()"
+            class="text-brand-accent hover:underline font-medium transition-colors">
+            <span id="btn-change-target-label">Ganti email</span>
+          </button>
+          <span id="otp-countdown-wrap" class="text-gray-50"> (<span id="otp-countdown">2:00</span>)</span>
+        </p>
+        <p data-i18n="otp-max-resend" id="resend-max-msg" style="display:none;" class="text-xs text-gray-50">Batas pengiriman tercapai.</p>
+      </div>
+      <!-- Prototype hint -->
+      <div class="flex items-start gap-2 rounded-md px-3 py-2 bg-info-subtle border border-info-border">
+        <i class="ti ti-info-circle text-brand-accent text-sm flex-shrink-0 mt-0.5"></i>
+        <p data-i18n-html="otp-prototype-hint-html" class="text-xs text-brand-accent"><strong>Prototype:</strong> gunakan kode <strong>123456</strong> untuk sukses, kode lain akan memicu error.</p>
+      </div>
+    </div>
+    <!-- CTA -->
+    <div class="px-5 pb-5 pt-2">
+      <button id="btn-verify-submit" onclick="submitVerifyOtp()" disabled
+        class="w-full h-11 bg-brand-action/40 text-white rounded-lg font-semibold text-sm cursor-not-allowed transition-all flex items-center justify-center gap-2">
+        <i class="ti ti-circle-check text-base"></i> <span data-i18n="btn-verifikasi">Verifikasi</span>
       </button>
     </div>
   </div>
